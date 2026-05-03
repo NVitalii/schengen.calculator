@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schengen Tracker - Never Overstay Your Visa | 90/180 Rule Calculator</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="description" content="Track your stays in the Schengen area, automatically calculate the 90/180 rule, and avoid overstaying with the Schengen Tracker app. Download now on Google Play.">
+    <meta name="keywords" content="Schengen calculator, 90/180 rule, Schengen stay tracker, travel app, visa tracker, Europe travel">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1B4965; /* Dark Blue from logo */
+            --primary-dark: #123246;
+            --secondary: #EE534F; /* Coral Red from logo */
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-body: #fefce8; /* Very light beige */
+            --bg-white: #ffffff;
+            --glass-bg: rgba(254, 252, 232, 0.85);
+            --glass-border: rgba(27, 73, 101, 0.1);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 16px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .logo svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-main);
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .lang-switch {
+            display: flex;
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--bg-white);
+            color: var(--dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Buttons */
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .btn-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.1;
+        }
+
+        .btn-subtext {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.8;
+            margin-bottom: 3px;
+        }
+
+        .btn-maintext {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: var(--dark);
+            color: var(--bg-white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: #000;
+        }
+
+        .btn-primary svg, .btn-apple svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .btn-apple {
+            background: var(--bg-white);
+            color: var(--dark);
+            border: 2px solid var(--dark);
+            padding: 10px 26px; /* slightly smaller padding to account for border */
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .btn-apple:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .coming-soon-text {
+            color: var(--secondary);
+            font-weight: 800;
+            animation: pulse-text 2s infinite;
+        }
+
+        @keyframes pulse-text {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, #FDF1D6 0%, #fefce8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(238, 83, 79, 0.1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.8);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(27,73,101,0.2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            position: relative;
+            text-align: center;
+        }
+
+        /* Mockup */
+        .mockup {
+            width: 300px;
+            height: 600px;
+            background: #fff;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 8px solid #1e293b;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            transform: rotate(-2deg);
+            transition: transform 0.5s ease;
+        }
+
+        .mockup:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .mockup-header {
+            background: var(--primary);
+            color: white;
+            padding: 24px 20px 40px;
+            text-align: left;
+            border-radius: 0 0 24px 24px;
+        }
+        
+        .mockup-header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .mockup-header-days {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .mockup-body {
+            padding: 20px;
+        }
+
+        .mockup-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            padding: 40px 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: #FDF1D6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Split Section (Problem & Solution) */
+        .split-section {
+            background: var(--bg-white);
+        }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .risk-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        .risk-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 1.125rem;
+            color: var(--text-main);
+        }
+
+        .risk-list li svg {
+            color: #ef4444; /* Red for risks */
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            margin-top: 2px;
+        }
+
+        .solution-list li svg {
+            color: var(--secondary); /* Green for solution */
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 64px;
+            position: relative;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: var(--dark);
+            color: var(--bg-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 24px;
+            box-shadow: 0 0 0 8px var(--bg-body);
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: #cbd5e1;
+            z-index: 0;
+        }
+
+        /* Social Proof */
+        .testimonials {
+            background: var(--dark);
+            color: var(--bg-white);
+            padding: 100px 0;
+        }
+
+        .testimonials h2 {
+            color: var(--bg-white);
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            font-style: italic;
+            color: #e2e8f0;
+            margin-bottom: 24px;
+        }
+
+        /* SEO Content Section */
+        .seo-content {
+            background: var(--bg-white);
+        }
+
+        .seo-box {
+            background: var(--bg-body);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 64px auto 0;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--dark);
+        }
+
+        .faq-question svg {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 24px 24px;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 120px 0;
+            background: linear-gradient(135deg, #FDF1D6 0%, #fefce8 100%);
+        }
+
+        /* Footer */
+        .footer {
+            background: #020617;
+            color: #94a3b8;
+            padding: 60px 0 30px;
+            font-size: 0.875rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--bg-white);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero .container, .split-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .risk-list li {
+                justify-content: flex-start;
+                text-align: left;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* simple mobile header */
+            }
+
+            h1 {
+                font-size: 2.25rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="favicon.png" alt="Logo" style="width: 36px; height: 36px; border-radius: 8px;">
+                Schengen Tracker
+            </a>
+            <div class="nav-links">
+                <a href="#features" data-i18n="nav_features">Features</a>
+                <a href="#how" data-i18n="nav_how">How it works</a>
+                <a href="#faq" data-i18n="nav_faq">FAQ</a>
+            </div>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('ua')">UA</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <div class="trust-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <span data-i18n="hero_badge">Used by travelers across Europe</span>
+                </div>
+                <h1 data-i18n="hero_title">Never Overstay Your Schengen Visa Again</h1>
+                <p data-i18n="hero_subtitle">Track your stays, automatically calculate the 90/180 rule, and travel stress-free with the #1 app for non-EU travelers.</p>
+                <div class="hero-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=net.botolab.schengen" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Download Schengen Tracker on Google Play">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12ZM20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.88 9.5L20.16 10.81ZM6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
+                        <div class="btn-text-wrapper">
+                            <span class="btn-subtext" data-i18n="btn_get_on">GET IT ON</span>
+                            <span class="btn-maintext">Google Play</span>
+                        </div>
+                    </a>
+                    <a href="#ios-coming-soon" class="btn btn-apple" aria-label="Schengen Tracker for iOS Apple App Store - Coming soon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 7.043c-.88-.04-1.78.36-2.31.93-.52.56-.93 1.48-.79 2.37.95.06 1.83-.34 2.35-.91.54-.58.94-1.5.8-2.39zM16.64 10.36c-1.39 0-2.38.8-3.04.8-.64 0-1.63-.78-2.88-.78-1.57 0-3.05.9-3.86 2.32-1.64 2.85-.42 7.07 1.18 9.38.78 1.12 1.7 2.39 2.92 2.39 1.18 0 1.63-.73 3.06-.73 1.42 0 1.88.73 3.09.73 1.25 0 2.06-1.16 2.82-2.28.88-1.29 1.24-2.54 1.27-2.61-.03-.01-2.45-.94-2.49-3.79-.04-2.38 1.94-3.52 2.03-3.57-1.12-1.64-2.86-1.85-3.48-1.88z"/></svg>
+                        <div class="btn-text-wrapper">
+                            <span class="btn-subtext coming-soon-text"><span data-i18n="btn_apple_soon">COMING IN</span> <span id="ios-countdown">5D</span></span>
+                            <span class="btn-maintext">App Store</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image reveal">
+                <img src="assets/app_demo.jpg" alt="Schengen Tracker App" class="mockup" style="height: auto; display: block; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section split-section">
+        <div class="container">
+            <div class="split-grid">
+                <div class="reveal">
+                    <h2 data-i18n="problem_title">The 90/180 Rule is Confusing.</h2>
+                    <p data-i18n="problem_desc1">Calculating your Schengen days manually is risky. A single mistake can lead to overstaying.</p>
+                    <ul class="risk-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                            <span data-i18n="problem_risk1">Hefty fines at the border</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                            <span data-i18n="problem_risk2">Entry bans for up to 5 years</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                            <span data-i18n="problem_risk3">Stress and ruined travel plans</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <h2 data-i18n="solution_title">The Stress-Free Solution</h2>
+                    <p data-i18n="solution_desc">Schengen Tracker automatically handles the complex calculations for you. Just enter your trip dates, and we'll tell you exactly how many days you have left.</p>
+                    <ul class="risk-list solution-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <span data-i18n="solution_ben1">100% accurate rolling window calculation</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <span data-i18n="solution_ben2">Clear visibility of remaining days</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <span data-i18n="solution_ben3">Peace of mind while traveling</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <h2 data-i18n="feat_title">Everything you need to travel safely</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <h3 data-i18n="feat_1_title">Automatic Calculation</h3>
+                    <p data-i18n="feat_1_desc" style="font-size: 1rem; margin-bottom: 0;">Instantly calculate your remaining days using the strict 90/180 rolling window rule.</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <h3 data-i18n="feat_2_title">Trip History</h3>
+                    <p data-i18n="feat_2_desc" style="font-size: 1rem; margin-bottom: 0;">Securely store all your past and future trips in one place to plan ahead.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.71 5.05A16 16 0 0 1 22.58 9A16 16 0 0 0 1.42 9a15.91 15.91 0 0 1 1.7-1.4"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line><line x1="2" y1="2" x2="22" y2="22"></line></svg>
+                    </div>
+                    <h3 data-i18n="feat_3_title">Offline Mode</h3>
+                    <p data-i18n="feat_3_desc" style="font-size: 1rem; margin-bottom: 0;">Works perfectly without an internet connection while you're traveling.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h3 data-i18n="feat_4_title">DST & Timezones</h3>
+                    <p data-i18n="feat_4_desc" style="font-size: 1rem; margin-bottom: 0;">Automatically handles edge cases like daylight saving time and midnight border crossings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" id="how" style="background: var(--bg-white);">
+        <div class="container">
+            <h2 class="reveal" style="text-align: center;" data-i18n="how_title">How It Works</h2>
+            
+            <div class="steps">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <h3 data-i18n="how_1">Add Your Trips</h3>
+                    <p data-i18n="how_1_desc">Simply enter your entry and exit dates.</p>
+                </div>
+                <div class="step-card reveal" style="transition-delay: 0.1s;">
+                    <div class="step-number">2</div>
+                    <h3 data-i18n="how_2">App Calculates</h3>
+                    <p data-i18n="how_2_desc">We instantly show your remaining allowance.</p>
+                </div>
+                <div class="step-card reveal" style="transition-delay: 0.2s;">
+                    <div class="step-number">3</div>
+                    <h3 data-i18n="how_3">Travel Safely</h3>
+                    <p data-i18n="how_3_desc">Enjoy your trip without worrying about overstaying.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="reveal" data-i18n="proof_title">Loved by Travelers</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="proof_1">"This app saved me from a potential fine. The 90/180 rule always confused me, but now it's clear as day!"</p>
+                    <div style="font-weight: 600;">Oksana T.</div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="proof_2">"As a digital nomad, this is exactly what I needed. Offline mode is a lifesaver when switching SIM cards."</p>
+                    <div style="font-weight: 600;">Michael B.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section class="section seo-content">
+        <div class="container">
+            <div class="seo-box reveal">
+                <h2 data-i18n="seo_title">Understanding the Schengen 90/180 Rule</h2>
+                <p data-i18n="seo_p1">The Schengen 90/180 rule states that you can stay in the Schengen Area for up to 90 days within any 180-day period. This is a rolling window, meaning the 180 days look backwards from any given date.</p>
+                <p data-i18n="seo_p2">Manually calculating this using a calendar is highly prone to errors. Our Schengen calculator app ensures you never accidentally overstay and face deportation or bans.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <div class="container">
+            <h2 class="reveal" style="text-align: center;" data-i18n="faq_title">Frequently Asked Questions</h2>
+            
+            <div class="faq-list reveal">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq_q1">What is the 90/180 rule?</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a1" style="margin-top: 16px; font-size: 1rem;">It allows non-EU citizens to stay in the Schengen Zone for a maximum of 90 days in any 180-day period.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq_q2">Is the calculation accurate?</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a2" style="margin-top: 16px; font-size: 1rem;">Yes, our algorithm is fully compliant with the official EU border control rules, including entry and exit day counting and DST edge cases.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq_q3">Does it work offline?</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a3" style="margin-top: 16px; font-size: 1rem;">Yes, once downloaded, the app stores your trips locally and requires no internet connection to calculate your days.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container reveal">
+            <h2 data-i18n="cta_title">Ready for stress-free travel?</h2>
+            <p data-i18n="cta_subtitle" style="max-width: 600px; margin: 0 auto 32px;">Download Schengen Tracker today and take the guesswork out of your travel plans.</p>
+            <div class="hero-buttons" style="justify-content: center;">
+                <a href="https://play.google.com/store/apps/details?id=net.botolab.schengen" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Download Schengen Tracker on Google Play">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12ZM20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.88 9.5L20.16 10.81ZM6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
+                    <div class="btn-text-wrapper">
+                        <span class="btn-subtext" data-i18n="btn_get_on">GET IT ON</span>
+                        <span class="btn-maintext">Google Play</span>
+                    </div>
+                </a>
+                <a href="#ios-coming-soon" class="btn btn-apple" aria-label="Schengen Tracker for iOS Apple App Store - Coming soon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 7.043c-.88-.04-1.78.36-2.31.93-.52.56-.93 1.48-.79 2.37.95.06 1.83-.34 2.35-.91.54-.58.94-1.5.8-2.39zM16.64 10.36c-1.39 0-2.38.8-3.04.8-.64 0-1.63-.78-2.88-.78-1.57 0-3.05.9-3.86 2.32-1.64 2.85-.42 7.07 1.18 9.38.78 1.12 1.7 2.39 2.92 2.39 1.18 0 1.63-.73 3.06-.73 1.42 0 1.88.73 3.09.73 1.25 0 2.06-1.16 2.82-2.28.88-1.29 1.24-2.54 1.27-2.61-.03-.01-2.45-.94-2.49-3.79-.04-2.38 1.94-3.52 2.03-3.57-1.12-1.64-2.86-1.85-3.48-1.88z"/></svg>
+                    <div class="btn-text-wrapper">
+                        <span class="btn-subtext coming-soon-text"><span data-i18n="btn_apple_soon">COMING IN</span> <span id="ios-countdown-cta">5D</span></span>
+                        <span class="btn-maintext">App Store</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="color: white;">
+                    <img src="favicon.png" alt="Logo" style="width: 36px; height: 36px; border-radius: 8px;">
+                    Schengen Tracker
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:hbb.soft.support@gmail.com" data-i18n="footer_contact">Contact Support</a>
+                    <a href="https://www.linkedin.com/in/nemudriy" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; <span id="year"></span> Schengen Tracker. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+
+        // Update Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+            });
+
+            // Toggle clicked
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Localization Dictionary
+        const i18n = {
+            en: {
+                nav_features: "Features",
+                nav_how: "How it works",
+                nav_faq: "FAQ",
+                hero_badge: "Used by travelers across Europe",
+                hero_title: "Never Overstay Your Schengen Visa Again",
+                hero_subtitle: "Track your stays, automatically calculate the 90/180 rule, and travel stress-free with the #1 app for non-EU travelers.",
+                btn_download: "Download on Google Play",
+                btn_get_on: "GET IT ON",
+                btn_apple_soon: "COMING IN",
+                days_short: "D",
+                hours_short: "H",
+                now_short: "NOW",
+                mockup_title: "Remaining",
+                problem_title: "The 90/180 Rule is Confusing.",
+                problem_desc1: "Calculating your Schengen days manually is risky. A single mistake can lead to overstaying.",
+                problem_risk1: "Hefty fines at the border",
+                problem_risk2: "Entry bans for up to 5 years",
+                problem_risk3: "Stress and ruined travel plans",
+                solution_title: "The Stress-Free Solution",
+                solution_desc: "Schengen Tracker automatically handles the complex calculations for you. Just enter your trip dates, and we'll tell you exactly how many days you have left.",
+                solution_ben1: "100% accurate rolling window calculation",
+                solution_ben2: "Clear visibility of remaining days",
+                solution_ben3: "Peace of mind while traveling",
+                feat_title: "Everything you need to travel safely",
+                feat_1_title: "Automatic Calculation",
+                feat_1_desc: "Instantly calculate your remaining days using the strict 90/180 rolling window rule.",
+                feat_2_title: "Trip History",
+                feat_2_desc: "Securely store all your past and future trips in one place to plan ahead.",
+                feat_3_title: "Offline Mode",
+                feat_3_desc: "Works perfectly without an internet connection while you're traveling.",
+                feat_4_title: "DST & Timezones",
+                feat_4_desc: "Automatically handles edge cases like daylight saving time and midnight border crossings.",
+                how_title: "How It Works",
+                how_1: "Add Your Trips",
+                how_1_desc: "Simply enter your entry and exit dates.",
+                how_2: "App Calculates",
+                how_2_desc: "We instantly show your remaining allowance.",
+                how_3: "Travel Safely",
+                how_3_desc: "Enjoy your trip without worrying about overstaying.",
+                proof_title: "Loved by Travelers",
+                proof_1: '"This app saved me from a potential fine. The 90/180 rule always confused me, but now it\'s clear as day!"',
+                proof_2: '"As a digital nomad, this is exactly what I needed. Offline mode is a lifesaver when switching SIM cards."',
+                seo_title: "Understanding the Schengen 90/180 Rule",
+                seo_p1: "The Schengen 90/180 rule states that you can stay in the Schengen Area for up to 90 days within any 180-day period. This is a rolling window, meaning the 180 days look backwards from any given date.",
+                seo_p2: "Manually calculating this using a calendar is highly prone to errors. Our Schengen calculator app ensures you never accidentally overstay and face deportation or bans.",
+                faq_title: "Frequently Asked Questions",
+                faq_q1: "What is the 90/180 rule?",
+                faq_a1: "It allows non-EU citizens to stay in the Schengen Zone for a maximum of 90 days in any 180-day period.",
+                faq_q2: "Is the calculation accurate?",
+                faq_a2: "Yes, our algorithm is fully compliant with the official EU border control rules, including entry and exit day counting and DST edge cases.",
+                faq_q3: "Does it work offline?",
+                faq_a3: "Yes, once downloaded, the app stores your trips locally and requires no internet connection to calculate your days.",
+                cta_title: "Ready for stress-free travel?",
+                cta_subtitle: "Download Schengen Tracker today and take the guesswork out of your travel plans.",
+                footer_contact: "Contact Support",
+                footer_privacy: "Privacy Policy"
+            },
+            ua: {
+                nav_features: "Можливості",
+                nav_how: "Як це працює",
+                nav_faq: "Часті питання",
+                hero_badge: "Використовується мандрівниками по всій Європі",
+                hero_title: "Ніколи більше не порушуйте ліміт у Шенгені",
+                hero_subtitle: "Відстежуйте поїздки, автоматично рахуйте дні за правилом 90/180 та подорожуйте без стресу з найкращим додатком.",
+                btn_download: "Завантажити в Google Play",
+                btn_get_on: "ЗАВАНТАЖИТИ З",
+                btn_apple_soon: "ВЖЕ ЗА",
+                days_short: "ДН",
+                hours_short: "ГОД",
+                now_short: "ВЖЕ",
+                mockup_title: "Залишилось",
+                problem_title: "Правило 90/180 заплутане.",
+                problem_desc1: "Рахувати дні в Шенгені вручну ризиковано. Одна помилка може призвести до порушення ліміту.",
+                problem_risk1: "Великі штрафи на кордоні",
+                problem_risk2: "Заборона на в'їзд до 5 років",
+                problem_risk3: "Стрес та зіпсовані плани",
+                solution_title: "Рішення без стресу",
+                solution_desc: "Schengen Tracker автоматично робить складні розрахунки. Просто введіть дати поїздок, і ми скажемо точно, скільки днів у вас залишилося.",
+                solution_ben1: "100% точний розрахунок плаваючого вікна",
+                solution_ben2: "Чітке відображення днів, що залишилися",
+                solution_ben3: "Спокій під час подорожей",
+                feat_title: "Все необхідне для безпечних подорожей",
+                feat_1_title: "Автоматичний розрахунок",
+                feat_1_desc: "Миттєво рахуйте залишок днів за суворим правилом 90/180 «плаваючого вікна».",
+                feat_2_title: "Історія поїздок",
+                feat_2_desc: "Безпечно зберігайте всі минулі та майбутні поїздки в одному місці для планування.",
+                feat_3_title: "Офлайн режим",
+                feat_3_desc: "Ідеально працює без підключення до інтернету під час подорожі.",
+                feat_4_title: "Літній час та часові пояси",
+                feat_4_desc: "Автоматично обробляє перехід на літній час і нічні перетини кордону.",
+                how_title: "Як це працює",
+                how_1: "Додайте поїздки",
+                how_1_desc: "Просто введіть дати в'їзду та виїзду.",
+                how_2: "Додаток рахує",
+                how_2_desc: "Ми миттєво показуємо ваш залишок днів.",
+                how_3: "Подорожуйте безпечно",
+                how_3_desc: "Насолоджуйтесь поїздкою, не турбуючись про штрафи.",
+                proof_title: "Улюбленець мандрівників",
+                proof_1: '"Цей додаток врятував мене від штрафу. Правило 90/180 завжди плутало мене, але тепер все прозоро!"',
+                proof_2: '"Як цифровому кочівнику, це саме те, що мені потрібно. Офлайн режим рятує, коли міняєш SIM-карти."',
+                seo_title: "Розуміння правила 90/180 в Шенгені",
+                seo_p1: "Правило Шенгену 90/180 означає, що ви можете перебувати в Шенгенській зоні до 90 днів протягом будь-якого 180-денного періоду. Це «плаваюче вікно», тобто 180 днів відраховуються назад від будь-якої конкретної дати.",
+                seo_p2: "Рахувати це вручну на календарі дуже ризиковано і часто призводить до помилок. Наш калькулятор гарантує, що ви ніколи випадково не перевищите ліміт і не зіткнетеся з депортацією.",
+                faq_title: "Часті питання",
+                faq_q1: "Що таке правило 90/180?",
+                faq_a1: "Воно дозволяє громадянам країн, що не входять до ЄС, перебувати в Шенгенській зоні максимум 90 днів у будь-який 180-денний період.",
+                faq_q2: "Чи точний розрахунок?",
+                faq_a2: "Так, наш алгоритм повністю відповідає офіційним правилам прикордонного контролю ЄС, включаючи підрахунок днів в'їзду та виїзду.",
+                faq_q3: "Чи працює додаток офлайн?",
+                faq_a3: "Так, після завантаження додаток зберігає ваші поїздки локально і не потребує підключення до Інтернету для розрахунку.",
+                cta_title: "Готові до подорожей без стресу?",
+                cta_subtitle: "Завантажте Schengen Tracker сьогодні і забудьте про здогадки у своїх планах.",
+                footer_contact: "Підтримка",
+                footer_privacy: "Політика конфіденційності"
+            }
+        };
+
+        function setLang(lang) {
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if(btn.textContent.toLowerCase() === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Update text contents
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.textContent = i18n[lang][key];
+                }
+            });
+            
+            // Update countdown labels
+            if (typeof updateCountdown === 'function') {
+                updateCountdown();
+            }
+        }
+
+        // App Store Countdown
+        function updateCountdown() {
+            const targetDate = new Date("2026-05-08T00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            const currentLang = document.documentElement.lang || 'en';
+            const daysSuffix = i18n[currentLang] && i18n[currentLang]['days_short'] ? i18n[currentLang]['days_short'] : 'D';
+            const hoursSuffix = i18n[currentLang] && i18n[currentLang]['hours_short'] ? i18n[currentLang]['hours_short'] : 'H';
+            const nowSuffix = i18n[currentLang] && i18n[currentLang]['now_short'] ? i18n[currentLang]['now_short'] : 'NOW';
+            
+            let displayString = "";
+            if (distance < 0) {
+                displayString = nowSuffix;
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                
+                if (days > 0) {
+                    displayString = days + " " + daysSuffix;
+                } else {
+                    displayString = hours + " " + hoursSuffix;
+                }
+            }
+            
+            const countdownEl1 = document.getElementById("ios-countdown");
+            const countdownEl2 = document.getElementById("ios-countdown-cta");
+            if (countdownEl1) countdownEl1.textContent = displayString;
+            if (countdownEl2) countdownEl2.textContent = displayString;
+        }
+        
+        setInterval(updateCountdown, 1000 * 60 * 60);
+        updateCountdown();
+    </script>
+</body>
+</html>
