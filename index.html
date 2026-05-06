@@ -950,7 +950,7 @@
                 <a href="#ios-coming-soon" class="btn btn-apple" aria-label="Schengen Tracker for iOS Apple App Store - Coming soon">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 7.043c-.88-.04-1.78.36-2.31.93-.52.56-.93 1.48-.79 2.37.95.06 1.83-.34 2.35-.91.54-.58.94-1.5.8-2.39zM16.64 10.36c-1.39 0-2.38.8-3.04.8-.64 0-1.63-.78-2.88-.78-1.57 0-3.05.9-3.86 2.32-1.64 2.85-.42 7.07 1.18 9.38.78 1.12 1.7 2.39 2.92 2.39 1.18 0 1.63-.73 3.06-.73 1.42 0 1.88.73 3.09.73 1.25 0 2.06-1.16 2.82-2.28.88-1.29 1.24-2.54 1.27-2.61-.03-.01-2.45-.94-2.49-3.79-.04-2.38 1.94-3.52 2.03-3.57-1.12-1.64-2.86-1.85-3.48-1.88z"/></svg>
                     <div class="btn-text-wrapper">
-                        <span class="btn-subtext coming-soon-text"><span data-i18n="btn_apple_soon">COMING IN</span> <span id="ios-countdown-cta">5D</span></span>
+                        <span class="btn-subtext coming-soon-text"><span data-i18n="btn_apple_soon">COMING IN</span> <span id="ios-countdown-cta">10D</span></span>
                         <span class="btn-maintext">App Store</span>
                     </div>
                 </a>
@@ -1168,7 +1168,7 @@
 
         // App Store Countdown
         function updateCountdown() {
-            const targetDate = new Date("2026-05-08T00:00:00").getTime();
+            const targetDate = new Date("2026-05-15T00:00:00").getTime();
             const now = new Date().getTime();
             const distance = targetDate - now;
             
@@ -1199,6 +1199,31 @@
         
         setInterval(updateCountdown, 1000 * 60 * 60);
         updateCountdown();
+    </script>
+
+    <!-- Firebase Analytics -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDg5tGJp9EcLOtkUUCeUos2jUK3dOwxTgk",
+            authDomain: "schengen-web.firebaseapp.com",
+            projectId: "schengen-web",
+            storageBucket: "schengen-web.firebasestorage.app",
+            messagingSenderId: "143026070197",
+            appId: "1:143026070197:web:4690baca41e8f5525094fc",
+            measurementId: "G-77PJSP0EYT"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
     </script>
 </body>
 </html>
