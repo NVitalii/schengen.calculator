@@ -738,10 +738,10 @@
                             <span class="btn-maintext">Google Play</span>
                         </div>
                     </a>
-                    <a href="#ios-coming-soon" class="btn btn-apple" aria-label="Schengen Tracker for iOS Apple App Store - Coming soon">
+                    <a href="https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029" class="btn btn-apple" target="_blank" rel="noopener" aria-label="Download Schengen Tracker on the App Store">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 7.043c-.88-.04-1.78.36-2.31.93-.52.56-.93 1.48-.79 2.37.95.06 1.83-.34 2.35-.91.54-.58.94-1.5.8-2.39zM16.64 10.36c-1.39 0-2.38.8-3.04.8-.64 0-1.63-.78-2.88-.78-1.57 0-3.05.9-3.86 2.32-1.64 2.85-.42 7.07 1.18 9.38.78 1.12 1.7 2.39 2.92 2.39 1.18 0 1.63-.73 3.06-.73 1.42 0 1.88.73 3.09.73 1.25 0 2.06-1.16 2.82-2.28.88-1.29 1.24-2.54 1.27-2.61-.03-.01-2.45-.94-2.49-3.79-.04-2.38 1.94-3.52 2.03-3.57-1.12-1.64-2.86-1.85-3.48-1.88z"/></svg>
                         <div class="btn-text-wrapper">
-                            <span class="btn-subtext coming-soon-text"><span data-i18n="btn_apple_soon">COMING IN</span> <span id="ios-countdown">5D</span></span>
+                            <span class="btn-subtext"><span data-i18n="btn_apple_soon">Download on the</span></span>
                             <span class="btn-maintext">App Store</span>
                         </div>
                     </a>
@@ -947,10 +947,10 @@
                         <span class="btn-maintext">Google Play</span>
                     </div>
                 </a>
-                <a href="#ios-coming-soon" class="btn btn-apple" aria-label="Schengen Tracker for iOS Apple App Store - Coming soon">
+                <a href="https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029" class="btn btn-apple" target="_blank" rel="noopener" aria-label="Download Schengen Tracker on the App Store">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 7.043c-.88-.04-1.78.36-2.31.93-.52.56-.93 1.48-.79 2.37.95.06 1.83-.34 2.35-.91.54-.58.94-1.5.8-2.39zM16.64 10.36c-1.39 0-2.38.8-3.04.8-.64 0-1.63-.78-2.88-.78-1.57 0-3.05.9-3.86 2.32-1.64 2.85-.42 7.07 1.18 9.38.78 1.12 1.7 2.39 2.92 2.39 1.18 0 1.63-.73 3.06-.73 1.42 0 1.88.73 3.09.73 1.25 0 2.06-1.16 2.82-2.28.88-1.29 1.24-2.54 1.27-2.61-.03-.01-2.45-.94-2.49-3.79-.04-2.38 1.94-3.52 2.03-3.57-1.12-1.64-2.86-1.85-3.48-1.88z"/></svg>
                     <div class="btn-text-wrapper">
-                        <span class="btn-subtext coming-soon-text"><span data-i18n="btn_apple_soon">COMING IN</span> <span id="ios-countdown-cta">10D</span></span>
+                        <span class="btn-subtext"><span data-i18n="btn_apple_soon">Download on the</span></span>
                         <span class="btn-maintext">App Store</span>
                     </div>
                 </a>
@@ -1030,7 +1030,7 @@
                 hero_subtitle: "Track your stays, automatically calculate the 90/180 rule, and travel stress-free with the #1 app for non-EU travelers.",
                 btn_download: "Download on Google Play",
                 btn_get_on: "GET IT ON",
-                btn_apple_soon: "COMING IN",
+                btn_apple_soon: "Download on the",
                 days_short: "D",
                 hours_short: "H",
                 now_short: "NOW",
@@ -1088,7 +1088,7 @@
                 hero_subtitle: "Відстежуйте поїздки, автоматично рахуйте дні за правилом 90/180 та подорожуйте без стресу з найкращим додатком.",
                 btn_download: "Завантажити в Google Play",
                 btn_get_on: "ЗАВАНТАЖИТИ З",
-                btn_apple_soon: "ВЖЕ ЗА",
+                btn_apple_soon: "Завантажити в",
                 days_short: "ДН",
                 hours_short: "ГОД",
                 now_short: "ВЖЕ",
@@ -1160,45 +1160,11 @@
                 }
             });
             
-            // Update countdown labels
+            // Update labels
             if (typeof updateCountdown === 'function') {
-                updateCountdown();
+                // updateCountdown();
             }
         }
-
-        // App Store Countdown
-        function updateCountdown() {
-            const targetDate = new Date("2026-05-15T00:00:00").getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            
-            const currentLang = document.documentElement.lang || 'en';
-            const daysSuffix = i18n[currentLang] && i18n[currentLang]['days_short'] ? i18n[currentLang]['days_short'] : 'D';
-            const hoursSuffix = i18n[currentLang] && i18n[currentLang]['hours_short'] ? i18n[currentLang]['hours_short'] : 'H';
-            const nowSuffix = i18n[currentLang] && i18n[currentLang]['now_short'] ? i18n[currentLang]['now_short'] : 'NOW';
-            
-            let displayString = "";
-            if (distance < 0) {
-                displayString = nowSuffix;
-            } else {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                
-                if (days > 0) {
-                    displayString = days + " " + daysSuffix;
-                } else {
-                    displayString = hours + " " + hoursSuffix;
-                }
-            }
-            
-            const countdownEl1 = document.getElementById("ios-countdown");
-            const countdownEl2 = document.getElementById("ios-countdown-cta");
-            if (countdownEl1) countdownEl1.textContent = displayString;
-            if (countdownEl2) countdownEl2.textContent = displayString;
-        }
-        
-        setInterval(updateCountdown, 1000 * 60 * 60);
-        updateCountdown();
     </script>
 
     <!-- Firebase Analytics -->
