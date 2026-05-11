@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Schengen Tracker</title>
+    <title>Privacy Policy - Schengen Calculator for 90/180</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Privacy Policy for Schengen Tracker app. Learn how we handle your data, our offline-first approach, and our commitment to your privacy.">
+    <meta name="description" content="Privacy Policy for Schengen Calculator for 90/180 app. Learn how we handle your data, our offline-first approach, and our commitment to your privacy.">
+
+    <!-- Open Graph / Facebook / Slack / Telegram -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://schengen.live/privacy.html">
+    <meta property="og:title" content="Privacy Policy - Schengen Calculator for 90/180">
+    <meta property="og:description" content="Learn how we handle your data, our offline-first approach, and our commitment to your privacy.">
+    <meta property="og:image" content="https://schengen.live/assets/app_demo.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://schengen.live/privacy.html">
+    <meta property="twitter:title" content="Privacy Policy - Schengen Calculator for 90/180">
+    <meta property="twitter:description" content="Learn how we handle your data, our offline-first approach, and our commitment to your privacy.">
+    <meta property="twitter:image" content="https://schengen.live/assets/app_demo.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -153,6 +167,19 @@
             color: var(--dark);
         }
 
+        .logo-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .logo-full {
+                display: none;
+            }
+            .logo-mobile {
+                display: inline;
+            }
+        }
+
         .logo svg {
             width: 36px;
             height: 36px;
@@ -267,7 +294,8 @@
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <img src="favicon.png" alt="Logo" style="width: 36px; height: 36px; border-radius: 8px;">
-                Schengen Tracker
+                <span class="logo-full">Schengen Calculator for 90/180</span>
+                <span class="logo-mobile">Schengen Tracker</span>
             </a>
             <div class="nav-links">
                 <a href="index.html" data-i18n="nav_home">Home</a>
@@ -366,7 +394,8 @@
             <div class="footer-content">
                 <div class="logo" style="color: white;">
                     <img src="favicon.png" alt="Logo" style="width: 36px; height: 36px; border-radius: 8px;">
-                    Schengen Tracker
+                    <span class="logo-full">Schengen Calculator for 90/180</span>
+                    <span class="logo-mobile">Schengen Tracker</span>
                 </div>
                 <div class="footer-links">
                     <a href="mailto:hbb.soft.support@gmail.com" data-i18n="footer_contact">Contact Support</a>
@@ -375,7 +404,7 @@
                 </div>
             </div>
             <div class="copyright">
-                &copy; <span id="year"></span> Schengen Tracker. All rights reserved.
+                &copy; <span id="year"></span> <span class="logo-full">Schengen Calculator for 90/180</span><span class="logo-mobile">Schengen Tracker</span>. All rights reserved.
             </div>
         </div>
     </footer>
