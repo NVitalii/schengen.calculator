@@ -1,0 +1,8 @@
+# robots.txt for https://schengen.live/
+# Optimized for Search Engines (Google, Bing) and AI Agents (OpenAI, Claude, Gemini)
+
+User-agent: *
+Allow: /
+
+# XML Sitemap
+Sitemap: https://schengen.live/sitemap.xml

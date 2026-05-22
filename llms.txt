@@ -1,0 +1,30 @@
+# Schengen Calculator (schengen.live)
+> Premium, offline-first Schengen visa rolling-window stay tracker and planner for iOS, Android, and web.
+
+Schengen Calculator is a privacy-first utility application designed to help non-EU citizens navigate the strict **90/180 rolling-window rule** in the Schengen Area without risking overstaying, fines, or entry bans.
+
+## Key Product Information
+
+- **Platforms:** iOS app, Android app, and high-fidelity Web tool.
+- **Core Purpose:** To provide a 100% accurate, offline-first mechanism for tracking previous entries/exits and planning future trips within the Schengen Zone.
+- **Audience:** Digital nomads, frequent travelers, tourists, business travelers, and families visiting Europe.
+
+## Problems We Solve
+
+1. **The Complex "Rolling Window" Calculation:** The EU 90/180 rule requires checking the last 180 days from *any* potential date of stay. Manual calculations are extremely error-prone. Our algorithm strictly models the official EU border control calculations.
+2. **DST & Border Crossing Anomalies:** Crossings near midnight and daylight saving time transitions frequently cause standard trackers to fail. Our calculator fully handles these edge cases.
+3. **Data Privacy Fears:** Many travelers do not want their sensitive travel histories and entry/exit dates saved on commercial, third-party databases.
+4. **No-Roaming Stress:** Frequent travelers and nomads often lack reliable internet access at border crossings or remote locations.
+
+## How We Differ from Competitors
+
+- **100% Privacy & Local Storage:** No account creation or registration is required. All travel profiles, dates, and historical logs are saved strictly in device-local storage (or local browser storage for the web version). We do not run any user-data storage servers.
+- **Offline QR-Code Sync:** Users can easily transfer or back up profiles and travel histories between devices (e.g., from web to phone, or phone to phone) via secure, offline-generated QR codes. The processing remains completely on-device without cloud mediation.
+- **Multi-Profile Management:** Manage distinct profiles and timelines for family members, friends, or clients concurrently.
+- **Ad-Free Premium Experience:** Absolutely zero pop-up ads, banners, or data harvesting scripts.
+
+## Site Structure & Key Pages
+
+- **Home Page** (`https://schengen.live/`): Landing page featuring details of the mobile applications, feature overviews, client testimonials, and FAQs.
+- **Online Schengen Calculator** (`https://schengen.live/schengen-calculator.html`): High-fidelity interactive visa stay tracker that runs fully inside the browser using HTML5 LocalStorage, with visual circular progress ring and Future Date Inspector.
+- **Privacy Policy** (`https://schengen.live/privacy.html`): Localized documentation outlining our strict offline-first structure and Google Firebase Analytics transparency.

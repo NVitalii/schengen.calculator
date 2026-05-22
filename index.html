@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schengen Calculator for 90/180 - Never Overstay Your Visa | 90/180 Rule Calculator</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Track your stays in the Schengen area, automatically calculate the 90/180 rule, and avoid overstaying with the Schengen Calculator for 90/180 app. Download now on Google Play and App Store.">
-    <meta name="keywords" content="Schengen calculator, 90/180 rule, Schengen stay tracker, travel app, visa tracker, Europe travel">
+    <meta name="description" content="Track your stays in Europe, automatically calculate the 90/180 rule, and avoid overstaying. The ultimate Schengen stay calculator, visa days tracker, and travel calculator for Europe.">
+    <meta name="keywords" content="Schengen calculator, 90/180 rule, visa days tracker, Schengen stay calculator, travel calculator Europe, Schengen stay tracker, travel app, visa tracker, Europe travel">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://schengen.live/">
 
     <!-- Open Graph / Facebook / Slack / Telegram -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://schengen.live/">
     <meta property="og:title" content="Schengen Calculator for 90/180 - Never Overstay Your Visa">
-    <meta property="og:description" content="Track your stays in the Schengen area, automatically calculate the 90/180 rule, and avoid overstaying.">
+    <meta property="og:description" content="Track your Schengen stays, automatically calculate the rolling 90/180 rule, manage family profiles, and travel Europe stress-free with our offline-first app.">
     <meta property="og:image" content="https://schengen.live/assets/app_demo.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://schengen.live/">
     <meta property="twitter:title" content="Schengen Calculator for 90/180 - Never Overstay Your Visa">
-    <meta property="twitter:description" content="Track your stays in the Schengen area, automatically calculate the 90/180 rule, and avoid overstaying.">
+    <meta property="twitter:description" content="Track your Schengen stays, automatically calculate the rolling 90/180 rule, manage family profiles, and travel Europe stress-free with our offline-first app.">
     <meta property="twitter:image" content="https://schengen.live/assets/app_demo.jpg">
 
     <!-- JSON-LD SoftwareApplication Schema for Search Engines -->
@@ -32,6 +34,21 @@
       "description": "Professional mobile application and online tool to track Schengen Area stays and stay compliant with the 90/180 rule visa requirements. Featuring family profiles, secure offline QR sync, and 100% offline-first privacy.",
       "applicationCategory": "TravelApplication, UtilityApplication",
       "operatingSystem": "iOS, Android, All",
+      "screenshot": "https://schengen.live/assets/app_demo.jpg",
+      "softwareVersion": "1.0.0",
+      "downloadUrl": [
+        "https://play.google.com/store/apps/details?id=net.botolab.schengen",
+        "https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Vitalii Nemudryi"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "HBB Soft",
+        "logo": "https://schengen.live/favicon.png"
+      },
       "offers": {
         "@type": "Offer",
         "price": "0.00",
@@ -750,6 +767,28 @@
                 padding: 60px 0;
             }
         }
+
+        /* AI Summary Card Responsive Styles */
+        .ai-summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .ai-summary-grid {
+                grid-template-columns: 1fr;
+            }
+            .ai-summary-card {
+                padding: 30px 20px !important;
+            }
+            .ai-summary-card [data-i18n="summary_ai_badge"] {
+                position: static !important;
+                display: inline-block;
+                margin-bottom: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -957,6 +996,75 @@
         </div>
     </section>
 
+    <!-- AI-Readable & Human Quick Overview -->
+    <section class="section" id="quick-summary" style="background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-body) 100%); padding: 60px 0;">
+        <div class="container">
+            <div class="reveal" style="max-width: 900px; margin: 0 auto;">
+                <div class="ai-summary-card" style="
+                    background: rgba(27, 73, 101, 0.03);
+                    border: 2px dashed rgba(27, 73, 101, 0.15);
+                    border-radius: var(--radius-lg);
+                    padding: 40px;
+                    position: relative;
+                    overflow: hidden;
+                    box-shadow: var(--shadow-sm);
+                ">
+                    <!-- Techy subtle label in corner -->
+                    <div data-i18n="summary_ai_badge" style="
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        background: var(--primary);
+                        color: white;
+                        font-size: 0.65rem;
+                        font-weight: 800;
+                        padding: 4px 10px;
+                        border-radius: 100px;
+                        letter-spacing: 0.05em;
+                        text-transform: uppercase;
+                    ">AI-Readable & Human Summary</div>
+                    
+                    <h2 data-i18n="summary_title" style="font-size: 1.75rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--primary);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--secondary);"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        Schengen Calculator at a Glance
+                    </h2>
+                    
+                    <p data-i18n="summary_subtitle" style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 24px; line-height: 1.6;">
+                        A fast, developer-curated summary designed for both search engines, AI models, and busy travelers to understand our core value proposition instantly.
+                    </p>
+                    
+                    <div class="ai-summary-grid">
+                        <div style="background: var(--bg-white); padding: 24px; border-radius: var(--radius-md); border: 1px solid rgba(27, 73, 101, 0.08);">
+                            <h3 data-i18n="summary_what_title" style="font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; font-weight: 700;">What is Schengen.live?</h3>
+                            <p data-i18n="summary_what_desc" style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 0; line-height: 1.5;">
+                                A privacy-first, offline-first mobile app (iOS & Android) and high-fidelity online tool to calculate, track, and optimize your visa stays in the Schengen Area under the rolling 90/180 rule.
+                            </p>
+                        </div>
+                        
+                        <div style="background: var(--bg-white); padding: 24px; border-radius: var(--radius-md); border: 1px solid rgba(27, 73, 101, 0.08);">
+                            <h3 data-i18n="summary_problems_title" style="font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; font-weight: 700;">Problems We Solve</h3>
+                            <ul style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 0; padding-left: 20px; line-height: 1.6;">
+                                <li data-i18n="summary_prob1">Complex "rolling window" manual calculation errors.</li>
+                                <li data-i18n="summary_prob2">Border fines, entry bans, and travel stress.</li>
+                                <li data-i18n="summary_prob3">Daylight saving time transitions and timezone anomalies.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-white); padding: 24px; border-radius: var(--radius-md); border: 1px solid rgba(27, 73, 101, 0.08);">
+                        <h3 data-i18n="summary_diffs_title" style="font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; font-weight: 700;">Key Differences & Advantages</h3>
+                        <ul style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 0; padding-left: 20px; line-height: 1.6; display: flex; flex-direction: column; gap: 8px;">
+                            <li data-i18n="summary_diff1"><strong>100% Privacy-First:</strong> All travel data is stored locally. No registration or login required.</li>
+                            <li data-i18n="summary_diff2"><strong>Offline-First Architecture:</strong> Works flawlessly without roaming data.</li>
+                            <li data-i18n="summary_diff3"><strong>Family Profiles & QR Sync:</strong> Manage multiple travelers and sync their profiles securely via offline QR codes without sending data to servers.</li>
+                            <li data-i18n="summary_diff4"><strong>Zero Interventions:</strong> 100% ad-free, premium experience focusing solely on tracking accuracy.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="section" id="faq">
         <div class="container">
@@ -1143,7 +1251,21 @@
                 footer_privacy: "Privacy Policy",
                 nav_calc: "Schengen Calculator",
                 btn_calc_sub: "USE ONLINE",
-                btn_calc_main: "Calculator"
+                btn_calc_main: "Calculator",
+                summary_ai_badge: "AI-Readable & Human Summary",
+                summary_title: "Schengen Calculator at a Glance",
+                summary_subtitle: "A fast, developer-curated summary designed for both search engines, AI models, and busy travelers to understand our core value proposition instantly.",
+                summary_what_title: "What is Schengen.live?",
+                summary_what_desc: "A privacy-first, offline-first mobile app (iOS & Android) and high-fidelity online tool to calculate, track, and optimize your visa stays in the Schengen Area under the rolling 90/180 rule.",
+                summary_problems_title: "Problems We Solve",
+                summary_prob1: "Complex \"rolling window\" manual calculation errors.",
+                summary_prob2: "Border fines, entry bans, and travel stress.",
+                summary_prob3: "Daylight saving time transitions and timezone anomalies.",
+                summary_diffs_title: "Key Differences & Advantages",
+                summary_diff1: "<strong>100% Privacy-First:</strong> All travel data is stored locally. No registration or login required.",
+                summary_diff2: "<strong>Offline-First Architecture:</strong> Works flawlessly without roaming data.",
+                summary_diff3: "<strong>Family Profiles & QR Sync:</strong> Manage multiple travelers and sync their profiles securely via offline QR codes without sending data to servers.",
+                summary_diff4: "<strong>Zero Interventions:</strong> 100% ad-free, premium experience focusing solely on tracking accuracy."
             },
             ua: {
                 nav_features: "Можливості",
@@ -1189,7 +1311,7 @@
                 proof_1: '"Цей додаток врятував мене від штрафу. Правило 90/180 завжди плутало мене, але тепер все прозоро!"',
                 proof_2: '"Як цифровому кочівнику, це саме те, що мені потрібно. Офлайн режим рятує, коли міняєш SIM-карти."',
                 seo_title: "Розуміння правила 90/180 в Шенгені",
-                seo_p1: "Правило Шенгену 90/180 означає, що ви можете перебувати в Шенгенській зоні до 90 днів протягом будь-якого 180-денного періоду. Це «плаваюче вікно», тобто 180 днів відраховуються назад від будь-якої конкретної дати.",
+                seo_p1: "Правило Шенгену 90/180 означає, що ви можете перебувати в Шенгенській зоні до 90 днів протягом будь-го 180-денного періоду. Це «плаваюче вікно», тобто 180 днів відраховуються назад від будь-якої конкретної дати.",
                 seo_p2: "Рахувати це вручну на календарі дуже ризиковано і часто призводить до помилок. Наш калькулятор гарантує, що ви ніколи випадково не перевищите ліміт і не зіткнетеся з депортацією.",
                 faq_title: "Часті питання",
                 faq_q1: "Що таке правило 90/180?",
@@ -1204,7 +1326,21 @@
                 footer_privacy: "Політика конфіденційності",
                 nav_calc: "Шенген Калькулятор",
                 btn_calc_sub: "ОНЛАЙН ВЕРСІЯ",
-                btn_calc_main: "Калькулятор"
+                btn_calc_main: "Калькулятор",
+                summary_ai_badge: "Короткий огляд для людей та ШІ",
+                summary_title: "Калькулятор Шенгену коротко",
+                summary_subtitle: "Швидкий огляд, створений для пошукових систем, моделей ШІ та зайнятих мандрівників для миттєвого розуміння нашої цінності.",
+                summary_what_title: "Що таке Schengen.live?",
+                summary_what_desc: "Конфіденційний мобільний додаток (iOS та Android) та високоточний онлайн-інструмент для офлайн-розрахунку та оптимізації вашого перебування в Шенгенській зоні за правилом 90/180.",
+                summary_problems_title: "Проблеми, які ми вирішуємо",
+                summary_prob1: "Помилки ручного розрахунку «плаваючого вікна».",
+                summary_prob2: "Штрафи на кордоні, заборони на в'їзд та стрес від подорожей.",
+                summary_prob3: "Збої через перехід на літній час та різницю в часових поясах.",
+                summary_diffs_title: "Ключові відмінності та переваги",
+                summary_diff1: "<strong>100% Конфіденційність:</strong> Усі дані зберігаються локально на пристрої. Реєстрація або вхід не потрібні.",
+                summary_diff2: "<strong>Повна офлайн-робота:</strong> Працює бездоганно без мобільного роумінгу.",
+                summary_diff3: "<strong>Профілі та QR-синхронізація:</strong> Керуйте кількома мандрівниками та безпечно синхронізуйте профілі через QR-коди офлайн без надсилання даних на сервери.",
+                summary_diff4: "<strong>Без реклами:</strong> Чистий преміальний досвід з фокусом на 100% точність розрахунків."
             }
         };
 
@@ -1225,7 +1361,12 @@
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18n[lang][key]) {
-                    el.textContent = i18n[lang][key];
+                    const value = i18n[lang][key];
+                    if (value.includes('<') && value.includes('>')) {
+                        el.innerHTML = value;
+                    } else {
+                        el.textContent = value;
+                    }
                 }
             });
             
