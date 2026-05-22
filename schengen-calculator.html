@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schengen Calculator - 90/180 Rule Visa Stay Tracker Online</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- SEO Optimization -->
+    <meta name="description" content="Calculate your Schengen Area stays and remaining visa allowance under the strict 90/180 rule. Free online tool to track your European travel history and avoid overstaying.">
+    <meta name="keywords" content="schengen calculator, 90/180 rule calculator, schengen visa calculator, visa stay tracker, Europe travel visa, rolling 180 days, free online visa calculator">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://schengen.live/schengen-calculator.html">
+
+    <!-- Open Graph / Facebook / Slack / Telegram / Instagram -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://schengen.live/schengen-calculator.html">
+    <meta property="og:title" content="Schengen Calculator - 90/180 Rule Visa Stay Tracker Online">
+    <meta property="og:description" content="Free online tool to calculate your Schengen Area stays, track remaining visa days under the rolling 90/180 rule, and plan stress-free travel to Europe.">
+    <meta property="og:image" content="https://schengen.live/assets/app_demo.jpg">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://schengen.live/schengen-calculator.html">
+    <meta property="twitter:title" content="Schengen Calculator - 90/180 Rule Visa Stay Tracker Online">
+    <meta property="twitter:description" content="Calculate your Schengen Area stays and remaining visa allowance under the strict 90/180 rule. Free online tool.">
+    <meta property="twitter:image" content="https://schengen.live/assets/app_demo.jpg">
+
+    <!-- JSON-LD WebApplication Schema for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Schengen Calculator for 90/180",
+      "url": "https://schengen.live/schengen-calculator.html",
+      "description": "Calculate remaining stays and used days in the Schengen Area under the 90/180 rule rolling window. Saves trips locally in browser storage.",
+      "applicationCategory": "TravelApplication, UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires HTML5, LocalStorage, and modern JavaScript.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Automatic rolling 90/180 window calculations",
+        "Visual circular progress ring for stay allowance",
+        "Interactive Future Date Inspector for planning ahead",
+        "LocalStorage persistence for single travel history list",
+        "English and Ukrainian language options"
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary: #1B4965; /* Dark Blue from logo */
+            --primary-dark: #123246;
+            --secondary: #EE534F; /* Coral Red from logo */
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-body: #fefce8; /* Very light beige */
+            --bg-white: #ffffff;
+            --glass-bg: rgba(254, 252, 232, 0.85);
+            --glass-border: rgba(27, 73, 101, 0.1);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            
+            /* State Colors */
+            --color-safe: #10b981;
+            --color-safe-bg: rgba(16, 185, 129, 0.1);
+            --color-warning: #f59e0b;
+            --color-warning-bg: rgba(245, 158, 11, 0.1);
+            --color-danger: #ef4444;
+            --color-danger-bg: rgba(239, 68, 68, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 100px; /* navbar spacing */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 16px 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .lang-switch {
+            display: flex;
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--bg-white);
+            color: var(--dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Main Content Grid */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 992px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        /* Cards & Containers */
+        .card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(27, 73, 101, 0.05);
+            margin-bottom: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Dashboard Gradient Card */
+        .dashboard-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dashboard-card h1 {
+            color: var(--bg-white);
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(238, 83, 79, 0.15) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .dashboard-header {
+            z-index: 1;
+        }
+
+        .dashboard-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 1;
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                flex-direction: column;
+                text-align: center;
+                gap: 24px;
+            }
+        }
+
+        /* Progress Circle */
+        .progress-ring-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring__circle-bg {
+            stroke: rgba(255, 255, 255, 0.12);
+        }
+
+        .progress-ring__circle {
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.4s ease;
+            transform-origin: 50% 50%;
+        }
+
+        .progress-ring-text {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-ring-text .days-val {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .progress-ring-text .days-lbl {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+            opacity: 0.75;
+        }
+
+        .stats-text {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .stats-text .stat-item {
+            font-size: 1.05rem;
+            opacity: 0.9;
+        }
+
+        .stats-text .stat-highlight {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .rolling-period {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 12px;
+            margin-top: 8px;
+        }
+
+        /* Dynamic Status Banner */
+        .status-banner {
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            z-index: 1;
+        }
+
+        .status-banner svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .status-banner.safe {
+            background-color: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: #d1fae5;
+        }
+        .status-banner.warning {
+            background-color: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            color: #fef3c7;
+        }
+        .status-banner.danger {
+            background-color: rgba(239, 68, 68, 0.18);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fee2e2;
+        }
+
+        /* Inspector Controls */
+        .inspector-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        input[type="date"], input[type="text"] {
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid #cbd5e1;
+            background-color: #f8fafc;
+            color: var(--dark);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="date"]:focus, input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(27, 73, 101, 0.15);
+            background-color: var(--bg-white);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--dark);
+            color: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+            background: #000;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        .btn-danger {
+            background: var(--secondary);
+            color: var(--bg-white);
+        }
+
+        .btn-danger:hover {
+            background: #d32f2f;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        /* Form Alerts */
+        .alert {
+            display: none;
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .alert.alert-danger {
+            display: flex;
+            background-color: var(--color-danger-bg);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #b91c1c;
+        }
+
+        /* Trip Timeline / Checklist */
+        .trip-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .trip-list-header h2 {
+            margin-bottom: 0;
+        }
+
+        .trip-count-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .trip-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-height: 520px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        /* Custom Scrollbar for Timeline */
+        .trip-timeline::-webkit-scrollbar {
+            width: 6px;
+        }
+        .trip-timeline::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+        .trip-timeline::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .trip-timeline::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .trip-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s ease;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .trip-card:hover {
+            border-color: var(--primary);
+            background: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .trip-card-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .trip-card-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.05rem;
+        }
+
+        .trip-card-dates {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trip-card-dates svg {
+            width: 16px;
+            height: 16px;
+            color: var(--text-light);
+        }
+
+        .trip-duration-badge {
+            background: rgba(27, 73, 101, 0.08);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        .trip-card-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-white);
+            border: 1px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-main);
+        }
+
+        .action-icon-btn:hover {
+            background-color: #f1f5f9;
+            color: var(--dark);
+        }
+
+        .action-icon-btn.edit-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .action-icon-btn.delete-btn:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            background-color: #fff5f5;
+        }
+
+        .action-icon-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .empty-state-icon {
+            width: 64px;
+            height: 64px;
+            background: #FDF1D6;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-state-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            max-width: 280px;
+        }
+
+        /* Accordion FAQ */
+        .faq-card h2 {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .faq-item {
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark);
+            background: #f8fafc;
+            user-select: none;
+        }
+
+        .faq-question svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+            color: var(--text-light);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background: var(--bg-white);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 16px 20px 20px;
+            max-height: 240px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+
+        /* App Promo Section Styles */
+        .app-promo-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--bg-white);
+            padding: 80px 24px;
+            margin-top: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-promo-section::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(27, 73, 101, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .promo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (max-width: 992px) {
+            .promo-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+        }
+
+        .promo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .promo-badge {
+            background: rgba(238, 83, 79, 0.15);
+            color: var(--secondary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 6px 14px;
+            border-radius: 100px;
+            align-self: flex-start;
+            border: 1px solid rgba(238, 83, 79, 0.25);
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 992px) {
+            .promo-badge {
+                align-self: center;
+            }
+        }
+
+        .app-promo-section h2 {
+            color: var(--bg-white);
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .app-promo-section p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .promo-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        @media (max-width: 640px) {
+            .promo-features {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        .promo-feature-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .promo-feature-item strong {
+            display: block;
+            color: var(--bg-white);
+            font-size: 1.05rem;
+            margin-bottom: 2px;
+        }
+
+        .promo-feature-text {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .feature-bullet-icon {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--color-safe);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-bullet-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .promo-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 992px) {
+            .promo-buttons {
+                justify-content: center;
+            }
+        }
+
+        .promo-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #020617;
+            color: var(--bg-white);
+            border-radius: 12px;
+            padding: 8px 18px;
+            gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+        }
+
+        .promo-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
+            background: #000000;
+        }
+
+        .promo-btn svg {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .promo-btn-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .p-btn-sub {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+        }
+
+        .p-btn-main {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .promo-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .promo-mockup {
+            max-width: 100%;
+            height: auto;
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: rotate(2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .promo-mockup:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        @media (max-width: 992px) {
+            .promo-mockup {
+                max-width: 280px;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: #020617;
+            color: #94a3b8;
+            padding: 40px 0 30px;
+            font-size: 0.875rem;
+            margin-top: 48px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 30px;
+            flex-wrap: wrap;
+            gap: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--bg-white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            color: #64748b;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Back Button Banner */
+        .back-banner {
+            max-width: 1200px;
+            margin: 24px auto 0;
+            padding: 0 24px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Logo">
+                <span data-i18n="logo_title">Schengen Calculator</span>
+            </a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('ua')">UA</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back banner -->
+    <div class="back-banner">
+        <a href="index.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span data-i18n="back_home">Back to Home</span>
+        </a>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        
+        <!-- Left Side: Dashboard Stats + Form Stay Editor -->
+        <section class="left-column">
+            
+            <!-- Dashboard Widget -->
+            <div class="dashboard-card">
+                <div class="dashboard-header">
+                    <h1 data-i18n="dash_header">Your Visa Allowance</h1>
+                </div>
+                <div class="dashboard-grid">
+                    
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="140" height="140">
+                            <circle class="progress-ring__circle-bg" stroke-width="8" fill="transparent" r="58" cx="70" cy="70" />
+                            <circle class="progress-ring__circle" stroke-width="8" fill="transparent" r="58" cx="70" cy="70" />
+                        </svg>
+                        <div class="progress-ring-text">
+                            <span class="days-val" id="days-left-val">90</span>
+                            <span class="days-lbl" data-i18n="days_left_lbl">Left</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-text">
+                        <div class="stat-item"><span data-i18n="stat_used">Used in 180 days:</span> <span class="stat-highlight" id="days-used-val">0</span> / 90 <span data-i18n="days_unit">days</span></div>
+                        <div class="stat-item"><span data-i18n="stat_status">Status:</span> <span class="stat-highlight" id="status-text-val">Safe</span></div>
+                        <div class="rolling-period" id="rolling-period-dates">
+                            Rolling window: -
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Dynamic Status Banner explaining the allowance -->
+                <div class="status-banner safe" id="status-banner-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="status-banner-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span id="status-banner-text" data-i18n="status_safe_desc">You have plenty of days left for your travels.</span>
+                </div>
+            </div>
+
+            <!-- Future Date Inspector Widget -->
+            <div class="card inspector-card">
+                <h2 data-i18n="inspector_header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: var(--primary);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    Future Date Inspector
+                </h2>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 6px;" data-i18n="inspector_desc">Test your visa limit on a specific calendar date in the future (e.g. for upcoming trips).</p>
+                <div class="form-group">
+                    <label for="inspect-date" data-i18n="inspect_date_label">Check remaining days on date:</label>
+                    <input type="date" id="inspect-date" onchange="recalculateDashboard()">
+                </div>
+            </div>
+
+            <!-- Add/Edit Form -->
+            <div class="card" id="form-card">
+                <h2 id="form-title" data-i18n="form_title_add">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--secondary);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Add a New Stay
+                </h2>
+                
+                <div class="alert alert-danger" id="form-alert">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    <span id="form-alert-text">Error message</span>
+                </div>
+
+                <form id="trip-form" onsubmit="handleFormSubmit(event)">
+                    <input type="hidden" id="edit-trip-id" value="">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trip-name" data-i18n="label_name">Destination / Trip Name (Optional)</label>
+                            <input type="text" id="trip-name" placeholder="e.g. Vacation in Poland, France...">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="trip-start" data-i18n="label_start">Entry Date</label>
+                            <input type="date" id="trip-start" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trip-end" data-i18n="label_end">Exit Date</label>
+                            <input type="date" id="trip-end" required>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary" id="form-submit-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            <span data-i18n="btn_add_stay">Add Stay</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="form-cancel-btn" onclick="cancelEditing()" style="display: none;" data-i18n="btn_cancel">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- Right Side: Travel Checklist & Timeline + FAQs -->
+        <section class="right-column">
+            
+            <!-- Travel History Checklist -->
+            <div class="card" style="min-height: 380px;">
+                <div class="trip-list-header">
+                    <h2 data-i18n="timeline_header">Travel Checklist</h2>
+                    <span class="trip-count-badge" id="trip-count">0 trips</span>
+                </div>
+
+                <div class="trip-timeline" id="trip-timeline-list">
+                    <!-- Dynamic empty state or list goes here -->
+                </div>
+            </div>
+
+            <!-- Accordion FAQ -->
+            <div class="card faq-card">
+                <h2 data-i18n="faq_title">FAQ & Rules</h2>
+                <div style="margin-top: 16px;">
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAccordion(this)">
+                            <span data-i18n="faq_q1">What is the 90/180 rule?</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a1">Non-EU travelers under visa-free regimes or short-stay Schengen visas are allowed to stay in the Schengen Area for a maximum of 90 days in any rolling period of 180 days. This means you look backwards 180 days from each day of your stay to check if you have exceeded the 90-day allowance.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAccordion(this)">
+                            <span data-i18n="faq_q2">Are entry and exit dates included?</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a2">Yes. Under EU border guidelines, any part of a day spent in the Schengen zone counts as a full day of stay. Thus, both the day you enter and the day you exit are fully counted towards your stay, even if you crossed the border right before midnight.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAccordion(this)">
+                            <span data-i18n="faq_q3">Does this calculator support future stays?</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq_a3">Yes! Our algorithm is designed to project stays. You can add future planned trips, and use the "Future Date Inspector" to check exactly how many days you will have available on any date ahead.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- App Promotion Section -->
+    <section class="app-promo-section">
+        <div class="promo-container">
+            <div class="promo-grid">
+                <div class="promo-content">
+                    <div class="promo-badge" data-i18n="promo_badge">Recommended for Mobile</div>
+                    <h2 data-i18n="promo_title">Get the Full Schengen App Experience</h2>
+                    <p data-i18n="promo_desc">
+                        While the online calculator is perfect for quick checks, our free mobile apps provide a much more powerful, convenient, and feature-rich experience for frequent travelers. Save unlimited trips, manage family profiles, and securely share itineraries offline via QR codes!
+                    </p>
+                    
+                    <div class="promo-features">
+                        <div class="promo-feature-item">
+                            <div class="feature-bullet-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <div>
+                                <strong data-i18n="promo_feat1_title">Multiple Profiles</strong>
+                                <span class="promo-feature-text" data-i18n="promo_feat1_desc">Track stays for family members, friends, or across multiple passports simultaneously.</span>
+                            </div>
+                        </div>
+                        <div class="promo-feature-item">
+                            <div class="feature-bullet-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <div>
+                                <strong data-i18n="promo_feat2_title">Secure QR Sync</strong>
+                                <span class="promo-feature-text" data-i18n="promo_feat2_desc">Transfer all trips and profiles between devices instantly via offline secure QR codes and a PIN.</span>
+                            </div>
+                        </div>
+                        <div class="promo-feature-item">
+                            <div class="feature-bullet-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <div>
+                                <strong data-i18n="promo_feat3_title">100% Offline & Private</strong>
+                                <span class="promo-feature-text" data-i18n="promo_feat3_desc">Access and update your trips in remote border control zones without cellular data.</span>
+                            </div>
+                        </div>
+                        <div class="promo-feature-item">
+                            <div class="feature-bullet-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <div>
+                                <strong data-i18n="promo_feat4_title">Personalized Interface</strong>
+                                <span class="promo-feature-text" data-i18n="promo_feat4_desc">Easily adjust calendar font sizes, set your preferred starting day of the week, and toggle between dark and light themes.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="promo-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=net.botolab.schengen" class="promo-btn" target="_blank" rel="noopener" aria-label="Download Schengen Calculator for 90/180 on Google Play">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12ZM20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.88 9.5L20.16 10.81ZM6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
+                            <div class="promo-btn-text">
+                                <span class="p-btn-sub">GET IT ON</span>
+                                <span class="p-btn-main">Google Play</span>
+                            </div>
+                        </a>
+                        <a href="https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029" class="promo-btn" target="_blank" rel="noopener" aria-label="Download Schengen Calculator for 90/180 on the App Store">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 7.043c-.88-.04-1.78.36-2.31.93-.52.56-.93 1.48-.79 2.37.95.06 1.83-.34 2.35-.91.54-.58.94-1.5.8-2.39zM16.64 10.36c-1.39 0-2.38.8-3.04.8-.64 0-1.63-.78-2.88-.78-1.57 0-3.05.9-3.86 2.32-1.64 2.85-.42 7.07 1.18 9.38.78 1.12 1.7 2.39 2.92 2.39 1.18 0 1.63-.73 3.06-.73 1.42 0 1.88.73 3.09.73 1.25 0 2.06-1.16 2.82-2.28.88-1.29 1.24-2.54 1.27-2.61-.03-.01-2.45-.94-2.49-3.79-.04-2.38 1.94-3.52 2.03-3.57-1.12-1.64-2.86-1.85-3.48-1.88z"/></svg>
+                            <div class="promo-btn-text">
+                                <span class="p-btn-sub">Download on the</span>
+                                <span class="p-btn-main">App Store</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="promo-image-container">
+                    <img src="assets/app_demo.jpg" alt="Schengen Calculator App Mockup - Google Play & App Store" class="promo-mockup">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="logo" style="color: white;">
+                <img src="favicon.png" alt="Logo">
+                <span data-i18n="logo_title">Schengen Calculator</span>
+            </div>
+            <div class="footer-links">
+                <a href="mailto:hbb.soft.support@gmail.com" data-i18n="footer_contact">Contact Support</a>
+                <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <span id="year"></span> Schengen Calculator. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // Update Year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Standard 90/180 Schengen Calculator Core Ported from Flutter Reference App
+        class SchengenCalculator {
+            static STAY_LIMIT_DAYS = 90;
+            static ROLLING_WINDOW_LENGTH = 180;
+
+            constructor(trips) {
+                this.trips = trips || [];
+            }
+
+            usedDaysOn(day) {
+                const target = toDateOnly(day);
+                const cutoff = new Date(target);
+                cutoff.setUTCDate(cutoff.getUTCDate() - (SchengenCalculator.ROLLING_WINDOW_LENGTH - 1));
+
+                let used = 0;
+                for (const trip of this.trips) {
+                    const start = parseInputDate(trip.start);
+                    const end = parseInputDate(trip.end);
+
+                    if (!start || !end) continue;
+
+                    // Skip trips completely outside the 180-day window ending on target
+                    if (end < cutoff || start > target) {
+                        continue;
+                    }
+
+                    // Clamp stays to rolling window boundaries
+                    const clampedStart = start < cutoff ? cutoff : start;
+                    const clampedEnd = end > target ? target : end;
+
+                    used += this._inclusiveDayCount(clampedStart, clampedEnd);
+                }
+
+                return used;
+            }
+
+            remainingDaysOn(day) {
+                return SchengenCalculator.STAY_LIMIT_DAYS - this.usedDaysOn(day);
+            }
+
+            _inclusiveDayCount(start, end) {
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays + 1;
+            }
+        }
+
+        // Timezone-safe UTC Date Helpers
+        function toDateOnly(date) {
+            const d = new Date(date);
+            return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+        }
+
+        function parseInputDate(str) {
+            if (!str) return null;
+            const parts = str.split('-');
+            if (parts.length !== 3) return null;
+            return new Date(Date.UTC(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10)));
+        }
+
+        function formatToInputDate(date) {
+            if (!date) return "";
+            const d = new Date(date);
+            const y = d.getUTCFullYear();
+            const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+            const day = String(d.getUTCDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        }
+
+        function formatDisplayDate(dateStr, lang) {
+            const d = parseInputDate(dateStr);
+            if (!d) return "";
+            const options = { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' };
+            return d.toLocaleDateString(lang === 'ua' ? 'uk-UA' : 'en-US', options);
+        }
+
+        // Application State
+        let trips = [];
+        let currentLang = 'en';
+
+        // Load trips from LocalStorage
+        function loadTripsFromStorage() {
+            const stored = localStorage.getItem('schengen_calculator_trips');
+            if (stored) {
+                try {
+                    trips = JSON.parse(stored);
+                } catch(e) {
+                    trips = [];
+                }
+            } else {
+                trips = [];
+            }
+        }
+
+        // Save trips to LocalStorage
+        function saveTripsToStorage() {
+            localStorage.setItem('schengen_calculator_trips', JSON.stringify(trips));
+        }
+
+        // Accordion functionality for FAQ
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // SVG progress circular offset
+        const circle = document.querySelector('.progress-ring__circle');
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = circumference;
+
+        function setCircleProgress(usedDays) {
+            const limit = SchengenCalculator.STAY_LIMIT_DAYS;
+            const percent = Math.min(100, Math.max(0, (usedDays / limit) * 100));
+            const offset = circumference - (percent / 100 * circumference);
+            circle.style.strokeDashoffset = offset;
+
+            // Color adjustments
+            if (usedDays > limit) {
+                circle.style.stroke = 'var(--secondary)'; // Danger Red
+            } else if (usedDays >= 75) {
+                circle.style.stroke = 'var(--color-warning)'; // Warning Amber
+            } else {
+                circle.style.stroke = 'var(--color-safe)'; // Safe Green
+            }
+        }
+
+        // Recalculate statistics and redraw UI
+        function recalculateDashboard() {
+            // Read chosen inspector date
+            const dateInput = document.getElementById('inspect-date');
+            let inspectorDate = parseInputDate(dateInput.value);
+            if (!inspectorDate) {
+                inspectorDate = toDateOnly(new Date());
+                dateInput.value = formatToInputDate(inspectorDate);
+            }
+
+            // Create calculator instance
+            const calc = new SchengenCalculator(trips);
+            const usedDays = calc.usedDaysOn(inspectorDate);
+            const remaining = calc.remainingDaysOn(inspectorDate);
+
+            // Update DOM counters
+            document.getElementById('days-left-val').textContent = remaining >= 0 ? remaining : 0;
+            document.getElementById('days-used-val').textContent = usedDays;
+
+            // Update progress ring
+            setCircleProgress(usedDays);
+
+            // Calculate rolling window boundaries
+            const cutoffDate = new Date(inspectorDate);
+            cutoffDate.setUTCDate(cutoffDate.getUTCDate() - 179);
+            
+            const startStr = formatDisplayDate(formatToInputDate(cutoffDate), currentLang);
+            const endStr = formatDisplayDate(formatToInputDate(inspectorDate), currentLang);
+            
+            const windowPrefix = currentLang === 'ua' ? 'Плаваюче вікно' : 'Rolling window';
+            document.getElementById('rolling-period-dates').textContent = `${windowPrefix}: ${startStr} – ${endStr}`;
+
+            // Update status text and banner
+            const statusTextVal = document.getElementById('status-text-val');
+            const banner = document.getElementById('status-banner-card');
+            const bannerIcon = document.getElementById('status-banner-icon');
+            const bannerText = document.getElementById('status-banner-text');
+
+            if (usedDays > SchengenCalculator.STAY_LIMIT_DAYS) {
+                // Overstayed
+                statusTextVal.textContent = currentLang === 'ua' ? "Перевищено ліміт!" : "Limit Exceeded!";
+                statusTextVal.style.color = 'var(--secondary)';
+                
+                banner.className = "status-banner danger";
+                bannerText.textContent = currentLang === 'ua' 
+                    ? "Порушення ліміту перебування! Ви перевищили дозволені 90 днів у цьому плаваючому вікні!" 
+                    : "Visa Overstay! You have exceeded the 90-day allowance in this rolling window!";
+                bannerIcon.innerHTML = `<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>`;
+            } else if (usedDays >= 75) {
+                // Warning
+                statusTextVal.textContent = currentLang === 'ua' ? "Увага" : "Warning";
+                statusTextVal.style.color = 'var(--color-warning)';
+                
+                banner.className = "status-banner warning";
+                bannerText.textContent = currentLang === 'ua' 
+                    ? "Ви наближаєтеся до ліміту в 90 днів у Шенгенській зоні!" 
+                    : "You are approaching your 90-day limit in the Schengen zone!";
+                bannerIcon.innerHTML = `<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>`;
+            } else {
+                // Safe
+                statusTextVal.textContent = currentLang === 'ua' ? "Безпечно" : "Safe";
+                statusTextVal.style.color = 'var(--color-safe)';
+                
+                banner.className = "status-banner safe";
+                bannerText.textContent = currentLang === 'ua' 
+                    ? "У вас достатньо днів для подорожей." 
+                    : "You have plenty of days left for your travels.";
+                bannerIcon.innerHTML = `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>`;
+            }
+        }
+
+        // Render checklist stays timeline
+        function renderTimelineList() {
+            const listContainer = document.getElementById('trip-timeline-list');
+            const tripCountBadge = document.getElementById('trip-count');
+            
+            // Format trip count badge
+            const countText = currentLang === 'ua' 
+                ? `${trips.length} поїзд.` 
+                : `${trips.length} trip${trips.length === 1 ? '' : 's'}`;
+            tripCountBadge.textContent = countText;
+
+            if (trips.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        </div>
+                        <h3 data-i18n="empty_title">${currentLang === 'ua' ? 'Немає поїздок' : 'No trips added yet'}</h3>
+                        <p data-i18n="empty_desc">${currentLang === 'ua' ? 'Додайте свою першу поїздку за допомогою форми зліва.' : 'Add your first stay using the form on the left to start tracking.'}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort trips by start date descending
+            const sortedTrips = [...trips].sort((a, b) => {
+                return new Date(b.start) - new Date(a.start);
+            });
+
+            listContainer.innerHTML = "";
+
+            sortedTrips.forEach(trip => {
+                // Calculate trip total days
+                const s = parseInputDate(trip.start);
+                const e = parseInputDate(trip.end);
+                const diffDays = s && e ? Math.round(Math.abs(e - s) / (1000 * 60 * 60 * 24)) + 1 : 0;
+                
+                const card = document.createElement('div');
+                card.className = "trip-card";
+                
+                const titleStr = trip.name ? trip.name : (currentLang === 'ua' ? `Подорож` : `Trip`);
+                const datesRangeStr = `${formatDisplayDate(trip.start, currentLang)} – ${formatDisplayDate(trip.end, currentLang)}`;
+                const durationLabel = currentLang === 'ua' ? `${diffDays} дн.` : `${diffDays} day${diffDays === 1 ? '' : 's'}`;
+
+                card.innerHTML = `
+                    <div class="trip-card-details">
+                        <span class="trip-card-name">${escapeHTML(titleStr)}</span>
+                        <div class="trip-card-dates">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            <span>${datesRangeStr}</span>
+                        </div>
+                        <div>
+                            <span class="trip-duration-badge">${durationLabel}</span>
+                        </div>
+                    </div>
+                    <div class="trip-card-actions">
+                        <button type="button" class="action-icon-btn edit-btn" onclick="startEditingTrip('${trip.id}')" title="${currentLang === 'ua' ? 'Редагувати' : 'Edit stay'}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button type="button" class="action-icon-btn delete-btn" onclick="deleteTrip('${trip.id}')" title="${currentLang === 'ua' ? 'Видалити' : 'Delete stay'}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                        </button>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        // Escape HTML to prevent injection
+        function escapeHTML(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Form operations
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const alertDiv = document.getElementById('form-alert');
+            const alertText = document.getElementById('form-alert-text');
+            alertDiv.style.display = "none";
+
+            const nameInput = document.getElementById('trip-name').value.trim();
+            const startInput = document.getElementById('trip-start').value;
+            const endInput = document.getElementById('trip-end').value;
+            const editId = document.getElementById('edit-trip-id').value;
+
+            if (!startInput || !endInput) {
+                alertText.textContent = currentLang === 'ua' ? "Обидві дати обов'язкові!" : "Both dates are required!";
+                alertDiv.style.display = "flex";
+                return;
+            }
+
+            const start = parseInputDate(startInput);
+            const end = parseInputDate(endInput);
+
+            if (end < start) {
+                alertText.textContent = currentLang === 'ua' 
+                    ? "Дата виїзду не може бути раніше дати в'їзду!" 
+                    : "Exit date cannot be before entry date!";
+                alertDiv.style.display = "flex";
+                return;
+            }
+
+            // Check if there is an overlapping trip (optional logic)
+            // For simplicity we allow overlaps, but prevent exact duplicates or notify
+            
+            if (editId) {
+                // Edit existing
+                const index = trips.findIndex(t => t.id === editId);
+                if (index !== -1) {
+                    trips[index].name = nameInput;
+                    trips[index].start = startInput;
+                    trips[index].end = endInput;
+                }
+            } else {
+                // Create new
+                const newTrip = {
+                    id: String(Date.now()),
+                    name: nameInput,
+                    start: startInput,
+                    end: endInput
+                };
+                trips.push(newTrip);
+            }
+
+            saveTripsToStorage();
+            cancelEditing(); // Reset form
+            
+            recalculateDashboard();
+            renderTimelineList();
+        }
+
+        function startEditingTrip(id) {
+            const trip = trips.find(t => t.id === id);
+            if (!trip) return;
+
+            // Populate form
+            document.getElementById('edit-trip-id').value = trip.id;
+            document.getElementById('trip-name').value = trip.name || "";
+            document.getElementById('trip-start').value = trip.start;
+            document.getElementById('trip-end').value = trip.end;
+
+            // Change form titles and layouts
+            const titleEl = document.getElementById('form-title');
+            titleEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--secondary);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> ${currentLang === 'ua' ? 'Редагувати поїздку' : 'Edit Stay'}`;
+            
+            const submitBtn = document.getElementById('form-submit-btn');
+            submitBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> ${currentLang === 'ua' ? 'Зберегти' : 'Save Changes'}`;
+            
+            document.getElementById('form-cancel-btn').style.display = "inline-flex";
+
+            // Scroll form smoothly into view
+            document.getElementById('form-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelEditing() {
+            document.getElementById('edit-trip-id').value = "";
+            document.getElementById('trip-form').reset();
+
+            const titleEl = document.getElementById('form-title');
+            titleEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--secondary);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${currentLang === 'ua' ? 'Додати нову поїздку' : 'Add a New Stay'}`;
+            
+            const submitBtn = document.getElementById('form-submit-btn');
+            submitBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> ${currentLang === 'ua' ? 'Додати' : 'Add Stay'}`;
+            
+            document.getElementById('form-cancel-btn').style.display = "none";
+            document.getElementById('form-alert').style.display = "none";
+        }
+
+        function deleteTrip(id) {
+            const confirmMsg = currentLang === 'ua' 
+                ? "Ви впевнені, що хочете видалити цей період перебування?" 
+                : "Are you sure you want to delete this period of stay?";
+            if (confirm(confirmMsg)) {
+                trips = trips.filter(t => t.id !== id);
+                saveTripsToStorage();
+                
+                // Reset edit form if deleted the active one
+                if (document.getElementById('edit-trip-id').value === id) {
+                    cancelEditing();
+                }
+
+                recalculateDashboard();
+                renderTimelineList();
+            }
+        }
+
+        // Localization System
+        const i18n = {
+            en: {
+                logo_title: "Schengen Calculator",
+                back_home: "Back to Home",
+                dash_header: "Your Visa Allowance",
+                days_left_lbl: "Left",
+                stat_used: "Used in 180 days:",
+                stat_status: "Status:",
+                days_unit: "days",
+                status_safe_desc: "You have plenty of days left for your travels.",
+                inspector_header: "Future Date Inspector",
+                inspector_desc: "Test your visa limit on a specific calendar date in the future (e.g. for upcoming trips).",
+                inspect_date_label: "Check remaining days on date:",
+                form_title_add: "Add a New Stay",
+                label_name: "Destination / Trip Name (Optional)",
+                label_start: "Entry Date",
+                label_end: "Exit Date",
+                btn_add_stay: "Add Stay",
+                btn_cancel: "Cancel",
+                timeline_header: "Travel Checklist",
+                faq_title: "FAQ & Rules",
+                faq_q1: "What is the 90/180 rule?",
+                faq_a1: "Non-EU travelers under visa-free regimes or short-stay Schengen visas are allowed to stay in the Schengen Area for a maximum of 90 days in any rolling period of 180 days. This means you look backwards 180 days from each day of your stay to check if you have exceeded the 90-day allowance.",
+                faq_q2: "Are entry and exit dates included?",
+                faq_a2: "Yes. Under EU border guidelines, any part of a day spent in the Schengen zone counts as a full day of stay. Thus, both the day you enter and the day you exit are fully counted towards your stay, even if you crossed the border right before midnight.",
+                faq_q3: "Does this calculator support future stays?",
+                faq_a3: "Yes! Our algorithm is designed to project stays. You can add future planned trips, and use the 'Future Date Inspector' to check exactly how many days you will have available on any date ahead.",
+                footer_contact: "Contact Support",
+                footer_privacy: "Privacy Policy",
+                
+                // Promo Section
+                promo_badge: "Recommended for Mobile",
+                promo_title: "Get the Full Schengen App Experience",
+                promo_desc: "While the online calculator is perfect for quick checks, our free mobile apps provide a much more powerful, convenient, and feature-rich experience for frequent travelers. Save unlimited trips, manage family profiles, and securely share itineraries offline via QR codes!",
+                promo_feat1_title: "Multiple Profiles",
+                promo_feat1_desc: "Track stays for family members, friends, or across multiple passports simultaneously.",
+                promo_feat2_title: "Secure QR Sync",
+                promo_feat2_desc: "Transfer all trips and profiles between devices instantly via offline secure QR codes and a PIN.",
+                promo_feat3_title: "100% Offline & Private",
+                promo_feat3_desc: "Access and update your trips in remote border control zones without cellular data.",
+                promo_feat4_title: "Personalized Interface",
+                promo_feat4_desc: "Easily adjust calendar font sizes, set your preferred starting day of the week, and toggle between dark and light themes."
+            },
+            ua: {
+                logo_title: "Шенген Калькулятор",
+                back_home: "Назад на головну",
+                dash_header: "Ваш ліміт перебування",
+                days_left_lbl: "Залишилось",
+                stat_used: "Використано за 180 днів:",
+                stat_status: "Статус:",
+                days_unit: "дн.",
+                status_safe_desc: "У вас достатньо днів для подорожей.",
+                inspector_header: "Планувальник на майбутнє",
+                inspector_desc: "Перевірте залишок днів на будь-яку дату в майбутньому (наприклад, для планування наступних поїздок).",
+                inspect_date_label: "Залишок днів на дату:",
+                form_title_add: "Додати нову поїздку",
+                label_name: "Куди / Назва поїздки (Опціонально)",
+                label_start: "Дата в'їзду",
+                label_end: "Дата виїзду",
+                btn_add_stay: "Додати",
+                btn_cancel: "Скасувати",
+                timeline_header: "Історія подорожей",
+                faq_title: "Питання та відповіді",
+                faq_q1: "Що таке правило 90/180?",
+                faq_a1: "Для громадян країн безвізового режиму або з короткостроковими візами дозволено перебувати в Шенгенській зоні не більше 90 днів протягом будь-якого плаваючого періоду в 180 днів. Це означає, що від кожного дня перебування ви відраховуєте назад 180 днів, щоб перевірити, чи не перевищили ви ліміт у 90 днів.",
+                faq_q2: "Чи рахуються дні в'їзду та виїзду?",
+                faq_a2: "Так. За офіційними правилами ЄС будь-яка частина дня, проведена в Шенгенській зоні, зараховується як повний день. Таким чином, і день прибуття, і день від'їзду повністю враховуються як дні перебування, навіть якщо перетин кордону відбувся перед опівніччю.",
+                faq_q3: "Чи підтримує калькулятор майбутні поїздки?",
+                faq_a3: "Так! Наш алгоритм розрахований на прогнозування. Ви можете додавати свої майбутні заплановані подорожі та використовувати 'Планувальник на майбутнє', щоб точно знати, скільки днів у вас буде на будь-яку майбутню дату.",
+                footer_contact: "Підтримка",
+                footer_privacy: "Політика конфіденційності",
+                
+                // Promo Section
+                promo_badge: "Рекомендовано для мобільних",
+                promo_title: "Спробуйте повноцінний мобільний додаток",
+                promo_desc: "Хоча онлайн-калькулятор чудово підходить для швидкої перевірки, наші безкоштовні мобільні додатки пропонують набагато потужніший, зручніший та функціональніший сервіс для постійних мандрівників. Зберігайте необмежену кількість поїздок, додавайте профілі членів родини та безпечно діліться даними офлайн через QR-коди!",
+                promo_feat1_title: "Кілька профілів",
+                promo_feat1_desc: "Слідкуйте за лімітами для членів родини, друзів або для кількох різних паспортів одночасно.",
+                promo_feat2_title: "Безпечний QR-імпорт",
+                promo_feat2_desc: "Миттєво переносьте всі поїздки та профілі між пристроями за допомогою офлайн QR-кодів та PIN-коду.",
+                promo_feat3_title: "100% Офлайн та приватність",
+                promo_feat3_desc: "Додавайте та переглядайте поїздки безпосередньо в зонах прикордонного контролю без інтернету.",
+                promo_feat4_title: "Налаштування інтерфейсу",
+                promo_feat4_desc: "Легко налаштовуйте розмір шрифту календаря, вибирайте перший день тижня та перемикайте темну або світлу тему."
+            }
+        };
+
+        function setLang(lang) {
+            currentLang = lang;
+
+            // Save preference
+            localStorage.setItem('lang', lang);
+
+            // Update buttons visually
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase() === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update document language
+            document.documentElement.lang = lang;
+
+            // Update elements with translation tag
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.textContent = i18n[lang][key];
+                }
+            });
+
+            // Re-render components with translated titles/formatting
+            recalculateDashboard();
+            renderTimelineList();
+            
+            // Sync with edit state if open
+            const editId = document.getElementById('edit-trip-id').value;
+            if (editId) {
+                startEditingTrip(editId);
+            } else {
+                cancelEditing();
+            }
+        }
+
+        // Initialize Application
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTripsFromStorage();
+
+            // Set language from LocalStorage or default
+            const initialLang = localStorage.getItem('lang') || ((navigator.language && (navigator.language.startsWith('uk') || navigator.language.startsWith('ua'))) ? 'ua' : 'en');
+            setLang(initialLang);
+
+            // Set default date picker values
+            const today = toDateOnly(new Date());
+            document.getElementById('inspect-date').value = formatToInputDate(today);
+
+            recalculateDashboard();
+            renderTimelineList();
+        });
+    </script>
+
+    <!-- Firebase Analytics -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDg5tGJp9EcLOtkUUCeUos2jUK3dOwxTgk",
+            authDomain: "schengen-web.firebaseapp.com",
+            projectId: "schengen-web",
+            storageBucket: "schengen-web.firebasestorage.app",
+            messagingSenderId: "143026070197",
+            appId: "1:143026070197:web:4690baca41e8f5525094fc",
+            measurementId: "G-77PJSP0EYT"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17632732616"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17632732616');
+    </script>
+</body>
+</html>

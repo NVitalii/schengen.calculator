@@ -2,9 +2,14 @@
 
 **The most accurate, offline-first app to track your Schengen visa days and allowed stay.**
 
+💻 **Schengen Calculator Online:** Try our free [Schengen Calculator Online](https://schengen.live/schengen-calculator.html) directly in your web browser. It features the exact same timezone-safe, DST-compliant calculation engine and saves your travel checklist locally in your browser's storage without requiring an account.
+
 <div align="center">
   <a href="https://schengen.live">
     <img src="https://img.shields.io/badge/Live_Website-schengen.live-1B4965?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Website"/>
+  </a>
+  <a href="https://schengen.live/schengen-calculator.html">
+    <img src="https://img.shields.io/badge/Online_Calculator-Use_Now-EE534F?style=for-the-badge&logo=javascript&logoColor=white" alt="Online Calculator"/>
   </a>
   <a href="https://play.google.com/store/apps/details?id=net.botolab.schengen">
     <img src="https://img.shields.io/badge/Google_Play-Download-000000?style=for-the-badge&logo=google-play&logoColor=white" alt="Google Play"/>
@@ -61,7 +66,11 @@ Unlike other Schengen calculators, we've built a robust calculation engine that 
   <img src="screenshots/app_configuration_dark.jpg" alt="App Configuration (Dark Theme)" width="200"/>
 </div>
 
-## 📥 Download
+## 📥 Download & Try Online
+
+*   **Try Web Version:** [Schengen Calculator Online](https://schengen.live/schengen-calculator.html)
+*   **Android App:** [Get it on Google Play](https://play.google.com/store/apps/details?id=net.botolab.schengen)
+*   **iOS App:** [Download on the App Store](https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029)
 
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="60">](https://play.google.com/store/apps/details?id=net.botolab.schengen)
 [<img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="60">](https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029)
