@@ -1465,12 +1465,10 @@
                     
                     <div class="calendar-legend">
                         <div class="legend-item">
-                            <span style="font-weight: 800; color: #059669; font-size: 0.8rem; margin-right: 3px;">90</span>
-                            <span data-i18n="legend_safe">Safe (≥0d)</span>
+                            <span data-i18n="legend_safe" style="font-weight: 600; color: #059669;">Safe (≥0d)</span>
                         </div>
                         <div class="legend-item">
-                            <span style="font-weight: 900; color: #dc2626; font-size: 0.8rem; margin-right: 3px;">-3</span>
-                            <span data-i18n="legend_danger">Overstay (<0d)</span>
+                            <span data-i18n="legend_danger" style="font-weight: 600; color: #dc2626;">Overstay (<0d)</span>
                         </div>
                         <div class="legend-item">
                             <span class="legend-square trip"></span>
@@ -1967,10 +1965,6 @@
                         </div>
                         <h3 data-i18n="empty_title">${currentLang === 'ua' ? 'Немає поїздок' : 'No trips added yet'}</h3>
                         <p data-i18n="empty_desc">${currentLang === 'ua' ? 'Додайте свою першу поїздку, щоб розпочати відстеження.' : 'Add your first stay to start tracking.'}</p>
-                        <button type="button" class="btn btn-primary" onclick="toggleAddStayForm(true)" style="margin-top: 8px;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            <span>${currentLang === 'ua' ? 'Додати першу поїздку' : 'Add First Stay'}</span>
-                        </button>
                     </div>
                 `;
                 toggleAddStayForm(true);
@@ -2083,7 +2077,7 @@
             }
 
             saveTripsToStorage();
-            cancelEditing(); // Reset form
+            resetFormToAddMode(); // Clean data for adding new stay, but do not close the window!
             
             recalculateDashboard();
             renderTimelineList();
