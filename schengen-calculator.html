@@ -400,10 +400,185 @@
         }
 
         /* Inspector Controls */
+        /* Inspector Controls & Calendar */
         .inspector-card {
             display: flex;
             flex-direction: column;
             gap: 12px;
+        }
+
+        .calendar-wrapper {
+            margin-top: 4px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .btn-cal-nav {
+            background: var(--bg-white);
+            border: 1px solid #cbd5e1;
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-cal-nav:hover {
+            background: #f1f5f9;
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .btn-cal-nav svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .calendar-month-year {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--dark);
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .calendar-day-cell {
+            display: block;
+            min-height: 48px;
+            padding: 4px 6px;
+            border-radius: var(--radius-md);
+            background: var(--bg-white);
+            border: 1px solid #f1f5f9;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .calendar-day-cell:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(27, 73, 101, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .calendar-day-cell.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
+            pointer-events: none;
+            min-height: 52px;
+        }
+
+        .calendar-day-cell.selected {
+            background: #eef2f6;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 12px rgba(27, 73, 101, 0.15);
+        }
+
+        .calendar-day-cell.trip-day {
+            background-color: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .calendar-day-cell.trip-day:hover {
+            background-color: rgba(99, 102, 241, 0.14);
+        }
+
+        .calendar-day-cell.trip-day.selected {
+            background-color: rgba(99, 102, 241, 0.12);
+            border: 2px solid var(--primary);
+        }
+
+        .day-number {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .calendar-day-cell.trip-day .day-number {
+            color: #4338ca;
+            font-weight: 700;
+        }
+
+        .remaining-count {
+            position: absolute;
+            bottom: 4px;
+            right: 7px;
+            font-size: 0.725rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .remaining-count.safe {
+            color: #059669; /* Rich Emerald Green */
+        }
+
+        .remaining-count.danger {
+            color: #dc2626; /* Bright Red */
+            font-weight: 900;
+        }
+
+        .calendar-legend {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.725rem;
+            color: var(--text-light);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+
+
+        .legend-square.trip {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background-color: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            display: inline-block;
         }
 
         .form-row {
@@ -1113,15 +1288,88 @@
             font-weight: 600;
             font-size: 0.95rem;
             transition: transform 0.2s ease;
+            white-space: nowrap; /* Prevent text wrapping on mobile */
         }
 
         .back-link:hover {
             transform: translateX(-4px);
         }
 
-        .back-link svg {
-            width: 16px;
-            height: 16px;
+        /* Mobile Layout & Translation-Safe Improvements */
+        @media (max-width: 480px) {
+            body {
+                padding-top: 76px !important; /* Reduce excessive top spacing */
+            }
+
+            .navbar .container {
+                padding: 0 12px;
+            }
+
+            .logo {
+                font-size: 1.15rem; /* Shrink logo font on small screens to prevent overflow in Ukrainian */
+                gap: 8px;
+            }
+
+            .logo img {
+                width: 28px;
+                height: 28px;
+            }
+
+            .lang-btn {
+                padding: 4px 10px; /* Slimmer language switcher buttons */
+                font-size: 0.85rem;
+            }
+
+            .main-container {
+                padding: 12px; /* Extra horizontal margin space for mobile */
+                gap: 16px;
+            }
+
+            .card {
+                padding: 16px; /* More roomy cards on small viewports */
+                border-radius: 16px;
+            }
+
+            .dashboard-card {
+                padding: 20px;
+                border-radius: 16px;
+            }
+
+            .rolling-period {
+                font-size: 0.8rem;
+                overflow-wrap: anywhere; /* Ensure long date ranges wrap safely */
+                word-break: break-word;
+            }
+
+            .calendar-legend {
+                justify-content: flex-start;
+                gap: 8px 12px; /* Wrap legend neatly without squeezing */
+            }
+
+            .calendar-day-cell {
+                min-height: 44px; /* Shorter cells to fit perfectly on very narrow screens */
+                padding: 3px 4px;
+            }
+
+            .day-number {
+                top: 8px;
+                font-size: 0.85rem;
+            }
+
+            .remaining-count {
+                bottom: 2px;
+                right: 4px;
+                font-size: 0.65rem;
+            }
+
+            .back-banner {
+                margin: 4px auto 0; /* Compact top margin on mobile */
+                padding: 0 12px;
+            }
+
+            .back-link {
+                font-size: 0.85rem; /* Highly elegant and proportional size on mobile */
+            }
         }
     </style>
 </head>
@@ -1193,13 +1441,42 @@
             <!-- Future Date Inspector Widget -->
             <div class="card inspector-card">
                 <h2 data-i18n="inspector_header">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: var(--primary);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                    Future Date Inspector
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: var(--primary);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Stay Allowance Calendar
                 </h2>
-                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 6px;" data-i18n="inspector_desc">Test your visa limit on a specific calendar date in the future (e.g. for upcoming trips).</p>
-                <div class="form-group">
-                    <label for="inspect-date" data-i18n="inspect_date_label">Check remaining days on date:</label>
-                    <input type="date" id="inspect-date" onchange="recalculateDashboard()">
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 12px;" data-i18n="inspector_desc">Check remaining visa days on any date. Selected date updates the progress ring.</p>
+                
+                <!-- Hidden input for backward compatibility with recalculateDashboard -->
+                <input type="date" id="inspect-date" style="display: none;" onchange="recalculateDashboard()">
+
+                <div class="calendar-wrapper">
+                    <div class="calendar-nav">
+                        <button type="button" class="btn-cal-nav" onclick="changeCalendarMonth(-1)" title="Previous Month">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+                        <span class="calendar-month-year" id="calendar-month-year-label">-</span>
+                        <button type="button" class="btn-cal-nav" onclick="changeCalendarMonth(1)" title="Next Month">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
+                    
+                    <div class="calendar-weekdays" id="calendar-weekdays-container"></div>
+                    <div class="calendar-days" id="calendar-days-container"></div>
+                    
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <span style="font-weight: 800; color: #059669; font-size: 0.8rem; margin-right: 3px;">90</span>
+                            <span data-i18n="legend_safe">Safe (≥0d)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span style="font-weight: 900; color: #dc2626; font-size: 0.8rem; margin-right: 3px;">-3</span>
+                            <span data-i18n="legend_danger">Overstay (<0d)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-square trip"></span>
+                            <span data-i18n="legend_trip">Your Stays</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1666,6 +1943,11 @@
                     : "You have plenty of days left for your travels.";
                 bannerIcon.innerHTML = `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>`;
             }
+
+            // Sync calendar drawing on recalculation
+            if (typeof renderCalendar === 'function') {
+                renderCalendar();
+            }
         }
 
         // Render checklist stays timeline
@@ -1876,9 +2158,12 @@
                 stat_status: "Status:",
                 days_unit: "days",
                 status_safe_desc: "You have plenty of days left for your travels.",
-                inspector_header: "Future Date Inspector",
-                inspector_desc: "Test your visa limit on a specific calendar date in the future (e.g. for upcoming trips).",
+                inspector_header: "Stay Allowance Calendar",
+                inspector_desc: "Check remaining visa days on any date. Selected date updates the progress ring.",
                 inspect_date_label: "Check remaining days on date:",
+                legend_safe: "Safe (≥0d)",
+                legend_danger: "Overstay (<0d)",
+                legend_trip: "Your Stays",
                 form_title_add: "Add a New Stay",
                 label_name: "Destination / Trip Name (Optional)",
                 label_start: "Entry Date",
@@ -1920,9 +2205,12 @@
                 stat_status: "Статус:",
                 days_unit: "дн.",
                 status_safe_desc: "У вас достатньо днів для подорожей.",
-                inspector_header: "Планувальник на майбутнє",
-                inspector_desc: "Перевірте залишок днів на будь-яку дату в майбутньому (наприклад, для планування наступних поїздок).",
+                inspector_header: "Календар ліміту перебування",
+                inspector_desc: "Перевіряйте залишок днів на будь-яку дату. Натисніть на день, щоб оновити інформаційне коло.",
                 inspect_date_label: "Залишок днів на дату:",
+                legend_safe: "Безпечно (≥0д)",
+                legend_danger: "Перевищення (<0д)",
+                legend_trip: "Ваші поїздки",
                 form_title_add: "Додати нову поїздку",
                 label_name: "Куди / Назва поїздки (Опціонально)",
                 label_start: "Дата в'їзду",
@@ -1996,6 +2284,111 @@
             }
         }
 
+        // Calendar State & Functions
+        let calendarViewDate = new Date(); // Controls the month currently viewed in the calendar
+
+        function changeCalendarMonth(offset) {
+            calendarViewDate.setUTCMonth(calendarViewDate.getUTCMonth() + offset);
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const weekdaysContainer = document.getElementById('calendar-weekdays-container');
+            const daysContainer = document.getElementById('calendar-days-container');
+            const monthYearLabel = document.getElementById('calendar-month-year-label');
+            const inspectDateInput = document.getElementById('inspect-date');
+
+            if (!weekdaysContainer || !daysContainer || !monthYearLabel || !inspectDateInput) return;
+
+            // Get selected inspect date for highlighting
+            let selectedDateStr = inspectDateInput.value;
+            let selectedDate = parseInputDate(selectedDateStr) || toDateOnly(new Date());
+
+            const year = calendarViewDate.getUTCFullYear();
+            const month = calendarViewDate.getUTCMonth();
+
+            // Month names translations
+            const monthNamesEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const monthNamesUa = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'];
+            const monthNames = currentLang === 'ua' ? monthNamesUa : monthNamesEn;
+
+            monthYearLabel.textContent = `${monthNames[month]} ${year}`;
+
+            // Weekday headers (Monday start)
+            const weekdaysEn = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+            const weekdaysUa = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
+            const weekdaysList = currentLang === 'ua' ? weekdaysUa : weekdaysEn;
+
+            weekdaysContainer.innerHTML = weekdaysList.map(day => `<div>${day}</div>`).join('');
+
+            // Calculate start offset (which day of the week is the 1st of the month, where Monday is 0, Sunday is 6)
+            const firstDayOfMonth = new Date(Date.UTC(year, month, 1));
+            let startDayOfWeek = firstDayOfMonth.getUTCDay(); // 0 is Sunday, 1 is Monday ... 6 is Saturday
+            // Adjust Sunday from 0 to 6, and Monday-Saturday from 1-6 to 0-5
+            startDayOfWeek = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
+
+            // Number of days in current month
+            const totalDaysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+
+            daysContainer.innerHTML = '';
+
+            // Render empty cells for leading offset days
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day-cell empty';
+                daysContainer.appendChild(emptyCell);
+            }
+
+            // Create Schengen calculator instance for dynamic calculations on each day of the month
+            const calc = new SchengenCalculator(trips);
+
+            // Render actual days
+            for (let day = 1; day <= totalDaysInMonth; day++) {
+                const cellDate = new Date(Date.UTC(year, month, day));
+                const cellDateStr = formatToInputDate(cellDate);
+
+                const cell = document.createElement('div');
+                cell.className = 'calendar-day-cell';
+
+                // Check if this date matches selected date
+                if (cellDateStr === selectedDateStr) {
+                    cell.classList.add('selected');
+                }
+
+                // Check if this date is inside any of the user's trips
+                const isTripDay = trips.some(t => {
+                    const start = parseInputDate(t.start);
+                    const end = parseInputDate(t.end);
+                    return start && end && cellDate >= start && cellDate <= end;
+                });
+                if (isTripDay) {
+                    cell.classList.add('trip-day');
+                }
+
+                // Calculate remaining days
+                const remaining = calc.remainingDaysOn(cellDate);
+                
+                // Color coding according to remaining days: safe if >= 0, danger if < 0
+                let badgeClass = 'safe';
+                if (remaining < 0) {
+                    badgeClass = 'danger';
+                }
+
+                cell.innerHTML = `
+                    <span class="day-number">${day}</span>
+                    <span class="remaining-count ${badgeClass}" title="${currentLang === 'ua' ? 'Залишилось днів: ' : 'Remaining days: '}${remaining}">${remaining}</span>
+                `;
+
+                // Set click action
+                cell.addEventListener('click', () => {
+                    inspectDateInput.value = cellDateStr;
+                    recalculateDashboard(); // Updates dashboard stats on the left
+                });
+
+                daysContainer.appendChild(cell);
+            }
+        }
+
         // Initialize Application
         window.addEventListener('DOMContentLoaded', () => {
             loadTripsFromStorage();
@@ -2007,6 +2400,9 @@
             // Set default date picker values
             const today = toDateOnly(new Date());
             document.getElementById('inspect-date').value = formatToInputDate(today);
+
+            // Initialize calendar view month/year to today's date
+            calendarViewDate = new Date(today);
 
             recalculateDashboard();
             renderTimelineList();
