@@ -1423,6 +1423,30 @@
         gtag('js', new Date());
 
         gtag('config', 'AW-17632732616');
+
+        // Track Google Store / App Store link clicks as conversions
+        function trackConversion() {
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-17632732616/odI-CI2cqK4cEMjL-NdB',
+                    'value': 1.0,
+                    'currency': 'PLN'
+                });
+            }
+        }
+
+        function bindStoreLinks() {
+            var storeLinks = document.querySelectorAll('a[href*="play.google.com"], a[href*="apps.apple.com"]');
+            storeLinks.forEach(function(link) {
+                link.addEventListener('click', trackConversion);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', bindStoreLinks);
+        } else {
+            bindStoreLinks();
+        }
     </script>
 </body>
 </html>
