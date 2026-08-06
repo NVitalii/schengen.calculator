@@ -322,12 +322,12 @@
                 <!-- English Content -->
                 <div class="content-en active">
                     <h1>Privacy Policy</h1>
-                    <div class="last-updated">Last Updated: May 6, 2026</div>
+                    <div class="last-updated">Last Updated: August 6, 2026</div>
 
                     <p>This Privacy Policy describes how the Schengen Calculator for 90/180 mobile application ("App") collects, uses, and protects your information. The App is developed and maintained by Vitalii Nemudryi ("we", "us", or "our"). We are committed to protecting your privacy and ensuring you have a secure experience.</p>
 
                     <h2>1. Offline-First Approach</h2>
-                    <p>Schengen Calculator for 90/180 is designed to be an <strong>offline-first</strong> application. This means that your primary data—including your travel history, entry and exit dates, and calculation results—is stored locally on your device. We do not transmit your personal travel itineraries to our servers or any third-party marketing services.</p>
+                    <p>Schengen Calculator for 90/180 is designed to be an <strong>offline-first</strong> application. By default — without an account — your travel data (trips, entry and exit dates, calculation results) is stored only locally on your device and is not transmitted anywhere. If you choose to sign in and use the optional cloud features (cloud sync, profile sharing, the AI assistant), the data required for those features is stored in Google Cloud Firestore, as described below. We never sell your data and never share it with marketing services.</p>
 
                     <h2>2. Information We Collect</h2>
                     <p>While your core travel data stays on your device, we may collect the following types of information to improve the App:</p>
@@ -335,12 +335,19 @@
                         <li><strong>Usage Data:</strong> We use Google Firebase Analytics to collect anonymous usage data. This includes how often you use the app, which screens you visit, and general interactions. This helps us understand what features are most useful.</li>
                         <li><strong>Crash Reports:</strong> We may collect automatic error reports if the App crashes. This includes device information (OS version, model) and the line of code that caused the crash to help us fix bugs quickly.</li>
                         <li><strong>Camera Access:</strong> If you use the QR code scanning feature to import data, the App will request access to your device's camera. This processing is done entirely locally on your device. We do not record, store, or transmit any video or images captured by your camera.</li>
+                        <li><strong>Optional Account &amp; Cloud Sync:</strong> if you sign in with Google or Apple (needed for purchases, sync, and sharing), we store your user identifier and sign-in email. Your profiles and trips are then stored in Google Cloud Firestore and synced between your devices. If you explicitly share a profile, the person you invite can see that profile's data.</li>
+                        <li><strong>Purchases:</strong> subscriptions and one-time purchases are processed by Google Play or the Apple App Store together with RevenueCat. We never see or store your payment card details.</li>
+                        <li><strong>AI Assistant (optional purchase):</strong> if you buy AI access, your chat messages and the trip data needed to answer them are processed by our backend and the AI model provider. Your chat history is stored in your account.</li>
                     </ul>
+                    <p>You can delete your account and all associated cloud data at any time in the App settings (GDPR). Local data can be cleared on the device whenever you wish.</p>
 
                     <h2>3. Third-Party Services</h2>
                     <p>The App uses third-party services that may collect information used to identify you. Link to privacy policy of third-party service providers used by the app:</p>
                     <ul>
                         <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Google Analytics for Firebase</a></li>
+                        <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Firebase (Authentication, Cloud Firestore, Crashlytics)</a></li>
+                        <li><a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">RevenueCat</a></li>
+                        <li><a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Anthropic (Claude API — powers the AI assistant)</a></li>
                     </ul>
 
                     <h2>4. Data Security</h2>
@@ -359,12 +366,12 @@
                 <!-- Ukrainian Content -->
                 <div class="content-ua">
                     <h1>Політика конфіденційності</h1>
-                    <div class="last-updated">Останнє оновлення: 6 травня 2026 р.</div>
+                    <div class="last-updated">Останнє оновлення: 6 серпня 2026 р.</div>
 
                     <p>Ця Політика конфіденційності описує, як мобільний додаток Schengen Calculator for 90/180 («Додаток») збирає, використовує та захищає вашу інформацію. Додаток розроблено та підтримується Vitalii Nemudryi («ми», «нас» або «наш»). Ми прагнемо захистити вашу конфіденційність та забезпечити безпечне користування додатком.</p>
 
                     <h2>1. Офлайн-перш за все</h2>
-                    <p>Schengen Calculator for 90/180 розроблено як додаток, що працює <strong>переважно в офлайн режимі</strong>. Це означає, що ваші основні дані — включаючи історію поїздок, дати в'їзду та виїзду, а також результати розрахунків — зберігаються локально на вашому пристрої. Ми не передаємо ваші особисті маршрути подорожей на наші сервери або будь-яким стороннім маркетинговим службам.</p>
+                    <p>Schengen Calculator for 90/180 розроблено як додаток, що працює <strong>переважно в офлайн режимі</strong>. За замовчуванням — без облікового запису — ваші дані про подорожі (поїздки, дати в'їзду та виїзду, результати розрахунків) зберігаються лише локально на вашому пристрої та нікуди не передаються. Якщо ви вирішите увійти в обліковий запис і користуватися додатковими хмарними функціями (синхронізація, спільний доступ до профілів, AI-помічник), необхідні для цих функцій дані зберігаються в Google Cloud Firestore, як описано нижче. Ми ніколи не продаємо ваші дані та не передаємо їх маркетинговим службам.</p>
 
                     <h2>2. Інформація, яку ми збираємо</h2>
                     <p>Хоча ваші основні дані про подорожі залишаються на вашому пристрої, ми можемо збирати наступні типи інформації для покращення Додатку:</p>
@@ -372,12 +379,19 @@
                         <li><strong>Дані про використання:</strong> Ми використовуємо Google Firebase Analytics для збору анонімних даних про використання. Це включає інформацію про те, як часто ви використовуєте додаток, які екрани відвідуєте та загальні взаємодії. Це допомагає нам зрозуміти, які функції є найбільш корисними.</li>
                         <li><strong>Звіти про збої:</strong> Ми можемо збирати автоматичні звіти про помилки у разі збою Додатку. Це включає інформацію про пристрій (версія ОС, модель) та рядок коду, який викликав збій, щоб допомогти нам швидко виправити помилки.</li>
                         <li><strong>Доступ до камери:</strong> Якщо ви використовуєте функцію сканування QR-коду для імпорту даних, Додаток запитає доступ до камери вашого пристрою. Ця обробка виконується повністю локально на вашому пристрої. Ми не записуємо, не зберігаємо та не передаємо жодних відео чи зображень, знятих вашою камерою.</li>
+                        <li><strong>Необов'язковий обліковий запис і хмарна синхронізація:</strong> якщо ви входите через Google або Apple (потрібно для покупок, синхронізації та спільного доступу), ми зберігаємо ваш ідентифікатор користувача та email входу. Ваші профілі й поїздки зберігаються в Google Cloud Firestore і синхронізуються між вашими пристроями. Якщо ви явно поділитеся профілем, запрошена вами людина бачитиме дані цього профілю.</li>
+                        <li><strong>Покупки:</strong> підписки та разові покупки обробляються Google Play або Apple App Store разом із RevenueCat. Ми ніколи не бачимо та не зберігаємо дані вашої платіжної картки.</li>
+                        <li><strong>AI-помічник (окрема покупка):</strong> якщо ви придбаєте AI-доступ, ваші повідомлення в чаті та потрібні для відповіді дані поїздок обробляються нашим бекендом і провайдером AI-моделі. Історія чату зберігається у вашому обліковому записі.</li>
                     </ul>
+                    <p>Ви можете видалити обліковий запис і всі пов'язані хмарні дані будь-коли в налаштуваннях Додатку (GDPR). Локальні дані можна очистити на пристрої в будь-який момент.</p>
 
                     <h2>3. Сторонні сервіси</h2>
                     <p>Додаток використовує сторонні сервіси, які можуть збирати інформацію, що використовується для вашої ідентифікації. Посилання на політику конфіденційності сторонніх постачальників послуг, які використовуються додатком:</p>
                     <ul>
                         <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Google Analytics for Firebase</a></li>
+                        <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Firebase (Authentication, Cloud Firestore, Crashlytics)</a></li>
+                        <li><a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">RevenueCat</a></li>
+                        <li><a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Anthropic (Claude API — працює AI-помічник)</a></li>
                     </ul>
 
                     <h2>4. Безпека даних</h2>
@@ -409,6 +423,7 @@
                     <a href="mailto:hbb.soft.support@gmail.com" data-i18n="footer_contact">Contact Support</a>
                     <a href="https://www.linkedin.com/in/nemudriy" target="_blank" rel="noopener">LinkedIn</a>
                     <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+                    <a href="terms.html" data-i18n="footer_terms">Terms of Use</a>
                 </div>
             </div>
             <div class="copyright">
@@ -427,12 +442,14 @@
             en: {
                 nav_home: "Home",
                 footer_contact: "Contact Support",
-                footer_privacy: "Privacy Policy"
+                footer_privacy: "Privacy Policy",
+                footer_terms: "Terms of Use"
             },
             ua: {
                 nav_home: "Головна",
                 footer_contact: "Підтримка",
-                footer_privacy: "Політика конфіденційності"
+                footer_privacy: "Політика конфіденційності",
+                footer_terms: "Умови використання"
             }
         };
 
