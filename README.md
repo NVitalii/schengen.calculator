@@ -30,7 +30,7 @@ Calculating the 90/180 rule manually is surprisingly complex. The 180-day window
 ## ✨ Key Features
 
 *   **Works Fully Offline:** Track your trips anywhere, no internet required.
-*   **Privacy-First:** No account needed. Your data never leaves your device.
+*   **Privacy-First by Default:** Tracking works without an account and your data stays on your device. Optional paid extras (cloud sync, profile sharing, AI assistant) require signing in.
 *   **No Ads:** A clean, premium, and distraction-free experience.
 *   **Multiple Profiles:** Manage tracking for yourself, your family, or your clients effortlessly.
 *   **Calendar-Based Tracking:** Easily select and visualize your entry and exit dates.
@@ -86,9 +86,9 @@ Unlike other Schengen calculators, we've built a robust calculation engine that 
 ## 🔒 Privacy First
 
 We believe your travel history is your business.
-*   **No tracking or analytics.**
-*   **No account registration needed.**
-*   **100% of your data is stored locally on your device.**
+*   **No account needed to track your days** — signing in is only required for the optional paid features.
+*   **Your travel data stays on your device by default** and is uploaded only if you turn on cloud sync or share a profile.
+*   **No ads, and we never sell your data.** We use Firebase Analytics and Crashlytics for anonymous usage statistics and crash reports — see the [Privacy Policy](https://schengen.live/privacy.html).
 
 ## ❓ FAQ
 

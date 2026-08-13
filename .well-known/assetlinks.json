@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "net.botolab.schengen",
+      "sha256_cert_fingerprints": [
+        "02:1A:C3:48:62:47:F1:A4:09:9D:FA:7A:0B:00:C2:92:60:F0:FE:81:0C:CB:4C:08:9A:CE:DD:11:53:01:31:95"
+      ]
+    }
+  }
+]

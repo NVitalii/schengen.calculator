@@ -1,0 +1,63 @@
+Privacy Policy
+Effective Date: August 5, 2026
+App Name: My Schengen – 90/180 Day Counter (Мій Шенген – 90/180 Лічильник)
+Developer: Botolab
+
+This privacy policy describes how we collect, use, and protect information related to your use of the app “My Schengen – 90/180 Day Counter” (“Мій Шенген – 90/180 Лічильник”), published by Botolab.
+
+The app works fully offline without any account. Creating an account is optional and only needed for the paid cloud features described below.
+
+🔍 1. Data We Collect
+
+Without an account:
+* Your trip data (entry/exit dates, trip names, traveler profiles) is stored only on your device.
+* Third-party services may automatically collect anonymized data for analytics and crash reporting:
+  - Approximate location (based on IP address)
+  - Device information (model, OS version, language, country)
+  - App usage data (e.g., screen views, button taps)
+  - App crash and error logs (via Firebase Crashlytics)
+  - Performance metrics (e.g., app load times, responsiveness)
+
+With an optional account (Premium / AI features):
+* Account identifiers: your Firebase user ID, and the email address and display name provided by Google or Apple sign-in.
+* User content: your traveler profiles and trip data, stored in Google Cloud Firestore so they can be backed up and synchronized across your devices, and — only if you explicitly share a profile — shown to the person you shared it with.
+* Purchase state: subscription and purchase entitlements are processed by RevenueCat and the app stores. We never see your card number or bank details.
+* AI assistant content: if you purchase AI access, the messages you send to the AI assistant and the trip data needed to answer them are processed by our backend and a third-party AI model provider to generate the answer. AI chat history is stored in your account.
+
+We do NOT collect your contacts or precise location, and we do not show third-party ads.
+
+📦 2. Third-Party Services
+* Firebase Analytics, Crashlytics, Authentication, Cloud Firestore, Cloud Functions, Cloud Messaging (Google LLC)
+  🔗 https://firebase.google.com/support/privacy
+* Google Play Services / App Store billing
+* RevenueCat (purchase management) 🔗 https://www.revenuecat.com/privacy
+* An AI model provider for the optional AI assistant (requests are proxied through our backend; the provider receives only the content needed to answer)
+
+🔐 3. How We Use This Data
+* Provide cloud backup, cross-device sync, and profile sharing you asked for
+* Process purchases and unlock paid features
+* Understand general usage trends and fix crashes
+* Generate AI answers when you use the AI assistant
+
+We do not sell, share, or trade any personal data.
+
+📷 4. Camera
+The app requests camera permission solely to scan QR codes when you import your trip data from another device. Scanning happens entirely on your device — no photos or video are recorded, stored, or transmitted.
+
+📱 5. Data Storage & Offline Use
+Your device always keeps a full local copy of your data: the app remains fully usable offline, with or without an account. Cloud data is stored in Google Cloud Firestore data centers.
+
+🗑 6. Your Control (GDPR)
+* Export: Settings → “Export data (JSON)” gives you a complete machine-readable copy of your data (right to portability).
+* Delete: Settings → “Delete account” permanently removes your account and all cloud data (right to erasure). Local data can be cleared with “Clear all data” or by uninstalling the app.
+* Notifications and reminders can be switched off in the app at any time.
+
+👶 7. Children
+The app is not intended for anyone under 13, and we do not knowingly collect their data.
+
+📩 8. Contact Us
+If you have any questions regarding this policy or your privacy rights, please contact:
+📧 hbb.soft.support@gmail.com
+
+✅ Consent
+By using My Schengen – 90/180 Day Counter (Мій Шенген – 90/180 Лічильник), published by Botolab, you agree to this privacy policy and the use of the services mentioned above.
