@@ -322,22 +322,22 @@
                 <!-- English Content -->
                 <div class="content-en active">
                     <h1>Privacy Policy</h1>
-                    <div class="last-updated">Last Updated: August 14, 2026</div>
+                    <div class="last-updated">Last Updated: August 30, 2026</div>
 
                     <p>This Privacy Policy describes how the Schengen Calculator for 90/180 mobile application ("App") collects, uses, and protects your information. The App is developed and maintained by Vitalii Nemudryi ("we", "us", or "our"). We are committed to protecting your privacy and ensuring you have a secure experience.</p>
 
                     <h2>1. Offline-First Approach</h2>
-                    <p>Schengen Calculator for 90/180 is designed to be an <strong>offline-first</strong> application. By default — without an account — your travel data (trips, entry and exit dates, calculation results) is stored only locally on your device and is not transmitted anywhere. If you choose to sign in and use the optional cloud features (cloud sync, profile sharing, the AI assistant), the data required for those features is stored in Google Cloud Firestore, as described below. We never sell your data and never share it with marketing services.</p>
+                    <p>Schengen Calculator for 90/180 is designed to be an <strong>offline-first</strong> application. By default — without an account — your travel data (trips, entry and exit dates, calculation results) is stored only locally on your device and is not transmitted anywhere. If you choose to sign in and use the optional cloud features (cloud sync, profile sharing, the AI assistant), the data required for those features is stored in Google Cloud Firestore in the European Union (region europe-west1, Belgium), as described below. We never sell your data and never share it with marketing services.</p>
 
                     <h2>2. Information We Collect</h2>
                     <p>While your core travel data stays on your device, we may collect the following types of information to improve the App:</p>
                     <ul>
-                        <li><strong>Usage Data:</strong> We use Google Firebase Analytics to collect anonymous usage data. This includes how often you use the app, which screens you visit, and general interactions. This helps us understand what features are most useful.</li>
+                        <li><strong>Usage Data:</strong> We use Google Firebase Analytics to collect pseudonymous usage data: app opens, device and OS information, approximate (IP-based) location, and a small set of in-app events such as viewing the paywall and completing, failing or restoring a purchase. This helps us understand what features are most useful. This data is not tied to your name or e-mail.</li>
                         <li><strong>Crash Reports:</strong> We may collect automatic error reports if the App crashes. This includes device information (OS version, model) and the line of code that caused the crash to help us fix bugs quickly.</li>
                         <li><strong>Camera Access:</strong> If you use the QR code scanning feature to import data, the App will request access to your device's camera. This processing is done entirely locally on your device. We do not record, store, or transmit any video or images captured by your camera.</li>
                         <li><strong>Optional Account &amp; Cloud Sync:</strong> if you sign in with Google or Apple (needed for purchases, sync, and sharing), we store your user identifier and sign-in email. Your profiles and trips are then stored in Google Cloud Firestore and synced between your devices. If you explicitly share a profile, the person you invite can see that profile's data. When you share a profile, the name and e-mail address of your sign-in account are shown to the people you invite so they can tell who shared it with them; when you accept an invite, your name and e-mail address are shown to the profile owner (and are visible to other members of that profile) so the owner can manage access. You can leave a shared profile, and the owner can revoke access, at any time. Sharing is a Premium feature: when a Premium subscription ends, the profiles that account shared are automatically unshared and any unused invite codes stop working.</li>
                         <li><strong>Purchases:</strong> subscriptions and one-time purchases are processed by Google Play or the Apple App Store together with RevenueCat. We never see or store your payment card details.</li>
-                        <li><strong>AI Assistant (optional purchase):</strong> if you buy AI access, your chat messages and the trip data needed to answer them are processed by our backend and the AI model provider. Your chat history is stored in your account.</li>
+                        <li><strong>AI Assistant (optional purchase):</strong> if you buy AI access, your messages to the assistant and the trip data needed to answer them (remaining days and trip dates/names) are processed by our backend and by the AI model provider, Anthropic (Claude API). Your conversation history is stored in your account and kept until you delete it or delete your account — it stays visible in the App even after your AI access period ends. Photos of the places the assistant suggests are looked up on Wikipedia by place name and served through our own endpoint (api.schengen.live, fronted by Amazon CloudFront); our backend caches these photos keyed by place name only — no personal data is stored with them.</li>
                         <li><strong>Calendar Access (optional):</strong> the calendar integration reads your device calendar only to suggest travel-like events and creates events for the trips you export. This happens entirely on your device — calendar contents are never uploaded to our servers. Access is requested only when you open the feature and can be revoked in system settings at any time.</li>
                         <li><strong>Push Notifications:</strong> if you sign in, we store your device's push token (Firebase Cloud Messaging) in your account so that updates to profiles shared with you can reach your devices. Tokens are removed when you delete your account.</li>
                     </ul>
@@ -347,14 +347,15 @@
                     <p>The App uses third-party services that may collect information used to identify you. Link to privacy policy of third-party service providers used by the app:</p>
                     <ul>
                         <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Google Analytics for Firebase</a></li>
-                        <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Firebase (Authentication, Cloud Firestore, Crashlytics)</a></li>
+                        <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Firebase (Authentication, Cloud Firestore, Cloud Messaging, Cloud Functions, Crashlytics)</a></li>
                         <li><a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">RevenueCat</a></li>
                         <li><a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Anthropic (Claude API — powers the AI assistant)</a></li>
                         <li><a href="https://foundation.wikimedia.org/wiki/Policy:Privacy_policy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Wikimedia (Wikipedia — photos of places suggested by the AI assistant are loaded by place name)</a></li>
+                        <li><a href="https://aws.amazon.com/privacy/" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Amazon Web Services (CloudFront — fronts our api.schengen.live endpoint that serves AI place photos)</a></li>
                     </ul>
 
                     <h2>4. Data Security</h2>
-                    <p>We value your trust in providing us your personal information (stored locally). Remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
+                    <p>We value your trust in providing us your personal information. Remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
 
                     <h2>5. Children's Privacy</h2>
                     <p>These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13.</p>
@@ -363,28 +364,28 @@
                     <p>We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
 
                     <h2>7. Contact Us</h2>
-                    <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at: <a href="mailto:hbb.soft.support@gmail.com" style="color: var(--primary); text-decoration: underline;">hbb.soft.support@gmail.com</a>.</p>
+                    <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at: <a href="mailto:support@schengen.live" style="color: var(--primary); text-decoration: underline;">support@schengen.live</a>.</p>
                 </div>
 
                 <!-- Ukrainian Content -->
                 <div class="content-ua">
                     <h1>Політика конфіденційності</h1>
-                    <div class="last-updated">Останнє оновлення: 14 серпня 2026 р.</div>
+                    <div class="last-updated">Останнє оновлення: 30 серпня 2026 р.</div>
 
                     <p>Ця Політика конфіденційності описує, як мобільний додаток Schengen Calculator for 90/180 («Додаток») збирає, використовує та захищає вашу інформацію. Додаток розроблено та підтримується Vitalii Nemudryi («ми», «нас» або «наш»). Ми прагнемо захистити вашу конфіденційність та забезпечити безпечне користування додатком.</p>
 
                     <h2>1. Офлайн-перш за все</h2>
-                    <p>Schengen Calculator for 90/180 розроблено як додаток, що працює <strong>переважно в офлайн режимі</strong>. За замовчуванням — без облікового запису — ваші дані про подорожі (поїздки, дати в'їзду та виїзду, результати розрахунків) зберігаються лише локально на вашому пристрої та нікуди не передаються. Якщо ви вирішите увійти в обліковий запис і користуватися додатковими хмарними функціями (синхронізація, спільний доступ до профілів, AI-помічник), необхідні для цих функцій дані зберігаються в Google Cloud Firestore, як описано нижче. Ми ніколи не продаємо ваші дані та не передаємо їх маркетинговим службам.</p>
+                    <p>Schengen Calculator for 90/180 розроблено як додаток, що працює <strong>переважно в офлайн режимі</strong>. За замовчуванням — без облікового запису — ваші дані про подорожі (поїздки, дати в'їзду та виїзду, результати розрахунків) зберігаються лише локально на вашому пристрої та нікуди не передаються. Якщо ви вирішите увійти в обліковий запис і користуватися додатковими хмарними функціями (синхронізація, спільний доступ до профілів, AI-помічник), необхідні для цих функцій дані зберігаються в Google Cloud Firestore у Європейському Союзі (регіон europe-west1, Бельгія), як описано нижче. Ми ніколи не продаємо ваші дані та не передаємо їх маркетинговим службам.</p>
 
                     <h2>2. Інформація, яку ми збираємо</h2>
                     <p>Хоча ваші основні дані про подорожі залишаються на вашому пристрої, ми можемо збирати наступні типи інформації для покращення Додатку:</p>
                     <ul>
-                        <li><strong>Дані про використання:</strong> Ми використовуємо Google Firebase Analytics для збору анонімних даних про використання. Це включає інформацію про те, як часто ви використовуєте додаток, які екрани відвідуєте та загальні взаємодії. Це допомагає нам зрозуміти, які функції є найбільш корисними.</li>
+                        <li><strong>Дані про використання:</strong> Ми використовуємо Google Firebase Analytics для збору псевдонімізованих даних про використання: відкриття додатку, інформація про пристрій і ОС, приблизне (за IP) розташування та невеликий набір подій у додатку — перегляд сторінки покупки, успішна або неуспішна покупка, відновлення покупок. Це допомагає нам зрозуміти, які функції найкорисніші. Ці дані не пов'язуються з вашим ім'ям чи електронною поштою.</li>
                         <li><strong>Звіти про збої:</strong> Ми можемо збирати автоматичні звіти про помилки у разі збою Додатку. Це включає інформацію про пристрій (версія ОС, модель) та рядок коду, який викликав збій, щоб допомогти нам швидко виправити помилки.</li>
                         <li><strong>Доступ до камери:</strong> Якщо ви використовуєте функцію сканування QR-коду для імпорту даних, Додаток запитає доступ до камери вашого пристрою. Ця обробка виконується повністю локально на вашому пристрої. Ми не записуємо, не зберігаємо та не передаємо жодних відео чи зображень, знятих вашою камерою.</li>
                         <li><strong>Необов'язковий обліковий запис і хмарна синхронізація:</strong> якщо ви входите через Google або Apple (потрібно для покупок, синхронізації та спільного доступу), ми зберігаємо ваш ідентифікатор користувача та email входу. Ваші профілі й поїздки зберігаються в Google Cloud Firestore і синхронізуються між вашими пристроями. Якщо ви явно поділитеся профілем, запрошена вами людина бачитиме дані цього профілю. Коли ви ділитеся профілем, ім'я та адреса електронної пошти вашого облікового запису показуються запрошеним людям, щоб вони бачили, хто саме поділився; коли ви приймаєте запрошення, ваші ім'я та адреса електронної пошти показуються власнику профілю (і видимі іншим учасникам цього профілю), щоб власник міг керувати доступом. Ви можете будь-коли вийти зі спільного профілю, а власник — відкликати доступ. Спільний доступ — функція Premium: коли підписка Premium завершується, профілі, якими ділився цей обліковий запис, автоматично перестають бути спільними, а невикористані коди запрошень стають недійсними.</li>
                         <li><strong>Покупки:</strong> підписки та разові покупки обробляються Google Play або Apple App Store разом із RevenueCat. Ми ніколи не бачимо та не зберігаємо дані вашої платіжної картки.</li>
-                        <li><strong>AI-помічник (окрема покупка):</strong> якщо ви придбаєте AI-доступ, ваші повідомлення в чаті та потрібні для відповіді дані поїздок обробляються нашим бекендом і провайдером AI-моделі. Історія чату зберігається у вашому обліковому записі.</li>
+                        <li><strong>AI-помічник (окрема покупка):</strong> якщо ви придбаєте AI-доступ, ваші повідомлення до помічника та потрібні для відповіді дані поїздок (залишок днів, дати та назви поїздок) обробляються нашим бекендом і провайдером AI-моделі — Anthropic (Claude API). Історія спілкування з помічником зберігається у вашому обліковому записі, доки ви не видалите її або сам обліковий запис, — вона лишається видимою в Додатку навіть після завершення періоду AI-доступу. Фото місць, які пропонує помічник, шукаються у Вікіпедії за назвою місця та роздаються через наш власний ендпоінт (api.schengen.live, попереду Amazon CloudFront); наш бекенд кешує ці фото з ключем лише за назвою місця — жодних персональних даних із ними не зберігається.</li>
                         <li><strong>Доступ до календаря (необов'язково):</strong> інтеграція з календарем читає календар пристрою лише для того, щоб запропонувати схожі на подорожі події, і створює події для експортованих вами поїздок. Усе це відбувається виключно на вашому пристрої — вміст календаря ніколи не завантажується на наші сервери. Доступ запитується лише тоді, коли ви відкриваєте цю функцію, і його можна будь-коли відкликати в системних налаштуваннях.</li>
                         <li><strong>Push-сповіщення:</strong> якщо ви увійшли в обліковий запис, ми зберігаємо push-токен вашого пристрою (Firebase Cloud Messaging) у вашому акаунті, щоб оновлення профілів, якими з вами поділилися, доходили до ваших пристроїв. Токени видаляються разом з обліковим записом.</li>
                     </ul>
@@ -394,14 +395,15 @@
                     <p>Додаток використовує сторонні сервіси, які можуть збирати інформацію, що використовується для вашої ідентифікації. Посилання на політику конфіденційності сторонніх постачальників послуг, які використовуються додатком:</p>
                     <ul>
                         <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Google Analytics for Firebase</a></li>
-                        <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Firebase (Authentication, Cloud Firestore, Crashlytics)</a></li>
+                        <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Firebase (Authentication, Cloud Firestore, Cloud Messaging, Cloud Functions, Crashlytics)</a></li>
                         <li><a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">RevenueCat</a></li>
                         <li><a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Anthropic (Claude API — працює AI-помічник)</a></li>
                         <li><a href="https://foundation.wikimedia.org/wiki/Policy:Privacy_policy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Wikimedia (Вікіпедія — фото місць, які пропонує AI-помічник, завантажуються за назвою місця)</a></li>
+                        <li><a href="https://aws.amazon.com/privacy/" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Amazon Web Services (CloudFront — попереду нашого ендпоінта api.schengen.live, що роздає фото місць)</a></li>
                     </ul>
 
                     <h2>4. Безпека даних</h2>
-                    <p>Ми цінуємо вашу довіру щодо надання нам вашої особистої інформації (яка зберігається локально). Пам'ятайте, що жоден метод передачі через Інтернет або метод електронного зберігання не є на 100% безпечним і надійним, і ми не можемо гарантувати його абсолютну безпеку.</p>
+                    <p>Ми цінуємо вашу довіру щодо надання нам вашої особистої інформації. Пам'ятайте, що жоден метод передачі через Інтернет або метод електронного зберігання не є на 100% безпечним і надійним, і ми не можемо гарантувати його абсолютну безпеку.</p>
 
                     <h2>5. Конфіденційність дітей</h2>
                     <p>Ці Послуги не адресовані особам віком до 13 років. Ми свідомо не збираємо особисту інформацію, що дозволяє ідентифікувати особу, від дітей віком до 13 років.</p>
@@ -410,7 +412,7 @@
                     <p>Ми можемо час від часу оновлювати нашу Політику конфіденційності. Тому ми радимо вам періодично переглядати цю сторінку на наявність будь-яких змін. Ми повідомимо вас про будь-які зміни, опублікувавши нову Політику конфіденційності на цій сторінці.</p>
 
                     <h2>7. Зв'яжіться з нами</h2>
-                    <p>Якщо у вас є якісь питання або пропозиції щодо нашої Політики конфіденційності, не соромтеся звертатися до нас за адресою: <a href="mailto:hbb.soft.support@gmail.com" style="color: var(--primary); text-decoration: underline;">hbb.soft.support@gmail.com</a>.</p>
+                    <p>Якщо у вас є якісь питання або пропозиції щодо нашої Політики конфіденційності, не соромтеся звертатися до нас за адресою: <a href="mailto:support@schengen.live" style="color: var(--primary); text-decoration: underline;">support@schengen.live</a>.</p>
                 </div>
             </div>
         </div>
@@ -426,7 +428,7 @@
                     <span class="logo-mobile">Schengen Tracker</span>
                 </div>
                 <div class="footer-links">
-                    <a href="mailto:hbb.soft.support@gmail.com" data-i18n="footer_contact">Contact Support</a>
+                    <a href="mailto:support@schengen.live" data-i18n="footer_contact">Contact Support</a>
                     <a href="https://www.linkedin.com/in/nemudriy" target="_blank" rel="noopener">LinkedIn</a>
                     <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
                     <a href="terms.html" data-i18n="footer_terms">Terms of Use</a>
@@ -513,14 +515,7 @@
         });
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17632732616"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'AW-17632732616');
-    </script>
+    <!-- No ad/conversion tags on the legal pages: the privacy policy must
+         not itself perform the tracking it does not disclose. -->
 </body>
 </html>

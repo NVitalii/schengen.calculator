@@ -56,14 +56,17 @@ Unlike other Schengen calculators, we've built a robust calculation engine that 
 ## 📱 Screenshots
 
 <div align="left">
-  <img src="screenshots/main_screen_light.jpg" alt="Main Screen" width="200"/>
-  <img src="screenshots/main_screen_dark.jpg" alt="Main Screen (Dark Theme)" width="200"/>
-  <img src="screenshots/import_export_menu.jpg" alt="Import/Export Menu" width="200"/>
-  <img src="screenshots/qr_code_export.jpg" alt="QR Code Export" width="200"/>
-  <img src="screenshots/add_new_user.jpg" alt="Add New User" width="200"/>
-  <img src="screenshots/add_tour_period.jpg" alt="Add Tour Period" width="200"/>
-  <img src="screenshots/app_configuration_light.jpg" alt="App Configuration" width="200"/>
-  <img src="screenshots/app_configuration_dark.jpg" alt="App Configuration (Dark Theme)" width="200"/>
+  <img src="screenshots/300.png" alt="Track your Schengen days with the 90/180 rule" width="200"/>
+  <img src="screenshots/301.png" alt="Reminders, reports and sharing in one menu" width="200"/>
+  <img src="screenshots/302.png" alt="Keep a separate profile for every traveller" width="200"/>
+  <img src="screenshots/303.png" alt="Your AI assistant plans around your remaining days" width="200"/>
+  <img src="screenshots/304.png" alt="Check if your trip fits the 90/180 rule" width="200"/>
+  <img src="screenshots/305.png" alt="Share a profile with family using Premium" width="200"/>
+  <img src="screenshots/306.png" alt="Transfer travel history between phones - free, no account" width="200"/>
+  <img src="screenshots/307.png" alt="Track your Schengen days in light or dark" width="200"/>
+  <img src="screenshots/308.png" alt="Real places, real photos, an hour-by-hour plan" width="200"/>
+  <img src="screenshots/309.png" alt="Choose your theme, language and text size" width="200"/>
+  <img src="screenshots/310.png" alt="Back up and sync your trips with Premium" width="200"/>
 </div>
 
 ## 📥 Download & Try Online

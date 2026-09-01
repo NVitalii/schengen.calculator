@@ -1,9 +1,10 @@
 Privacy Policy
-Effective Date: August 5, 2026
-App Name: My Schengen – 90/180 Day Counter (Мій Шенген – 90/180 Лічильник)
-Developer: Botolab
+Effective Date: August 30, 2026
+App Name: Schengen Calculator for 90/180
+Developer: Vitalii Nemudryi
+Canonical version of this policy: https://schengen.live/privacy.html
 
-This privacy policy describes how we collect, use, and protect information related to your use of the app “My Schengen – 90/180 Day Counter” (“Мій Шенген – 90/180 Лічильник”), published by Botolab.
+This privacy policy describes how we collect, use, and protect information related to your use of the app "Schengen Calculator for 90/180", developed and maintained by Vitalii Nemudryi.
 
 The app works fully offline without any account. Creating an account is optional and only needed for the paid cloud features described below.
 
@@ -11,18 +12,20 @@ The app works fully offline without any account. Creating an account is optional
 
 Without an account:
 * Your trip data (entry/exit dates, trip names, traveler profiles) is stored only on your device.
-* Third-party services may automatically collect anonymized data for analytics and crash reporting:
+* Third-party services may automatically collect pseudonymous data for analytics and crash reporting:
   - Approximate location (based on IP address)
   - Device information (model, OS version, language, country)
-  - App usage data (e.g., screen views, button taps)
+  - App open and interaction events, including a small purchase funnel (viewing the paywall; completing, failing or restoring a purchase)
   - App crash and error logs (via Firebase Crashlytics)
   - Performance metrics (e.g., app load times, responsiveness)
 
 With an optional account (Premium / AI features):
 * Account identifiers: your Firebase user ID, and the email address and display name provided by Google or Apple sign-in.
-* User content: your traveler profiles and trip data, stored in Google Cloud Firestore so they can be backed up and synchronized across your devices, and — only if you explicitly share a profile — shown to the person you shared it with.
+* User content: your traveler profiles and trip data, stored in Google Cloud Firestore in the European Union (region europe-west1, Belgium) so they can be backed up and synchronized across your devices, and — only if you explicitly share a profile — shown to the people you shared it with. When you share a profile, your sign-in name and e-mail are shown to the people you invite; when you accept an invite, your name and e-mail are shown to the profile owner and other members. Sharing is a Premium feature: when the Premium subscription ends, shared profiles are automatically un-shared and unused invite codes stop working.
 * Purchase state: subscription and purchase entitlements are processed by RevenueCat and the app stores. We never see your card number or bank details.
-* AI assistant content: if you purchase AI access, the messages you send to the AI assistant and the trip data needed to answer them are processed by our backend and a third-party AI model provider to generate the answer. AI chat history is stored in your account.
+* AI assistant content: if you purchase AI access, the messages you send to the AI assistant and the trip data needed to answer them (remaining days, trip dates and names) are processed by our backend and by the AI model provider — Anthropic (Claude API) — to generate the answer. AI chat history is stored in your account and kept until you delete it or delete your account; it stays readable in the app even after your AI access period ends.
+* AI place photos: photos of places suggested by the assistant are looked up on Wikipedia by place name and served through our own endpoint (api.schengen.live, fronted by Amazon CloudFront). Our backend caches these photos keyed by place name only — no personal data is stored with them.
+* Push notifications: if you sign in, your device's push token (Firebase Cloud Messaging) is stored in your account so updates to profiles shared with you can reach your devices. Tokens are removed when you delete your account.
 
 We do NOT collect your contacts or precise location, and we do not show third-party ads.
 
@@ -31,7 +34,9 @@ We do NOT collect your contacts or precise location, and we do not show third-pa
   🔗 https://firebase.google.com/support/privacy
 * Google Play Services / App Store billing
 * RevenueCat (purchase management) 🔗 https://www.revenuecat.com/privacy
-* An AI model provider for the optional AI assistant (requests are proxied through our backend; the provider receives only the content needed to answer)
+* Anthropic (Claude API — powers the optional AI assistant; requests are proxied through our backend and the provider receives only the content needed to answer) 🔗 https://www.anthropic.com/privacy
+* Wikimedia (Wikipedia — photos of places suggested by the AI assistant are loaded by place name) 🔗 https://foundation.wikimedia.org/wiki/Policy:Privacy_policy
+* Amazon Web Services (CloudFront — fronts our api.schengen.live photo endpoint) 🔗 https://aws.amazon.com/privacy/
 
 🔐 3. How We Use This Data
 * Provide cloud backup, cross-device sync, and profile sharing you asked for
@@ -44,20 +49,23 @@ We do not sell, share, or trade any personal data.
 📷 4. Camera
 The app requests camera permission solely to scan QR codes when you import your trip data from another device. Scanning happens entirely on your device — no photos or video are recorded, stored, or transmitted.
 
-📱 5. Data Storage & Offline Use
-Your device always keeps a full local copy of your data: the app remains fully usable offline, with or without an account. Cloud data is stored in Google Cloud Firestore data centers.
+📅 5. Calendar (optional)
+The calendar integration reads your device calendar only to suggest travel-like events and creates events for the trips you export. This happens entirely on your device — calendar contents are never uploaded to our servers. The permission is requested only when you open the feature and can be revoked in system settings at any time.
 
-🗑 6. Your Control (GDPR)
-* Export: Settings → “Export data (JSON)” gives you a complete machine-readable copy of your data (right to portability).
-* Delete: Settings → “Delete account” permanently removes your account and all cloud data (right to erasure). Local data can be cleared with “Clear all data” or by uninstalling the app.
+📱 6. Data Storage & Offline Use
+Your device always keeps a full local copy of your data: the app remains fully usable offline, with or without an account. Cloud data is stored in Google Cloud Firestore data centers in the European Union (europe-west1).
+
+🗑 7. Your Control (GDPR)
+* Transfer: the encrypted QR export moves all your profiles and trips to another device (Settings → transfer via QR code). For a machine-readable copy of your data, contact us at the address below.
+* Delete: Settings → "Delete account" permanently removes your account and all cloud data (right to erasure). Local data can be cleared with "Clear all data" or by uninstalling the app.
 * Notifications and reminders can be switched off in the app at any time.
 
-👶 7. Children
+👶 8. Children
 The app is not intended for anyone under 13, and we do not knowingly collect their data.
 
-📩 8. Contact Us
+📩 9. Contact Us
 If you have any questions regarding this policy or your privacy rights, please contact:
-📧 hbb.soft.support@gmail.com
+📧 support@schengen.live
 
 ✅ Consent
-By using My Schengen – 90/180 Day Counter (Мій Шенген – 90/180 Лічильник), published by Botolab, you agree to this privacy policy and the use of the services mentioned above.
+By using Schengen Calculator for 90/180 you agree to this privacy policy and the use of the services mentioned above.

@@ -1,11 +1,11 @@
 # Schengen Calculator (schengen.live)
-> Premium, offline-first Schengen visa rolling-window stay tracker and planner for iOS, Android, and web.
+> Offline-first Schengen visa rolling-window stay tracker and planner for iOS, Android, and web — free core, with an optional Premium subscription and AI travel assistant.
 
 Schengen Calculator is a privacy-first utility application designed to help non-EU citizens navigate the strict **90/180 rolling-window rule** in the Schengen Area without risking overstaying, fines, or entry bans.
 
 ## Key Product Information
 
-- **Platforms:** iOS app, Android app, and high-fidelity Web tool.
+- **Platforms:** iOS app, Android app, and high-fidelity Web tool. The free 90/180 day tracking is on all three; the paid extras (Premium subscription, AI travel assistant) are currently available on Android and are planned for iOS.
 - **Core Purpose:** To provide a 100% accurate, offline-first mechanism for tracking previous entries/exits and planning future trips within the Schengen Zone.
 - **Audience:** Digital nomads, frequent travelers, tourists, business travelers, and families visiting Europe.
 
@@ -18,14 +18,20 @@ Schengen Calculator is a privacy-first utility application designed to help non-
 
 ## How We Differ from Competitors
 
-- **Local Storage by Default:** Tracking your days requires no account — travel profiles, dates, and historical logs are saved in device-local storage (the web version stays entirely in local browser storage and never asks for an account). Signing in is optional and needed only for the paid extras: cloud sync, profile sharing, and the AI travel assistant, whose data is stored in Google Cloud Firestore and can be deleted from the app at any time.
-- **Offline QR-Code Sync:** Users can easily transfer or back up profiles and travel histories between devices (e.g., from web to phone, or phone to phone) via secure, offline-generated QR codes. The processing remains completely on-device without cloud mediation.
+- **Local Storage by Default:** Tracking your days requires no account — travel profiles, dates, and historical logs are saved in device-local storage (the web version stays entirely in local browser storage and never asks for an account). Signing in is optional and needed only for the paid extras — the Premium subscription (cloud sync, profile sharing, PDF report, phone-calendar export, unlimited profiles) and the one-time AI travel assistant periods; their data is stored in Google Cloud Firestore (EU region) and can be deleted from the app at any time.
+- **Offline QR-Code Transfer:** Users can transfer profiles and travel histories between phones (device to device) via secure, offline-generated, encrypted QR codes. The processing remains completely on-device without cloud mediation.
 - **Multi-Profile Management:** Manage distinct profiles and timelines for family members, friends, or clients concurrently.
-- **Ad-Free Premium Experience:** Absolutely zero pop-up ads, banners, or data harvesting scripts.
+- **Ad-Free:** Absolutely zero pop-up ads or banners, and no sale of personal data — only pseudonymous usage analytics (Google Firebase Analytics), as disclosed in the Privacy Policy.
+
+## Get the App
+
+- [Android — Google Play](https://play.google.com/store/apps/details?id=net.botolab.schengen): the full app, including the optional Premium subscription and the one-time AI travel assistant periods. Free to install; 5,000+ downloads.
+- [iOS — App Store](https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029): free 90/180 day tracking. The paid extras (Premium, AI assistant) are not on iOS yet and are planned.
+- [Web calculator — no install](https://schengen.live/schengen-calculator.html): runs entirely in the browser, stores trips in local browser storage, no account.
 
 ## Site Structure & Key Pages
 
-- **Home Page** (`https://schengen.live/`): Landing page featuring details of the mobile applications, feature overviews, client testimonials, and FAQs.
-- **Online Schengen Calculator** (`https://schengen.live/schengen-calculator.html`): High-fidelity interactive visa stay tracker that runs fully inside the browser using HTML5 LocalStorage, with visual circular progress ring and Future Date Inspector.
-- **Privacy Policy** (`https://schengen.live/privacy.html`): Localized documentation outlining our offline-first structure, the optional cloud features and what they store, and Google Firebase Analytics transparency.
-- **Terms of Use** (`https://schengen.live/terms.html`): Terms covering the free tier, Premium subscriptions, one-time AI access periods, and account deletion.
+- [Home Page](https://schengen.live/): Landing page featuring details of the mobile applications, feature overviews, real Google Play reviews, and FAQs.
+- [Online Schengen Calculator](https://schengen.live/schengen-calculator.html): High-fidelity interactive visa stay tracker that runs fully inside the browser using HTML5 LocalStorage, with visual circular progress ring and Future Date Inspector.
+- [Privacy Policy](https://schengen.live/privacy.html): Localized documentation outlining our offline-first structure, the optional cloud features and what they store, and Google Firebase Analytics transparency.
+- [Terms of Use](https://schengen.live/terms.html): Terms covering the free tier, Premium subscriptions, one-time AI access periods, sharing revocation on expiry, and account deletion.

@@ -37,11 +37,11 @@
       "@type": "SoftwareApplication",
       "name": "Schengen Calculator for 90/180",
       "url": "https://schengen.live/",
-      "description": "Professional mobile application and online tool to track Schengen Area stays and stay compliant with the 90/180 rule visa requirements. Featuring family profiles, secure offline QR sync, and offline-first privacy — with optional cloud sync, profile sharing and an AI travel assistant for signed-in users.",
+      "description": "Professional mobile application and online tool to track Schengen Area stays and stay compliant with the 90/180 rule visa requirements. Featuring family profiles, secure offline QR sync, and offline-first privacy — with optional cloud sync, profile sharing and an AI travel assistant for signed-in users (paid extras currently on Android; iOS planned).",
       "applicationCategory": "TravelApplication, UtilityApplication",
       "operatingSystem": "iOS, Android, All",
       "screenshot": "https://schengen.live/assets/app_demo.jpg",
-      "softwareVersion": "1.0.0",
+      "softwareVersion": "4.0.5",
       "downloadUrl": [
         "https://play.google.com/store/apps/details?id=net.botolab.schengen",
         "https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029"
@@ -830,7 +830,7 @@
                     <span data-i18n="hero_badge">Used by travelers across Europe</span>
                 </div>
                 <h1 data-i18n="hero_title">Never Overstay Your Schengen Visa Again</h1>
-                <p data-i18n="hero_subtitle">Track your stays, automatically calculate the 90/180 rule, and travel stress-free with the #1 app for non-EU travelers.</p>
+                <p data-i18n="hero_subtitle">Track your stays, automatically calculate the 90/180 rule, and travel stress-free with an app built for non-EU travelers.</p>
                 <div class="hero-buttons">
                     <a href="schengen-calculator.html" class="btn" style="background: var(--primary); color: white;" aria-label="Use Schengen Calculator Online">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="15" y2="17"></line><line x1="9" y1="9" x2="9" y2="17"></line></svg>
@@ -948,6 +948,50 @@
         </div>
     </section>
 
+    <!-- Paid extras: everything here is optional; the day counter above is free -->
+    <section class="section" id="premium" style="background: var(--bg-white);">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center; max-width: 640px; margin: 0 auto;">
+                <h2 data-i18n="paid_title">Optional extras</h2>
+                <p data-i18n="paid_sub" style="margin-bottom: 40px;">The 90/180 day counter above is free forever. These add-ons are optional and available on Android; coming to iOS later.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6 5 .4-3.8 3.3 1.2 4.9L12 13.8 7.7 16.2l1.2-4.9L5.1 8l5-.4z"></path></svg>
+                    </div>
+                    <h3 data-i18n="paid_ai_title">AI travel planner</h3>
+                    <p data-i18n="paid_ai_desc" style="font-size: 1rem; margin-bottom: 0;">An AI assistant that knows your remaining days and plans around them: day-by-day itineraries, top sights with photos, ticket and transit tips. A one-time purchase for 7, 14 or 30 days — no subscription, no auto-renewal.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+                    </div>
+                    <h3 data-i18n="paid_sync_title">Cloud backup & family sharing</h3>
+                    <p data-i18n="paid_sync_desc" style="font-size: 1rem; margin-bottom: 0;">Premium subscription: your profiles sync across devices and can be shared with family — everyone sees the same trips. Data is stored in the EU and can be deleted in the app at any time.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    </div>
+                    <h3 data-i18n="paid_pdf_title">PDF report & calendar</h3>
+                    <p data-i18n="paid_pdf_desc" style="font-size: 1rem; margin-bottom: 0;">Premium also gives you a PDF report of your stays for visa applications and border checks, plus two-way sync with your phone calendar.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    </div>
+                    <h3 data-i18n="paid_free_title">Free, not paid</h3>
+                    <p data-i18n="paid_free_desc" style="font-size: 1rem; margin-bottom: 0;">Smart reminders before trips and when days become available again, the trip planner, family profiles, the home-screen widget and encrypted QR transfer — all included at no cost.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- How It Works -->
     <section class="section" id="how" style="background: var(--bg-white);">
         <div class="container">
@@ -976,17 +1020,28 @@
     <!-- Social Proof -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="reveal" data-i18n="proof_title">Loved by Travelers</h2>
+            <h2 class="reveal" data-i18n="proof_title">Trusted by travelers</h2>
+            <p class="reveal" style="text-align: center; color: #cbd5e1; margin-top: -8px;" data-i18n="proof_sub">5,000+ downloads on Google Play</p>
+            <!-- Real Google Play reviews. Do not edit the quotes: they are
+                 verbatim, and the names/dates are the public review authors. -->
             <div class="testimonial-grid">
                 <div class="testimonial-card reveal">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-text" data-i18n="proof_1">"This app saved me from a potential fine. The 90/180 rule always confused me, but now it's clear as day!"</p>
-                    <div style="font-weight: 600;">Oksana T.</div>
+                    <p class="testimonial-text" data-i18n="proof_1">“Very useful app, works perfectly and interface is very user friendly”</p>
+                    <div style="font-weight: 600;">Tom R.</div>
+                    <div style="font-size: 0.875rem; color: #94a3b8;" data-i18n="proof_1_src">Google Play · June 2026</div>
                 </div>
                 <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-text" data-i18n="proof_2">"As a digital nomad, this is exactly what I needed. Offline mode is a lifesaver when switching SIM cards."</p>
-                    <div style="font-weight: 600;">Michael B.</div>
+                    <p class="testimonial-text" data-i18n="proof_2">“I find this app easy to use and receive a clear picture of available days I have remaining.”</p>
+                    <div style="font-weight: 600;">Bridget H.</div>
+                    <div style="font-size: 0.875rem; color: #94a3b8;" data-i18n="proof_2_src">Google Play · July 2026</div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="proof_3">“Works perfectly, saves what I've been doing since Brexit working out manually.”</p>
+                    <div style="font-weight: 600;">Douglas A.</div>
+                    <div style="font-size: 0.875rem; color: #94a3b8;" data-i18n="proof_3_src">Google Play · August 2026</div>
                 </div>
             </div>
         </div>
@@ -1145,7 +1200,7 @@
                     <span class="logo-mobile">Schengen Tracker</span>
                 </div>
                 <div class="footer-links">
-                    <a href="mailto:hbb.soft.support@gmail.com" data-i18n="footer_contact">Contact Support</a>
+                    <a href="mailto:support@schengen.live" data-i18n="footer_contact">Contact Support</a>
                     <a href="https://www.linkedin.com/in/nemudriy" target="_blank" rel="noopener">LinkedIn</a>
                     <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
                     <a href="terms.html" data-i18n="footer_terms">Terms of Use</a>
@@ -1206,7 +1261,7 @@
                 nav_faq: "FAQ",
                 hero_badge: "Used by travelers across Europe",
                 hero_title: "Never Overstay Your Schengen Visa Again",
-                hero_subtitle: "Track your stays, automatically calculate the 90/180 rule, and travel stress-free with the #1 app for non-EU travelers.",
+                hero_subtitle: "Track your stays, automatically calculate the 90/180 rule, and travel stress-free with an app built for non-EU travelers.",
                 btn_download: "Download on Google Play",
                 btn_get_on: "GET IT ON",
                 btn_apple_soon: "Download on the",
@@ -1240,9 +1295,24 @@
                 how_2_desc: "We instantly show your remaining allowance.",
                 how_3: "Travel Safely",
                 how_3_desc: "Enjoy your trip without worrying about overstaying.",
-                proof_title: "Loved by Travelers",
-                proof_1: '"This app saved me from a potential fine. The 90/180 rule always confused me, but now it\'s clear as day!"',
-                proof_2: '"As a digital nomad, this is exactly what I needed. Offline mode is a lifesaver when switching SIM cards."',
+                paid_title: "Optional extras",
+                paid_sub: "The 90/180 day counter above is free forever. These add-ons are optional and available on Android; coming to iOS later.",
+                paid_ai_title: "AI travel planner",
+                paid_ai_desc: "An AI assistant that knows your remaining days and plans around them: day-by-day itineraries, top sights with photos, ticket and transit tips. A one-time purchase for 7, 14 or 30 days — no subscription, no auto-renewal.",
+                paid_sync_title: "Cloud backup & family sharing",
+                paid_sync_desc: "Premium subscription: your profiles sync across devices and can be shared with family — everyone sees the same trips. Data is stored in the EU and can be deleted in the app at any time.",
+                paid_pdf_title: "PDF report & calendar",
+                paid_pdf_desc: "Premium also gives you a PDF report of your stays for visa applications and border checks, plus two-way sync with your phone calendar.",
+                paid_free_title: "Free, not paid",
+                paid_free_desc: "Smart reminders before trips and when days become available again, the trip planner, family profiles, the home-screen widget and encrypted QR transfer — all included at no cost.",
+                proof_title: "Trusted by travelers",
+                proof_sub: "5,000+ downloads on Google Play",
+                proof_1: '“Very useful app, works perfectly and interface is very user friendly”',
+                proof_1_src: "Google Play · June 2026",
+                proof_2: '“I find this app easy to use and receive a clear picture of available days I have remaining.”',
+                proof_2_src: "Google Play · July 2026",
+                proof_3: '“Works perfectly, saves what I\'ve been doing since Brexit working out manually.”',
+                proof_3_src: "Google Play · August 2026",
                 seo_title: "Understanding the Schengen 90/180 Rule",
                 seo_p1: "The Schengen 90/180 rule states that you can stay in the Schengen Area for up to 90 days within any 180-day period. This is a rolling window, meaning the 180 days look backwards from any given date.",
                 seo_p2: "Manually calculating this using a calendar is highly prone to errors. Our Schengen calculator app ensures you never accidentally overstay and face deportation or bans.",
@@ -1282,7 +1352,7 @@
                 nav_faq: "Часті питання",
                 hero_badge: "Використовується мандрівниками по всій Європі",
                 hero_title: "Ніколи більше не порушуйте ліміт у Шенгені",
-                hero_subtitle: "Відстежуйте поїздки, автоматично рахуйте дні за правилом 90/180 та подорожуйте без стресу з найкращим додатком.",
+                hero_subtitle: "Відстежуйте поїздки, автоматично рахуйте дні за правилом 90/180 та подорожуйте без стресу з додатком, створеним для мандрівників поза ЄС.",
                 btn_download: "Завантажити в Google Play",
                 btn_get_on: "ЗАВАНТАЖИТИ З",
                 btn_apple_soon: "Завантажити в",
@@ -1316,9 +1386,24 @@
                 how_2_desc: "Ми миттєво показуємо ваш залишок днів.",
                 how_3: "Подорожуйте безпечно",
                 how_3_desc: "Насолоджуйтесь поїздкою, не турбуючись про штрафи.",
-                proof_title: "Улюбленець мандрівників",
-                proof_1: '"Цей додаток врятував мене від штрафу. Правило 90/180 завжди плутало мене, але тепер все прозоро!"',
-                proof_2: '"Як цифровому кочівнику, це саме те, що мені потрібно. Офлайн режим рятує, коли міняєш SIM-карти."',
+                paid_title: "Додаткові можливості",
+                paid_sub: "Лічильник днів 90/180 вище — безкоштовний назавжди. Ці доповнення опційні та доступні на Android; на iOS — згодом.",
+                paid_ai_title: "AI-планувальник подорожей",
+                paid_ai_desc: "AI-помічник, який знає ваш залишок днів і планує з огляду на це: маршрути по днях, головні пам'ятки з фото, поради щодо квитків і транспорту. Разова покупка на 7, 14 або 30 днів — без підписки й автопродовження.",
+                paid_sync_title: "Хмарна копія та спільний доступ",
+                paid_sync_desc: "Підписка Premium: профілі синхронізуються між пристроями, ними можна поділитися з родиною — усі бачать ті самі поїздки. Дані зберігаються в ЄС, їх можна будь-коли видалити в додатку.",
+                paid_pdf_title: "PDF-звіт і календар",
+                paid_pdf_desc: "Premium також дає PDF-звіт про перебування для візових заяв і перевірок на кордоні та двосторонню синхронізацію з календарем телефону.",
+                paid_free_title: "Безкоштовно, а не за гроші",
+                paid_free_desc: "Розумні нагадування перед поїздками й коли дні знову доступні, планувальник, сімейні профілі, віджет і зашифрований QR-перенос — усе входить у безкоштовну версію.",
+                proof_title: "Нам довіряють мандрівники",
+                proof_sub: "5 000+ завантажень у Google Play",
+                proof_1: '«Дуже корисний додаток, працює бездоганно, а інтерфейс дуже зручний»',
+                proof_1_src: "Google Play · червень 2026 · переклад з англійської",
+                proof_2: '«Додатком легко користуватися, і я чітко бачу, скільки днів у мене лишилося»',
+                proof_2_src: "Google Play · липень 2026 · переклад з англійської",
+                proof_3: '«Працює бездоганно — рахує за мене те, що після Brexit я робив вручну»',
+                proof_3_src: "Google Play · серпень 2026 · переклад з англійської",
                 seo_title: "Розуміння правила 90/180 в Шенгені",
                 seo_p1: "Правило Шенгену 90/180 означає, що ви можете перебувати в Шенгенській зоні до 90 днів протягом будь-го 180-денного періоду. Це «плаваюче вікно», тобто 180 днів відраховуються назад від будь-якої конкретної дати.",
                 seo_p2: "Рахувати це вручну на календарі дуже ризиковано і часто призводить до помилок. Наш калькулятор гарантує, що ви ніколи випадково не перевищите ліміт і не зіткнетеся з депортацією.",

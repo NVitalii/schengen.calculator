@@ -46,3 +46,23 @@ Nothing else in the repo is published.
   auto-renews as long as the validation CNAME managed here exists).
 - Legacy zone records (`TXT hosting-site=…`, `_acme-challenge`) — remnants of
   old hosting; unmanaged, delete manually when confident nothing needs them.
+
+## DNS boundary: do NOT add email records here
+
+The Route 53 zone is shared with the **email stack, which lives in another
+project's Terraform state** (SES in us-east-1: inbound MX at the apex, the
+`_amazonses` verification TXT, three `_domainkey` DKIM CNAMEs and the
+`mail.schengen.live` MAIL FROM records that carry the SPF TXT). This state
+manages only:
+
+- apex `A`/`AAAA` -> the landing CloudFront distribution
+- `api.schengen.live` `A`/`AAAA` -> the API CloudFront distribution
+- the two ACM validation CNAMEs
+- the zone itself and the registrar settings
+
+Record sets are keyed by (name, type), so those sets do not collide today —
+`terraform plan` here must always report **no changes** to anything mail
+related. Never add an MX record, an apex `SPF`/`TXT`, or a `_dmarc` record to
+this configuration: the apex `TXT` set already holds `hosting-site=schengen-web`
+and a Terraform-managed TXT at the same name would overwrite the whole set.
+Email DNS changes belong in the project that owns the SES stack.
