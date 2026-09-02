@@ -90,7 +90,7 @@ Unlike other Schengen calculators, we've built a robust calculation engine that 
 
 We believe your travel history is your business.
 *   **No account needed to track your days** — signing in is only required for the optional paid features.
-*   **Your travel data stays on your device by default** and is uploaded only if you turn on cloud sync or share a profile.
+*   **Your travel data stays on your device by default** and is uploaded only if you turn on cloud sync, share a profile, or use the AI assistant (each request includes your remaining days and trips so it can plan around them).
 *   **No ads, and we never sell your data.** We use Firebase Analytics and Crashlytics for anonymous usage statistics and crash reports — see the [Privacy Policy](https://schengen.live/privacy.html).
 
 ## ❓ FAQ
