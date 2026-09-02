@@ -19,9 +19,16 @@ $shots = Join-Path $RepoRoot 'screenshots'
 # Captions come from the approved long set in the app repo's
 # marketing/screenshots/README.md — do not invent new claims here.
 $variants = @(
+    # Final candidates: full-frame device mockups (screenshots/mockup-*.png,
+    # transparent corners, never cropped), two approved caption options.
     @{ Out='feature-graphic-1024x500.png'; Bg='#E7E3F8'; Ink='#2E2A55'; Sub='#524C7A'; Accent='#6750A4'
-       H1='Know exactly how'; H2='many days are left'; SubLine='Schengen 90/180, counted for you'
-       Pills=@('Free','Offline','No account'); Front='300.png'; Back='303.png' }
+       H1='Track your Schengen days'; H2='with the 90/180 rule'; H1Size=70
+       SubLine='Now with an AI travel assistant'
+       Pills=@('Free','Offline','No account'); Front='mockup-tracker.png'; Back='mockup-ai.png'; Raw=$true }
+    @{ Out='feature-graphic-1024x500-b.png'; Bg='#E7E3F8'; Ink='#2E2A55'; Sub='#524C7A'; Accent='#6750A4'
+       H1='Always know how many'; H2='Schengen days remain'
+       SubLine='Now with an AI travel assistant'
+       Pills=@('Free','Offline','No account'); Front='mockup-tracker.png'; Back='mockup-ai.png'; Raw=$true }
     @{ Out='feature-graphic-v2.png'; Bg='#DDF3E4'; Ink='#1E4634'; Sub='#3A6B54'; Accent='#2E7D5B'
        H1='Track the'; H2='whole family'; SubLine='Up to five profiles free'
        Pills=@('Free','Offline','No account'); Front='302.png'; Back='300.png' }
@@ -44,8 +51,17 @@ $crop = New-Object System.Drawing.Rectangle(370, 635, 1415, 3125)
 
 function Draw-Phone([System.Drawing.Graphics]$gr, [string]$framePath,
                     [int]$x, [int]$y, [int]$w,
-                    [System.Drawing.Rectangle]$cropRect) {
+                    $cropRect) {
     $img = [System.Drawing.Image]::FromFile($framePath)
+    if ($null -eq $cropRect) {
+        # Full mockup with its own bezel and transparent corners — draw as
+        # is, never crop the source.
+        $h = [int]($w * $img.Height / $img.Width)
+        $dest = New-Object System.Drawing.Rectangle($x, $y, $w, $h)
+        $gr.DrawImage($img, $dest)
+        $img.Dispose()
+        return
+    }
     $h = [int]($w * $cropRect.Height / $cropRect.Width)
     $radius = [int]($w * 0.155)
     $clip = New-Object System.Drawing.Drawing2D.GraphicsPath
@@ -88,10 +104,12 @@ foreach ($v in $variants) {
     $g.FillEllipse($deco1, -180, 620, 700, 700)
     $g.FillEllipse($deco2, 1050, -300, 620, 620)
 
-    Draw-Phone $g (Join-Path $shots $v.Back)  1060 230 420 $crop
-    Draw-Phone $g (Join-Path $shots $v.Front) 1400 140 480 $crop
+    $useCrop = if ($v.Raw) { $null } else { $crop }
+    Draw-Phone $g (Join-Path $shots $v.Back)  1090 230 420 $useCrop
+    Draw-Phone $g (Join-Path $shots $v.Front) 1420 140 480 $useCrop
 
-    $fontH1  = New-Object System.Drawing.Font('Segoe UI', 76, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
+    $h1px = if ($v.H1Size) { $v.H1Size } else { 76 }
+    $fontH1  = New-Object System.Drawing.Font('Segoe UI', $h1px, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
     $fontSub = New-Object System.Drawing.Font('Segoe UI Semibold', 42, [System.Drawing.FontStyle]::Regular, [System.Drawing.GraphicsUnit]::Pixel)
     $fontTag = New-Object System.Drawing.Font('Segoe UI Semibold', 34, [System.Drawing.FontStyle]::Regular, [System.Drawing.GraphicsUnit]::Pixel)
     $brushInk = New-Object System.Drawing.SolidBrush($ink)
