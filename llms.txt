@@ -5,7 +5,7 @@ Schengen Calculator is a privacy-first utility application designed to help non-
 
 ## Key Product Information
 
-- **Platforms:** iOS app, Android app, and high-fidelity Web tool. The free 90/180 day tracking is on all three; the paid extras (Premium subscription, AI travel assistant) are currently available on Android and are planned for iOS.
+- **Platforms:** iOS app, Android app, and high-fidelity Web tool. The free 90/180 day tracking is on all three. The paid extras (Premium subscription, AI travel assistant) are optional.
 - **Core Purpose:** To provide a 100% accurate, offline-first mechanism for tracking previous entries/exits and planning future trips within the Schengen Zone.
 - **Audience:** Digital nomads, frequent travelers, tourists, business travelers, and families visiting Europe.
 
@@ -25,8 +25,8 @@ Schengen Calculator is a privacy-first utility application designed to help non-
 
 ## Get the App
 
-- [Android — Google Play](https://play.google.com/store/apps/details?id=net.botolab.schengen): the full app, including the optional Premium subscription and the one-time AI travel assistant periods. Free to install; 5,000+ downloads.
-- [iOS — App Store](https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029): free 90/180 day tracking. The paid extras (Premium, AI assistant) are not on iOS yet and are planned.
+- [Android — Google Play](https://play.google.com/store/apps/details?id=net.botolab.schengen): free to install; 5,000+ downloads.
+- [iOS — App Store](https://apps.apple.com/app/schengen-calculator-for-90-180/id6766031029): free to install.
 - [Web calculator — no install](https://schengen.live/schengen-calculator.html): runs entirely in the browser, stores trips in local browser storage, no account.
 
 ## Site Structure & Key Pages
