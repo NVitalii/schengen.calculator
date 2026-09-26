@@ -44,8 +44,10 @@ Nothing else in the repo is published.
   schengen files there some day, carefully).
 - The ACM certificate object itself (referenced via data source; it
   auto-renews as long as the validation CNAME managed here exists).
-- Legacy zone records (`TXT hosting-site=…`, `_acme-challenge`) — remnants of
-  old hosting; unmanaged, delete manually when confident nothing needs them.
+- Legacy zone records (`_acme-challenge` TXT) — remnants of old hosting;
+  unmanaged, delete manually when confident nothing needs them. (The apex TXT
+  set, which also carries the legacy `hosting-site=…` value, IS managed here
+  since 2026-09-15 — see below.)
 
 ## DNS boundary: do NOT add email records here
 
@@ -58,11 +60,15 @@ manages only:
 - apex `A`/`AAAA` -> the landing CloudFront distribution
 - `api.schengen.live` `A`/`AAAA` -> the API CloudFront distribution
 - the two ACM validation CNAMEs
+- the apex `TXT` set (imported 2026-09-15 for the Google Search Console
+  verification value; every apex TXT value must be listed inside that one
+  resource, because Route 53 keys record sets by (name, type) and the set is
+  written as a whole)
 - the zone itself and the registrar settings
 
 Record sets are keyed by (name, type), so those sets do not collide today —
 `terraform plan` here must always report **no changes** to anything mail
-related. Never add an MX record, an apex `SPF`/`TXT`, or a `_dmarc` record to
-this configuration: the apex `TXT` set already holds `hosting-site=schengen-web`
-and a Terraform-managed TXT at the same name would overwrite the whole set.
-Email DNS changes belong in the project that owns the SES stack.
+related. Never add an MX record or a `_dmarc` record to this configuration,
+and never add a second apex TXT resource — new apex TXT values (e.g. SPF, more
+site verifications) go into the existing `apex_txt` records list. Email DNS
+changes belong in the project that owns the SES stack.

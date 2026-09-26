@@ -1,30 +1,32 @@
 Privacy Policy
-Effective Date: August 30, 2026
+Effective Date: September 19, 2026
 App Name: Schengen Calculator for 90/180
 Developer: Vitalii Nemudryi
 Canonical version of this policy: https://schengen.live/privacy.html
 
 This privacy policy describes how we collect, use, and protect information related to your use of the app "Schengen Calculator for 90/180", developed and maintained by Vitalii Nemudryi.
 
-The app works fully offline without any account. Creating an account is optional and only needed for the paid cloud features described below.
+The app works fully offline without any account. Creating an account is optional: AI access can be bought without one, and what was bought that way is restored without one. An account (sign-in with Google, or also Apple on iOS) is needed for the Premium subscription (cloud sync, profile sharing) and to use AI access on all your devices; a subscription belongs to the account it was bought with, or moved to at sign-in, and is restored by signing in to that account.
 
 🔍 1. Data We Collect
 
 Without an account:
-* Your trip data (entry/exit dates, trip names, traveler profiles) is stored only on your device.
+* Your trip data (entry/exit dates, trip names, traveler profiles) is stored only on your device (the AI assistant, if you use it, receives what it needs to answer — see below).
 * Third-party services may automatically collect pseudonymous data for analytics and crash reporting:
   - Approximate location (based on IP address)
   - Device information (model, OS version, language, country)
   - App open and interaction events, including a small purchase funnel (viewing the paywall; completing, failing or restoring a purchase)
   - App crash and error logs (via Firebase Crashlytics)
   - Performance metrics (e.g., app load times, responsiveness)
+* AI access bought without an account: RevenueCat recognises such purchases by a random anonymous ID that its software creates in the app on your device (no name, e-mail or other contact details). The Premium subscription is bought signed in and belongs to that account; a subscription bought without an account in an earlier version of the app moves to your account when you sign in and restore purchases.
+* AI access bought without an account works only on the device it was bought on; signing in later does not move it. To check this access, our backend stores the anonymous purchase ID together with the date the access ends and a record of each AI purchase (product, number of days, store, dates and refund status) in Google Cloud Firestore in the European Union — no contact details. The app sends this ID to our backend with every AI request from that device (also after you sign in), when it checks the state of that access, and when it loads place photos. Your AI messages and the trip data needed to answer them are processed by our backend and by Anthropic (Claude API) to generate the answer, as with an account. While you are not signed in, your AI chat history stays only on your device and our backend keeps no copy (the recent part of the conversation is sent with each question only to produce the answer); after you sign in, new chats are stored in your account, as described below. If you delete the app or clear its data, that access and those chats can be lost. These records are not tied to an account, so they cannot be deleted from the app — write to us with the purchase details from your store receipt and we will erase them.
 
-With an optional account (Premium / AI features):
+With an optional account:
 * Account identifiers: your Firebase user ID, and the email address and display name provided by Google or Apple sign-in.
 * User content: your traveler profiles and trip data, stored in Google Cloud Firestore in the European Union (region europe-west1, Belgium) so they can be backed up and synchronized across your devices, and — only if you explicitly share a profile — shown to the people you shared it with. When you share a profile, your sign-in name and e-mail are shown to the people you invite; when you accept an invite, your name and e-mail are shown to the profile owner and other members. Sharing is a Premium feature: when the Premium subscription ends, shared profiles are automatically un-shared and unused invite codes stop working.
-* Purchase state: subscription and purchase entitlements are processed by RevenueCat and the app stores. We never see your card number or bank details.
-* AI assistant content: if you purchase AI access, the messages you send to the AI assistant and the trip data needed to answer them (remaining days, trip dates and names) are processed by our backend and by the AI model provider — Anthropic (Claude API) — to generate the answer. AI chat history is stored in your account and kept until you delete it or delete your account; it stays readable in the app even after your AI access period ends.
-* AI place photos: photos of places suggested by the assistant are looked up on Wikipedia by place name and served through our own endpoint (api.schengen.live, fronted by Amazon CloudFront). Our backend caches these photos keyed by place name only — no personal data is stored with them.
+* Purchase state: subscription and purchase entitlements are processed by RevenueCat and the app stores (with an account, RevenueCat uses your account's user ID). We never see your card number or bank details.
+* AI assistant content: if you purchase AI access, the messages you send to the AI assistant and the trip data needed to answer them (remaining days, trip dates and names) are processed by our backend and by the AI model provider — Anthropic (Claude API) — to generate the answer. AI chat history is stored in your account and kept until you delete it or delete your account; it stays readable in the app even after your AI access period ends. AI access bought while signed in works on all your devices signed in to that account.
+* AI place photos: photos of places suggested by the assistant are looked up on Wikipedia by place name and served through our own endpoint (api.schengen.live, fronted by Amazon CloudFront) to signed-in users and to people who bought AI access without an account. Our backend caches these photos keyed by place name only — no personal data is stored with them.
 * Push notifications: if you sign in, your device's push token (Firebase Cloud Messaging) is stored in your account so updates to profiles shared with you can reach your devices. Tokens are removed when you delete your account.
 
 We do NOT collect your contacts or precise location, and we do not show third-party ads.
@@ -57,7 +59,7 @@ Your device always keeps a full local copy of your data: the app remains fully u
 
 🗑 7. Your Control (GDPR)
 * Transfer: the encrypted QR export moves all your profiles and trips to another device (Settings → transfer via QR code). For a machine-readable copy of your data, contact us at the address below.
-* Delete: Settings → "Delete account" permanently removes your account and all cloud data (right to erasure). Local data can be cleared with "Clear all data" or by uninstalling the app.
+* Delete: Settings → "Delete account" permanently removes your account and all cloud data (right to erasure). Local data can be cleared with "Clear all data" (trips and profiles), AI chats kept on the device can be cleared in the AI assistant, and uninstalling the app removes all local data. Records of AI access bought without an account are erased on request (see Contact Us).
 * Notifications and reminders can be switched off in the app at any time.
 
 👶 8. Children

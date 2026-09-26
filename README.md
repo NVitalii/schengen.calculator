@@ -30,7 +30,7 @@ Calculating the 90/180 rule manually is surprisingly complex. The 180-day window
 ## ✨ Key Features
 
 *   **Works Fully Offline:** Track your trips anywhere, no internet required.
-*   **Privacy-First by Default:** Tracking works without an account and your data stays on your device. Optional paid extras (cloud sync, profile sharing, AI assistant) require signing in.
+*   **Privacy-First by Default:** Tracking works without an account and your data stays on your device. The AI assistant can be bought without an account; Premium (cloud sync, profile sharing) requires signing in.
 *   **No Ads:** A clean, premium, and distraction-free experience.
 *   **Multiple Profiles:** Manage tracking for yourself, your family, or your clients effortlessly.
 *   **Calendar-Based Tracking:** Easily select and visualize your entry and exit dates.
@@ -56,17 +56,14 @@ Unlike other Schengen calculators, we've built a robust calculation engine that 
 ## 📱 Screenshots
 
 <div align="left">
-  <img src="screenshots/300.png" alt="Track your Schengen days with the 90/180 rule" width="200"/>
-  <img src="screenshots/301.png" alt="Reminders, reports and sharing in one menu" width="200"/>
-  <img src="screenshots/302.png" alt="Keep a separate profile for every traveller" width="200"/>
-  <img src="screenshots/303.png" alt="Your AI assistant plans around your remaining days" width="200"/>
-  <img src="screenshots/304.png" alt="Check if your trip fits the 90/180 rule" width="200"/>
-  <img src="screenshots/305.png" alt="Share a profile with family using Premium" width="200"/>
-  <img src="screenshots/306.png" alt="Transfer travel history between phones - free, no account" width="200"/>
-  <img src="screenshots/307.png" alt="Track your Schengen days in light or dark" width="200"/>
-  <img src="screenshots/308.png" alt="Real places, real photos, an hour-by-hour plan" width="200"/>
-  <img src="screenshots/309.png" alt="Choose your theme, language and text size" width="200"/>
-  <img src="screenshots/310.png" alt="Back up and sync your trips with Premium" width="200"/>
+  <img src="screenshots/01_home_light.png" alt="See your Schengen days left under the 90/180 rule" width="200"/>
+  <img src="screenshots/02_ai_answer.png" alt="AI trip planner that knows your days left" width="200"/>
+  <img src="screenshots/03_planner.png" alt="Check if a trip fits or find the nearest safe dates" width="200"/>
+  <img src="screenshots/04_share_invite.png" alt="With Premium, your family sees the same trips" width="200"/>
+  <img src="screenshots/05_qr_export.png" alt="New phone? One encrypted QR carries your trips" width="200"/>
+  <img src="screenshots/06_menu_open.png" alt="Get reminded before a trip and when days free up" width="200"/>
+  <img src="screenshots/07_home_dark.png" alt="Look ahead: days left on every future date" width="200"/>
+  <img src="screenshots/08_settings.png" alt="Set the language, theme and calendar text size" width="200"/>
 </div>
 
 ## 📥 Download & Try Online
@@ -89,9 +86,9 @@ Unlike other Schengen calculators, we've built a robust calculation engine that 
 ## 🔒 Privacy First
 
 We believe your travel history is your business.
-*   **No account needed to track your days** — signing in is only required for the optional paid features.
+*   **No account needed to track your days or to buy AI access** — signing in is required for Premium (cloud sync and profile sharing) and to use AI access on all your devices.
 *   **Your travel data stays on your device by default** and is uploaded only if you turn on cloud sync, share a profile, or use the AI assistant (each request includes your remaining days and trips so it can plan around them).
-*   **No ads, and we never sell your data.** We use Firebase Analytics and Crashlytics for anonymous usage statistics and crash reports — see the [Privacy Policy](https://schengen.live/privacy.html).
+*   **No ads, and we never sell your data.** We use Firebase Analytics and Crashlytics for pseudonymous usage statistics and crash reports — see the [Privacy Policy](https://schengen.live/privacy.html).
 
 ## ❓ FAQ
 

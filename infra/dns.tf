@@ -53,6 +53,21 @@ resource "aws_route53_record" "cert_validation" {
   records = ["_96c1909dbf00470f535ac4856a41afac.jkddzztszm.acm-validations.aws."]
 }
 
+# The whole apex TXT set (Route 53 keys record sets by name+type, so every
+# apex TXT value must live in this one resource — a second resource with the
+# same name would overwrite the set). Imported on 2026-09-15; holds the legacy
+# hosting-site value plus the Google Search Console ownership proof.
+resource "aws_route53_record" "apex_txt" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = local.domain
+  type    = "TXT"
+  ttl     = 300
+  records = [
+    "hosting-site=schengen-web",
+    "google-site-verification=9C3IDJ2tgOk4jUE6610gwVpvv0vIfQ1ZwWfA_GLnRgs",
+  ]
+}
+
 # Registrar-level settings (Route 53 Domains). Deleting this resource does
 # not unregister the domain; it only stops managing these flags.
 resource "aws_route53domains_registered_domain" "site" {
