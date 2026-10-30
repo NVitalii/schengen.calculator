@@ -32,7 +32,7 @@ Schengen Calculator is a privacy-first utility application designed to help non-
 
 ## Site Structure & Key Pages
 
-- [Home Page](https://schengen.live/): Landing page featuring details of the mobile applications, feature overviews, real Google Play reviews, and FAQs.
-- [Online Schengen Calculator](https://schengen.live/schengen-calculator.html): High-fidelity interactive visa stay tracker that runs fully inside the browser using HTML5 LocalStorage, with visual circular progress ring and Future Date Inspector.
+- [Home Page](https://schengen.live/): Everything in one place — the free online Schengen calculator embedded right on the page, a video tutorial, details of the mobile applications, feature overviews, real Google Play reviews, and FAQs.
+- [Online Calculator](https://schengen.live/schengen-calculator.html): The free in-browser 90/180 calculator on its own page — interactive visa stay tracker running fully inside the browser using HTML5 LocalStorage, with a circular progress ring and a stay-allowance calendar, usage steps and tool-specific FAQs. No account, no install.
 - [Privacy Policy](https://schengen.live/privacy.html): Localized documentation outlining our offline-first structure, the optional cloud features and what they store, and Google Firebase Analytics transparency.
 - [Terms of Use](https://schengen.live/terms.html): Terms covering the free tier, Premium subscriptions, one-time AI access periods, sharing revocation on expiry, and account deletion.

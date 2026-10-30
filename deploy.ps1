@@ -36,6 +36,11 @@ if ($LASTEXITCODE -ne 0) { throw "upload failed: assetlinks.json" }
 aws s3 sync "$repo\assets" "s3://$bucket/assets" --delete
 if ($LASTEXITCODE -ne 0) { throw "assets sync failed" }
 
+# Browsers refuse caption tracks served with the wrong MIME type, and the CLI's
+# guess for .vtt is not reliable - re-upload with an explicit one.
+aws s3 cp "$repo\assets\tutorial_en.vtt" "s3://$bucket/assets/tutorial_en.vtt" --content-type "text/vtt"
+if ($LASTEXITCODE -ne 0) { throw "upload failed: tutorial_en.vtt" }
+
 $inv = aws cloudfront create-invalidation --distribution-id $dist --paths "/*" | ConvertFrom-Json
 if ($LASTEXITCODE -ne 0) { throw "invalidation failed" }
 "Deployed to s3://$bucket, invalidation $($inv.Invalidation.Id) running."
