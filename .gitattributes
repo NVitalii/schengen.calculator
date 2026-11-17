@@ -1,0 +1,2 @@
+# Runs in Git Bash and hands a command line to a Linux shell in a container.
+tool/*.sh text eol=lf

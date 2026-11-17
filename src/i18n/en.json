@@ -1,0 +1,54 @@
+{
+  "calc": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekdays": [
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa",
+      "Su"
+    ],
+    "strings": {
+      "form_add_title": "Add a New Stay",
+      "form_edit_title": "Edit Stay",
+      "btn_add": "Add Stay",
+      "btn_save": "Save Changes",
+      "btn_close": "Close",
+      "window_prefix": "Rolling window",
+      "status_over": "Limit Exceeded!",
+      "status_over_desc": "Visa Overstay! You have exceeded the 90-day allowance in this rolling window!",
+      "status_warn": "Warning",
+      "status_warn_desc": "You are approaching your 90-day limit in the Schengen zone!",
+      "status_safe": "Safe",
+      "status_safe_desc": "You have plenty of days left for your travels.",
+      "trips_one": "trip",
+      "trips_other": "trips",
+      "empty_title": "No trips added yet",
+      "empty_desc": "Add your first stay to start tracking.",
+      "trip_default_name": "Trip",
+      "duration_one": "{n} day",
+      "duration_other": "{n} days",
+      "edit_title": "Edit stay",
+      "delete_title": "Delete stay",
+      "err_both_dates": "Both dates are required!",
+      "err_end_before_start": "Exit date cannot be before entry date!",
+      "confirm_delete": "Are you sure you want to delete this period of stay?",
+      "remaining_title": "Remaining days: {n}"
+    }
+  }
+}
