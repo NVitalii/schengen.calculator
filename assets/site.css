@@ -154,6 +154,34 @@ p {
     font-weight: 500;
     color: var(--text-main);
     transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.logo {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Tablets and small laptops: the long logo and four links in ten languages do
+   not fit one row ("Онлайн-калькулятор", "Calculadora online" wrapped onto two
+   lines). The short logo and tighter links do; below 960px the links go, as
+   on phones. */
+@media (max-width: 1200px) {
+    .logo-full {
+        display: none;
+    }
+    .logo-mobile {
+        display: inline;
+    }
+    .nav-links {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 960px) {
+    .nav-links {
+        display: none;
+    }
 }
 
 .nav-links a:hover {
@@ -183,6 +211,77 @@ p {
     background: var(--bg-white);
     color: var(--dark);
     box-shadow: var(--shadow-sm);
+}
+
+/* Language menu of the generated pages: every language is a page of its own,
+   so the entries are links. (The two-button switch above is still what
+   privacy.html and terms.html use.) */
+.lang-menu {
+    position: relative;
+}
+
+.lang-menu summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(0,0,0,0.05);
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-weight: 600;
+    color: var(--dark);
+    transition: background 0.2s ease;
+}
+
+.lang-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.lang-menu summary:hover,
+.lang-menu[open] summary {
+    background: rgba(0,0,0,0.09);
+}
+
+.lang-menu summary svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s ease;
+}
+
+.lang-menu[open] summary svg {
+    transform: rotate(180deg);
+}
+
+.lang-list {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: grid;
+    min-width: 180px;
+    padding: 6px;
+    background: var(--bg-white);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-xl);
+}
+
+.lang-list a {
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-weight: 500;
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+.lang-list a:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.lang-list a.active {
+    font-weight: 700;
+    color: var(--primary);
 }
 
 /* Buttons */

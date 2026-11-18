@@ -515,8 +515,10 @@
     margin-bottom: 16px;
 }
 
+/* No display here: the alert stays hidden until calc.js shows an error
+   (inline display:flex); a display rule on this class kept "Error message"
+   on screen under an empty form. */
 #calculator .alert.alert-danger {
-    display: flex;
     background-color: var(--color-danger-bg);
     border: 1px solid rgba(239, 68, 68, 0.2);
     color: #b91c1c;

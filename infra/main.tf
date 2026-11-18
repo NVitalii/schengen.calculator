@@ -36,6 +36,15 @@ data "aws_cloudfront_cache_policy" "optimized" {
   name = "Managed-CachingOptimized"
 }
 
+# Folder addresses for the language pages (/de/, /uk/, ...): see the file.
+resource "aws_cloudfront_function" "pretty_urls" {
+  name    = "schengen-live-pretty-urls"
+  runtime = "cloudfront-js-2.0"
+  comment = "schengen.live: /de/ -> /de/index.html, /de and /de/index.html -> 301 /de/"
+  publish = true
+  code    = file("${path.module}/pretty_urls.js")
+}
+
 resource "aws_cloudfront_distribution" "site" {
   comment             = "schengen.live landing (dedicated)"
   enabled             = true
@@ -61,6 +70,12 @@ resource "aws_cloudfront_distribution" "site" {
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
     cache_policy_id        = data.aws_cloudfront_cache_policy.optimized.id
+
+    # /de/ -> /de/index.html, /de and /de/index.html -> 301 /de/
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.pretty_urls.arn
+    }
   }
 
   restrictions {

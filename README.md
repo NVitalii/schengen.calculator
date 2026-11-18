@@ -59,9 +59,7 @@ Unlike other Schengen calculators, we've built a robust calculation engine that 
   <img src="screenshots/01_home_light.png" alt="See your Schengen days left under the 90/180 rule" width="200"/>
   <img src="screenshots/02_ai_answer.png" alt="AI trip planner that knows your days left" width="200"/>
   <img src="screenshots/03_planner.png" alt="Check if a trip fits or find the nearest safe dates" width="200"/>
-  <img src="screenshots/04_share_invite.png" alt="With Premium, your family sees the same trips" width="200"/>
   <img src="screenshots/05_qr_export.png" alt="New phone? One encrypted QR carries your trips" width="200"/>
-  <img src="screenshots/06_menu_open.png" alt="Get reminded before a trip and when days free up" width="200"/>
   <img src="screenshots/07_home_dark.png" alt="Look ahead: days left on every future date" width="200"/>
   <img src="screenshots/08_settings.png" alt="Set the language, theme and calendar text size" width="200"/>
 </div>
@@ -106,6 +104,20 @@ A: Yes, the app supports multiple profiles so you can track the Schengen visa da
 
 **Q: Are time changes and DST handled correctly?**
 A: Absolutely. Our calculator engine uses strict calendar-inclusive logic, ensuring that Daylight Saving Time and timezone differences never result in an incorrect day count.
+
+## 🛠 How the Pages Are Built
+
+`index.html`, `schengen-calculator.html`, the language folders (`de/`, `es/`, `ja/`, `pl/`, `ru/`, `sr/`, `tr/`, `uk/`, `zh/` — the ten languages of the app, English at the root) and `sitemap.xml` are **generated** — edit their sources, not them.
+
+*   `src/pages/*.html` — the templates. Their text *is* the English version.
+*   `src/i18n/<code>.json` — every other language: `meta` (title and description per page), `common` and one section per page (texts by `data-i18n` key), `calc` (the calculator widget). `en.json` holds only the widget's English texts.
+*   In `calc`, a counted text has the forms its language needs: English `trips_one` / `trips_other`, Polish, Russian and Ukrainian also `trips_few` (1 podróż, 2 podróże, 5 podróży) — the widget picks the form by the browser's plural rules for the page's language, and a missing form reads `_other`. `monthYear` sets the calendar's heading where the year comes first (`{year}年{month}`).
+*   `src/site.json` — the languages, the pages and the address of the site.
+*   `bash tool/build.sh` — runs the generator (`tool/build_pages.cjs`) in a throwaway Docker container, with nothing installed and the network off, and writes the pages. `bash tool/build.sh --check` only says whether the pages on disk are current.
+*   A new language is one entry in `src/site.json` plus one `src/i18n/<code>.json`; the generator refuses to build while a text is missing.
+*   Each language is a page of its own at its own folder address (`/uk/`, …; `infra/pretty_urls.js`, a CloudFront function, serves `/uk/` from `/uk/index.html` and redirects `/uk` and `/uk/index.html` there) and names the others with `rel="alternate" hreflang`, so a search engine can index every one of them. Before this, both languages lived in one file and were swapped in the browser, and only the English text was ever indexed.
+*   `privacy.html` and `terms.html` are still hand-written (English and Ukrainian in one file).
+*   `deploy.ps1` publishes the built files and refuses to if they are older than their sources.
 
 ---
 *Built to be the most reliable Schengen stay tracker available.*

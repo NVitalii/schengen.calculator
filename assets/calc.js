@@ -1,8 +1,41 @@
-// Logic of the online Schengen calculator embedded on index.html (#calculator).
-// Ported unchanged from the former schengen-calculator.html page, so saved trips
-// (localStorage key schengen_calculator_trips) survive the move to one page.
-// The landing's own setLang() translates the static markup via data-i18n and
-// then calls window.calcSetLang(lang) so texts rendered here follow along.
+// Logic of the online Schengen calculator: embedded on the home page
+// (#calculator) and on schengen-calculator.html, in every language.
+// Saved trips live in the visitor's browser (localStorage key
+// schengen_calculator_trips) and are shared by all of those pages.
+//
+// The widget has no texts of its own. The page generator
+// (tool/build_pages.cjs) writes window.CALC_L10N in front of this script on
+// every page: { locale, months[12], weekdays[7] (Monday first), strings{},
+// monthYear (optional pattern for the calendar's heading) }, taken from the
+// "calc" section of src/i18n/<language>.json. The static
+// markup around the widget is translated by the same generator (data-i18n).
+
+const CALC_L10N = window.CALC_L10N || {};
+const CALC_STRINGS = CALC_L10N.strings || {};
+const CALC_LOCALE = CALC_L10N.locale || 'en-US';
+
+// A text by key; "{n}" in it is replaced by the number.
+function calcText(key, n) {
+    const text = CALC_STRINGS[key] !== undefined ? CALC_STRINGS[key] : key;
+    return n === undefined ? text : text.replace('{n}', n);
+}
+
+// The form of a counted text for a number: "<key>_<category>", the category
+// being the one the page's language gives that number — English has "one" and
+// "other", Russian and Polish also "few" (1 поездка, 2 поездки, 5 поездок). A
+// category without a text of its own reads "<key>_other". A browser without
+// Intl.PluralRules knows the two English forms only.
+let calcPluralRules = null;
+try {
+    calcPluralRules = new Intl.PluralRules(CALC_LOCALE);
+} catch (e) {
+    calcPluralRules = null;
+}
+function calcCount(key, n) {
+    const category = calcPluralRules ? calcPluralRules.select(n) : (n === 1 ? 'one' : 'other');
+    const own = `${key}_${category}`;
+    return calcText(CALC_STRINGS[own] !== undefined ? own : `${key}_other`, n);
+}
 
 // Standard 90/180 Schengen Calculator core ported from the Flutter reference app
 class SchengenCalculator {
@@ -73,16 +106,15 @@ function formatToInputDate(date) {
     return `${y}-${m}-${day}`;
 }
 
-function formatDisplayDate(dateStr, lang) {
+function formatDisplayDate(dateStr) {
     const d = parseInputDate(dateStr);
     if (!d) return "";
     const options = { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' };
-    return d.toLocaleDateString(lang === 'ua' ? 'uk-UA' : 'en-US', options);
+    return d.toLocaleDateString(CALC_LOCALE, options);
 }
 
 // Application state
 let trips = [];
-let currentLang = 'en';
 
 function loadTripsFromStorage() {
     const stored = localStorage.getItem('schengen_calculator_trips');
@@ -107,12 +139,12 @@ function resetFormToAddMode() {
 
     const titleEl = document.getElementById('form-title');
     if (titleEl) {
-        titleEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--secondary);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${currentLang === 'ua' ? 'Додати нову поїздку' : 'Add a New Stay'}`;
+        titleEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--secondary);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${escapeCalcHTML(calcText('form_add_title'))}`;
     }
 
     const submitBtn = document.getElementById('form-submit-btn');
     if (submitBtn) {
-        submitBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> ${currentLang === 'ua' ? 'Додати' : 'Add Stay'}`;
+        submitBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> ${escapeCalcHTML(calcText('btn_add'))}`;
     }
 
     document.getElementById('form-cancel-btn').style.display = "none";
@@ -131,11 +163,11 @@ function toggleAddStayForm(forceShow) {
     if (shouldShow) {
         formCard.style.display = 'block';
         toggleBtn.className = "cbtn cbtn-sm cbtn-secondary";
-        toggleBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> <span class="btn-text">${currentLang === 'ua' ? 'Закрити' : 'Close'}</span>`;
+        toggleBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> <span class="btn-text">${escapeCalcHTML(calcText('btn_close'))}</span>`;
     } else {
         formCard.style.display = 'none';
         toggleBtn.className = "cbtn cbtn-sm cbtn-primary";
-        toggleBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> <span class="btn-text">${currentLang === 'ua' ? 'Додати' : 'Add Stay'}</span>`;
+        toggleBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> <span class="btn-text">${escapeCalcHTML(calcText('btn_add'))}</span>`;
 
         // Reset form state to add mode on collapse if it was in edit mode
         const editId = document.getElementById('edit-trip-id').value;
@@ -194,11 +226,10 @@ function recalculateDashboard() {
     const cutoffDate = new Date(inspectorDate);
     cutoffDate.setUTCDate(cutoffDate.getUTCDate() - 179);
 
-    const startStr = formatDisplayDate(formatToInputDate(cutoffDate), currentLang);
-    const endStr = formatDisplayDate(formatToInputDate(inspectorDate), currentLang);
+    const startStr = formatDisplayDate(formatToInputDate(cutoffDate));
+    const endStr = formatDisplayDate(formatToInputDate(inspectorDate));
 
-    const windowPrefix = currentLang === 'ua' ? 'Плаваюче вікно' : 'Rolling window';
-    document.getElementById('rolling-period-dates').textContent = `${windowPrefix}: ${startStr} – ${endStr}`;
+    document.getElementById('rolling-period-dates').textContent = `${calcText('window_prefix')}: ${startStr} – ${endStr}`;
 
     // Status text and banner
     const statusTextVal = document.getElementById('status-text-val');
@@ -207,31 +238,25 @@ function recalculateDashboard() {
     const bannerText = document.getElementById('status-banner-text');
 
     if (usedDays > SchengenCalculator.STAY_LIMIT_DAYS) {
-        statusTextVal.textContent = currentLang === 'ua' ? "Перевищено ліміт!" : "Limit Exceeded!";
+        statusTextVal.textContent = calcText('status_over');
         statusTextVal.style.color = 'var(--secondary)';
 
         banner.className = "status-banner danger";
-        bannerText.textContent = currentLang === 'ua'
-            ? "Порушення ліміту перебування! Ви перевищили дозволені 90 днів у цьому плаваючому вікні!"
-            : "Visa Overstay! You have exceeded the 90-day allowance in this rolling window!";
+        bannerText.textContent = calcText('status_over_desc');
         bannerIcon.innerHTML = `<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>`;
     } else if (usedDays >= 75) {
-        statusTextVal.textContent = currentLang === 'ua' ? "Увага" : "Warning";
+        statusTextVal.textContent = calcText('status_warn');
         statusTextVal.style.color = 'var(--color-warning)';
 
         banner.className = "status-banner warning";
-        bannerText.textContent = currentLang === 'ua'
-            ? "Ви наближаєтеся до ліміту в 90 днів у Шенгенській зоні!"
-            : "You are approaching your 90-day limit in the Schengen zone!";
+        bannerText.textContent = calcText('status_warn_desc');
         bannerIcon.innerHTML = `<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>`;
     } else {
-        statusTextVal.textContent = currentLang === 'ua' ? "Безпечно" : "Safe";
+        statusTextVal.textContent = calcText('status_safe');
         statusTextVal.style.color = 'var(--color-safe)';
 
         banner.className = "status-banner safe";
-        bannerText.textContent = currentLang === 'ua'
-            ? "У вас достатньо днів для подорожей."
-            : "You have plenty of days left for your travels.";
+        bannerText.textContent = calcText('status_safe_desc');
         bannerIcon.innerHTML = `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>`;
     }
 
@@ -245,8 +270,7 @@ function renderTimelineList() {
     const listContainer = document.getElementById('trip-timeline-list');
     const tripCountBadge = document.getElementById('trip-count');
 
-    const textPart = currentLang === 'ua' ? 'поїзд.' : `trip${trips.length === 1 ? '' : 's'}`;
-    tripCountBadge.innerHTML = `<span class="count-num">${trips.length}</span><span class="count-text"> ${textPart}</span>`;
+    tripCountBadge.innerHTML = `<span class="count-num">${trips.length}</span><span class="count-text"> ${escapeCalcHTML(calcCount('trips', trips.length))}</span>`;
 
     if (trips.length === 0) {
         listContainer.innerHTML = `
@@ -254,8 +278,8 @@ function renderTimelineList() {
                 <div class="empty-state-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                 </div>
-                <h4>${currentLang === 'ua' ? 'Немає поїздок' : 'No trips added yet'}</h4>
-                <p>${currentLang === 'ua' ? 'Додайте свою першу поїздку, щоб розпочати відстеження.' : 'Add your first stay to start tracking.'}</p>
+                <h4>${escapeCalcHTML(calcText('empty_title'))}</h4>
+                <p>${escapeCalcHTML(calcText('empty_desc'))}</p>
             </div>
         `;
         toggleAddStayForm(true);
@@ -277,9 +301,9 @@ function renderTimelineList() {
         const card = document.createElement('div');
         card.className = "trip-card";
 
-        const titleStr = trip.name ? trip.name : (currentLang === 'ua' ? `Подорож` : `Trip`);
-        const datesRangeStr = `${formatDisplayDate(trip.start, currentLang)} – ${formatDisplayDate(trip.end, currentLang)}`;
-        const durationLabel = currentLang === 'ua' ? `${diffDays} дн.` : `${diffDays} day${diffDays === 1 ? '' : 's'}`;
+        const titleStr = trip.name ? trip.name : calcText('trip_default_name');
+        const datesRangeStr = `${formatDisplayDate(trip.start)} – ${formatDisplayDate(trip.end)}`;
+        const durationLabel = calcCount('duration', diffDays);
 
         card.innerHTML = `
             <div class="trip-card-details">
@@ -289,14 +313,14 @@ function renderTimelineList() {
                     <span>${datesRangeStr}</span>
                 </div>
                 <div>
-                    <span class="trip-duration-badge">${durationLabel}</span>
+                    <span class="trip-duration-badge">${escapeCalcHTML(durationLabel)}</span>
                 </div>
             </div>
             <div class="trip-card-actions">
-                <button type="button" class="action-icon-btn edit-btn" onclick="startEditingTrip('${trip.id}')" title="${currentLang === 'ua' ? 'Редагувати' : 'Edit stay'}">
+                <button type="button" class="action-icon-btn edit-btn" onclick="startEditingTrip('${trip.id}')" title="${escapeCalcHTML(calcText('edit_title'))}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                 </button>
-                <button type="button" class="action-icon-btn delete-btn" onclick="deleteTrip('${trip.id}')" title="${currentLang === 'ua' ? 'Видалити' : 'Delete stay'}">
+                <button type="button" class="action-icon-btn delete-btn" onclick="deleteTrip('${trip.id}')" title="${escapeCalcHTML(calcText('delete_title'))}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                 </button>
             </div>
@@ -307,7 +331,7 @@ function renderTimelineList() {
 
 // Escape HTML to prevent injection
 function escapeCalcHTML(str) {
-    return str
+    return String(str)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -328,7 +352,7 @@ function handleFormSubmit(event) {
     const editId = document.getElementById('edit-trip-id').value;
 
     if (!startInput || !endInput) {
-        alertText.textContent = currentLang === 'ua' ? "Обидві дати обов'язкові!" : "Both dates are required!";
+        alertText.textContent = calcText('err_both_dates');
         alertDiv.style.display = "flex";
         return;
     }
@@ -337,9 +361,7 @@ function handleFormSubmit(event) {
     const end = parseInputDate(endInput);
 
     if (end < start) {
-        alertText.textContent = currentLang === 'ua'
-            ? "Дата виїзду не може бути раніше дати в'їзду!"
-            : "Exit date cannot be before entry date!";
+        alertText.textContent = calcText('err_end_before_start');
         alertDiv.style.display = "flex";
         return;
     }
@@ -380,10 +402,10 @@ function startEditingTrip(id) {
     toggleAddStayForm(true);
 
     const titleEl = document.getElementById('form-title');
-    titleEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--secondary);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> ${currentLang === 'ua' ? 'Редагувати поїздку' : 'Edit Stay'}`;
+    titleEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--secondary);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> ${escapeCalcHTML(calcText('form_edit_title'))}`;
 
     const submitBtn = document.getElementById('form-submit-btn');
-    submitBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> ${currentLang === 'ua' ? 'Зберегти' : 'Save Changes'}`;
+    submitBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> ${escapeCalcHTML(calcText('btn_save'))}`;
 
     document.getElementById('form-cancel-btn').style.display = "inline-flex";
 
@@ -404,10 +426,7 @@ function cancelEditing() {
 }
 
 function deleteTrip(id) {
-    const confirmMsg = currentLang === 'ua'
-        ? "Ви впевнені, що хочете видалити цей період перебування?"
-        : "Are you sure you want to delete this period of stay?";
-    if (confirm(confirmMsg)) {
+    if (confirm(calcText('confirm_delete'))) {
         trips = trips.filter(t => t.id !== id);
         saveTripsToStorage();
 
@@ -419,23 +438,6 @@ function deleteTrip(id) {
         renderTimelineList();
     }
 }
-
-// Called by the landing's setLang() after it has applied data-i18n texts.
-window.calcSetLang = function(lang) {
-    currentLang = lang;
-
-    recalculateDashboard();
-    renderTimelineList();
-
-    // Keep dynamic form texts in step with the edit state
-    const editId = document.getElementById('edit-trip-id').value;
-    if (editId) {
-        startEditingTrip(editId);
-    } else if (document.getElementById('form-card').style.display !== 'none') {
-        resetFormToAddMode();
-        toggleAddStayForm(true);
-    }
-};
 
 // Calendar state and rendering
 let calendarViewDate = new Date();
@@ -458,17 +460,17 @@ function renderCalendar() {
     const year = calendarViewDate.getUTCFullYear();
     const month = calendarViewDate.getUTCMonth();
 
-    const monthNamesEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const monthNamesUa = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'];
-    const monthNames = currentLang === 'ua' ? monthNamesUa : monthNamesEn;
+    // "November 2026" by default; a language that writes the year first
+    // (Japanese, Chinese) gives its own pattern as monthYear.
+    const monthNames = CALC_L10N.months || [];
+    const monthName = monthNames[month] !== undefined ? monthNames[month] : month + 1;
+    monthYearLabel.textContent = (CALC_L10N.monthYear || '{month} {year}')
+        .replace('{month}', monthName)
+        .replace('{year}', year);
 
-    monthYearLabel.textContent = `${monthNames[month]} ${year}`;
-
-    const weekdaysEn = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-    const weekdaysUa = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
-    const weekdaysList = currentLang === 'ua' ? weekdaysUa : weekdaysEn;
-
-    weekdaysContainer.innerHTML = weekdaysList.map(day => `<div>${day}</div>`).join('');
+    // Monday first, as the grid below is laid out
+    const weekdaysList = CALC_L10N.weekdays || [];
+    weekdaysContainer.innerHTML = weekdaysList.map(day => `<div>${escapeCalcHTML(day)}</div>`).join('');
 
     // Which day of the week the 1st of the month is (Monday = 0, Sunday = 6)
     const firstDayOfMonth = new Date(Date.UTC(year, month, 1));
@@ -516,7 +518,7 @@ function renderCalendar() {
 
         cell.innerHTML = `
             <span class="day-number">${day}</span>
-            <span class="remaining-count ${badgeClass}" title="${currentLang === 'ua' ? 'Залишилось днів: ' : 'Remaining days: '}${remaining}">${remaining}</span>
+            <span class="remaining-count ${badgeClass}" title="${escapeCalcHTML(calcText('remaining_title', remaining))}">${remaining}</span>
         `;
 
         cell.addEventListener('click', () => {
@@ -531,8 +533,6 @@ function renderCalendar() {
 // Initialize the calculator
 window.addEventListener('DOMContentLoaded', () => {
     loadTripsFromStorage();
-
-    currentLang = localStorage.getItem('lang') || ((navigator.language && (navigator.language.startsWith('uk') || navigator.language.startsWith('ua'))) ? 'ua' : 'en');
 
     const today = toDateOnly(new Date());
     document.getElementById('inspect-date').value = formatToInputDate(today);

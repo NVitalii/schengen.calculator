@@ -1,0 +1,26 @@
+{
+  "site": "https://schengen.live",
+  "appStoreId": "6766031029",
+  "updated": "2026-11-10",
+  "directoryIndex": true,
+  "pages": [
+    { "id": "index", "file": "index.html", "changefreq": "monthly", "priority": "1.0", "translatedPriority": "0.9" },
+    { "id": "calculator", "file": "schengen-calculator.html", "changefreq": "monthly", "priority": "0.8", "translatedPriority": "0.7" }
+  ],
+  "otherUrls": [
+    { "path": "/privacy.html", "lastmod": "2026-08-30", "changefreq": "yearly", "priority": "0.3" },
+    { "path": "/terms.html", "lastmod": "2026-10-06", "changefreq": "yearly", "priority": "0.3" }
+  ],
+  "languages": [
+    { "code": "en", "dir": "", "hreflang": "en", "locale": "en-US", "og": "en_US", "name": "English", "short": "EN" },
+    { "code": "de", "dir": "de", "hreflang": "de", "locale": "de-DE", "og": "de_DE", "name": "Deutsch", "short": "DE", "browser": ["de"] },
+    { "code": "es", "dir": "es", "hreflang": "es", "locale": "es-ES", "og": "es_ES", "name": "Español", "short": "ES", "browser": ["es"] },
+    { "code": "pl", "dir": "pl", "hreflang": "pl", "locale": "pl-PL", "og": "pl_PL", "name": "Polski", "short": "PL", "browser": ["pl"] },
+    { "code": "sr", "dir": "sr", "hreflang": "sr-Latn", "locale": "sr-Latn-RS", "og": "sr_RS", "name": "Srpski", "short": "SR", "browser": ["sr", "bs", "sh"] },
+    { "code": "tr", "dir": "tr", "hreflang": "tr", "locale": "tr-TR", "og": "tr_TR", "name": "Türkçe", "short": "TR", "browser": ["tr"] },
+    { "code": "uk", "dir": "uk", "hreflang": "uk", "locale": "uk-UA", "og": "uk_UA", "name": "Українська", "short": "UA", "browser": ["uk", "ua"] },
+    { "code": "ja", "dir": "ja", "hreflang": "ja", "locale": "ja-JP", "og": "ja_JP", "name": "日本語", "short": "JA", "browser": ["ja"] },
+    { "code": "zh", "dir": "zh", "hreflang": "zh-Hans", "locale": "zh-CN", "og": "zh_CN", "name": "中文", "short": "ZH", "browser": ["zh"] },
+    { "code": "ru", "dir": "ru", "hreflang": "ru", "locale": "ru-RU", "og": "ru_RU", "name": "Русский", "short": "RU", "browser": ["ru"] }
+  ]
+}
